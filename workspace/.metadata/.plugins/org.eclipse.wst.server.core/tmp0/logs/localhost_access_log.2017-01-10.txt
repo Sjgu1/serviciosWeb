@@ -1,0 +1,11 @@
+127.0.0.1 - - [10/Jan/2017:13:02:09 +0100] "GET / HTTP/1.1" 404 1004
+127.0.0.1 - - [10/Jan/2017:13:13:41 +0100] "GET / HTTP/1.1" 404 1004
+0:0:0:0:0:0:0:1 - - [10/Jan/2017:13:19:44 +0100] "GET /HolaMundoSW/ HTTP/1.1" 200 3477
+0:0:0:0:0:0:0:1 - - [10/Jan/2017:13:19:44 +0100] "GET /HolaMundoSW/axis2-web/css/axis-style.css HTTP/1.1" 200 1587
+0:0:0:0:0:0:0:1 - - [10/Jan/2017:13:19:44 +0100] "GET /HolaMundoSW/axis2-web/images/asf-logo.gif HTTP/1.1" 200 5866
+0:0:0:0:0:0:0:1 - - [10/Jan/2017:13:19:44 +0100] "GET /HolaMundoSW/axis2-web/images/axis_l.jpg HTTP/1.1" 200 12340
+0:0:0:0:0:0:0:1 - - [10/Jan/2017:13:19:44 +0100] "GET /favicon.ico HTTP/1.1" 404 1026
+0:0:0:0:0:0:0:1 - - [10/Jan/2017:13:19:46 +0100] "GET /HolaMundoSW/services/listServices HTTP/1.1" 200 3791
+0:0:0:0:0:0:0:1 - - [10/Jan/2017:13:19:48 +0100] "GET /HolaMundoSW/services/HolaMundo?wsdl HTTP/1.1" 200 2199
+127.0.0.1 - - [10/Jan/2017:13:21:53 +0100] "GET /HolaMundoSW/services/HolaMundo?wsdl HTTP/1.1" 200 2199
+127.0.0.1 - - [10/Jan/2017:13:22:09 +0100] "POST /HolaMundoSW/services/HolaMundo/ HTTP/1.1" 200 302
