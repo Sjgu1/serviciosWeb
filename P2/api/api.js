@@ -1,5 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser')
+var cors = require('cors')
+
 
 var http = require('http');
 var path = require('path');
@@ -14,6 +16,7 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 // parse application/json
 app.use(bodyParser.json())
+app.use(cors())
 
 
 
