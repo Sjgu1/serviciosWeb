@@ -1,7 +1,9 @@
 var express = require('express');
+var bodyParser = require('body-parser')
 
 var http = require('http');
 var path = require('path');
+var validator = require('validator');
 
 var app = express();
 
@@ -10,6 +12,9 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
+// parse application/json
+app.use(bodyParser.json())
+
 
 
 //llamamos al paquete mysql que hemos instalado
@@ -27,7 +32,7 @@ http.createServer(app).listen(app.get('port'), function () {
             database: 'mtis'
         }
     );
-   
+
 
     /********************************************************************************************************************************************/
     /************************************************************VALIDAR DNI*********************************************************************/
@@ -276,6 +281,99 @@ http.createServer(app).listen(app.get('port'), function () {
                         poblacion: null,
                         provincia: null,
                         existe: null
+                    }
+            });
+        }
+    });
+
+
+    /********************************************************************************************************************************************/
+    /************************************************************Generar Presupuesto*************************************************************/
+    /********************************************************************************************************************************************/
+
+    app.post("/generarPresupuesto", function (req, res) {
+        var key = req.headers.restkey;
+        if (connection) {
+            try {
+                connection.query("SELECT count(1) AS recuento from soap where clave like '" + key + "' ;", function (error, rows) {
+                    if (error) {
+                        console.log(error);
+                        return res.status(500).send({
+                            "correcto": false,
+                            "status": 500,
+                            "message": "Problemas con el servidor",
+                            "Presupuesto":
+                                {
+                                    "idPresupuesto": false,
+                                    "presupuestoGeneradoCorrectamente": null
+                                }
+                        });
+                    } else {
+                        if (rows[0].recuento == 0) {
+                            return res.status(401).send({
+                                "correcto": false,
+                                "status": 401,
+                                "message": "RestKey incorrecta",
+                                "Presupuesto":
+                                    {
+                                        "idPresupuesto": null,
+                                        "presupuestoGeneradoCorrectamente": false
+                                    }
+                            });
+                        } else {
+                            var values = "('" + req.body.fechaPresupuesto + "', '" + req.body.idCliente + "', '" + req.body.referenciaProducto + "', '" + req.body.cantidadProducto + "')";
+                            connection.query("INSERT INTO presupuestos (fechaPresupuesto, idCliente, referenciaProducto, cantidadProducto) VALUES " + values + ";", function (error2, rows) {
+                                console.log(rows)
+                                if (error2) {
+                                    return res.status(500).send({
+                                        "correcto" : false,
+                                        "status" : 500,
+                                        "message" : "Problema a la hora de crear el recurso",
+                                        "Presupuesto" : 
+                                          {
+                                            "idPresupuesto": false,
+                                            "presupuestoGeneradoCorrectamente" : false
+                                          }
+                                      });
+                                }else {
+                                    return res.status(201).send({
+                                        "correcto": true,
+                                        "status": 201,
+                                        "message": "Recurso creado correctamente",
+                                        "Presupuesto":
+                                            {
+                                                "idPresupuesto": rows.insertId,
+                                                "presupuestoGeneradoCorrectamente": true
+                                            }
+                                    });
+                                }
+
+                            })
+                        }
+                    }
+                });
+            } catch (err) {
+                return res.status(500).send({
+                    "correcto": false,
+                    "status": 500,
+                    "message": "Problemas con el servidor",
+                    "Presupuesto":
+                        {
+                            "idPresupuesto": false,
+                            "presupuestoGeneradoCorrectamente": null
+                        }
+                });
+
+            }
+        } else {
+            return res.status(500).send({
+                "correcto": false,
+                "status": 500,
+                "message": "Problemas con el servidor",
+                "Presupuesto":
+                    {
+                        "idPresupuesto": false,
+                        "presupuestoGeneradoCorrectamente": null
                     }
             });
         }
