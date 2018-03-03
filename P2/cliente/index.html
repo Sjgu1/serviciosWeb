@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cliente</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Cliente REST</a>
+                </div>
+                <div style="margin-left: 40%; margin-top: 15px;">
+                    <label  >RESTKEY
+                        <input type="text" style="border-radius: 1rem;" id="restkey">
+                    </label>
+                </div>
+            </div>
+        </nav>
+        <div class="alert alert-danger" id="danger-alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>Error! </strong>
+            La RestKey no es válida.
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                    Validar NIF
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="col-sm-1"></div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group" id="divDNI" style="text-align:center;">
+                                        <label id="labelDNI" for="focusedInput">NIF</label>
+                                        <input class="form-control" id="inputDNI" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" onclick="validarDNI()" style="margin-left:40px;margin-top:23px"> Comprobar</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group" style="text-align:center;" id="divResultadoDni">
+                                        <label for="focusedInput">Resultado</label>
+                                        <input class="form-control" id="inputDNIrespuesta" type="text" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                    Validar IBAN
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="col-sm-1"></div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group" id="divIBAN" style="text-align:center;">
+                                        <label for="focusedInput">IBAN</label>
+                                        <input class="form-control" id="inputIBAN" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" onclick="validarIBAN()" style="margin-left:40px;margin-top:23px"> Comprobar</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group" style="text-align:center;" id="divResultadoIBAN">
+                                        <label for="focusedInput">Resultado</label>
+                                        <input class="form-control" id="inputIBANrespuesta" type="text" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                    Consultar CP</a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="col-sm-2">
+                                    <div class="form-group" id="divCP" style="text-align:center;">
+                                        <label for="focusedInput">CP</label>
+                                        <input class="form-control" id="inputCP" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" onclick="comprobarCP()" style="margin-left:20px;margin-top:23px"> Comprobar</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <div class="form-group" style="text-align:center;" id="divCPresultado">
+                                        <label for="focusedInput">CP</label>
+                                        <input class="form-control" id="inputCPrespuesta" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group" style="text-align:center;" id="divCPresultado">
+                                        <label for="focusedInput">Población</label>
+                                        <input class="form-control" id="inputPOBLACIONrespuesta" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group" style="text-align:center;" id="divCPresultado">
+                                        <label for="focusedInput">Provincia</label>
+                                        <input class="form-control" id="inputPROVINCIArespuesta" type="text" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                                    Generar Presupuesto</a>
+                            </h4>
+                        </div>
+                        <div id="collapse4" class="panel-collapse collapse">
+                                <div class="alert alert-danger" id="danger-alert-presupuesto">
+                                        <button type="button" class="close" data-dismiss="alert">x</button>
+                                        <strong>Error! </strong>
+                                       Error al generar el presupuesto. Comprueba que los datos están bien.
+                                    </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group" id="divIDCLIENTE" style="text-align:center;">
+                                            <label for="focusedInput">ID Cliente</label>
+                                            <input class="form-control" id="inputIDCLIENTE" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group" style="text-align:center;" id="divFECHA">
+                                            <label for="focusedInput">Fecha</label>
+                                            <input class="form-control" id="inputFECHA" type="date">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group" style="text-align:center;" id="divREFERENCIA">
+                                            <label for="focusedInput">Ref.</label>
+                                            <input class="form-control" id="inputREFERENCIA" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group" style="text-align:center;" id="divCANTIDAD">
+                                            <label for="focusedInput">CANTIDAD</label>
+                                            <input class="form-control" id="inputCANTIDAD" type="number">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" onclick="generarPresupuesto()" style="margin-left:40px;margin-top:23px"> Generar</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group" style="text-align:center;" id="divPRESUPUESTOresultado">
+                                            <label for="focusedInput">Resultado</label>
+                                            <input class="form-control" id="inputPRESUPUESTOrespuesta" type="text" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $("#danger-alert").hide();
+                });
+
+            </script>
+            <script>
+                    $(document).ready(function () {
+                        $("#danger-alert-presupuesto").hide();
+                    });
+    
+                </script>
+            <!-- ******************************************************************************************** -->
+            <!-- *********************************************DNI******************************************** -->
+            <!-- ******************************************************************************************** -->
+            <script>
+                function validarDNI() {
+                    if (document.getElementById("inputDNI").value == "") {
+                        document.getElementById("divDNI").className = "form-group has-error   "
+                    } else {
+                        document.getElementById("divDNI").className = "form-group "
+                    }
+                    $.ajax({
+                        type: 'GET',
+                        url: "http://localhost:3000/validarNIF/" + document.getElementById("inputDNI").value,
+                        headers: {
+                            RestKey: document.getElementById("restkey").value
+                        },
+                        success: function (data, textStatus, xhr) {
+                            if (data.status == 200) {
+                                document.getElementById("inputDNIrespuesta").value = data.message
+
+                                if (data.correcto == true) {
+                                    document.getElementById("divResultadoDni").className = "form-group has-success   "
+                                    document.getElementById("inputDNIrespuesta").style = "background-color: #3CBC8D;"
+                                } else {
+                                    document.getElementById("divResultadoDni").className = "form-group has-error   "
+                                    document.getElementById("inputDNIrespuesta").style = "background-color: #ff6347;"
+                                }
+                            }
+                        },
+                        error: function (data, xhr, textStatus) {
+                            if (data.status == 401) {
+                                $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
+                                    $("#danger-alert").slideUp(500);
+                                });
+                            }
+                        }
+                    });
+                }
+            </script>
+
+            <!-- ******************************************************************************************** -->
+            <!-- *********************************************IBAN******************************************* -->
+            <!-- ******************************************************************************************** -->
+            <script>
+                function validarIBAN() {
+                    if (document.getElementById("inputIBAN").value == "") {
+                        document.getElementById("divIBAN").className = "form-group has-error   "
+                    } else {
+                        document.getElementById("divIBAN").className = "form-group "
+                    }
+                    $.ajax({
+                        type: 'GET',
+                        url: "http://localhost:3000/validarIBAN/" + document.getElementById("inputIBAN").value,
+                        headers: {
+                            RestKey: document.getElementById("restkey").value
+                        },
+                        success: function (data, textStatus, xhr) {
+                            if (data.status == 200) {
+                                document.getElementById("inputIBANrespuesta").value = data.message
+
+                                if (data.correcto == true) {
+                                    document.getElementById("divResultadoIBAN").className = "form-group has-success   "
+                                    document.getElementById("inputIBANrespuesta").style = "background-color: #3CBC8D;"
+                                } else {
+                                    document.getElementById("divResultadoIBAN").className = "form-group has-error   "
+                                    document.getElementById("inputIBANrespuesta").style = "background-color: #ff6347;"
+                                }
+                            }
+                        },
+                        error: function (data, xhr, textStatus) {
+                            if (data.status == 401) {
+                                $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
+                                    $("#danger-alert").slideUp(500);
+                                });
+                            }
+                        }
+                    });
+                }
+            </script>
+            <!-- ******************************************************************************************** -->
+            <!-- *********************************************CP********************************************* -->
+            <!-- ******************************************************************************************** -->
+            <script>
+                function comprobarCP() {
+                    if (document.getElementById("inputCP").value == "") {
+                        document.getElementById("divCP").className = "form-group has-error   "
+                    } else {
+                        document.getElementById("divCP").className = "form-group "
+                    }
+                    $.ajax({
+                        type: 'GET',
+                        url: "http://localhost:3000/consultaCodigoPostal/" + document.getElementById("inputCP").value,
+                        headers: {
+                            RestKey: document.getElementById("restkey").value
+                        },
+                        success: function (data, textStatus, xhr) {
+                            if (data.status == 200) {
+                                if (data.correcto == true) {
+                                    document.getElementById("inputCPrespuesta").value = data.Poblacion.codigoPostal
+                                    document.getElementById("inputPOBLACIONrespuesta").value = data.Poblacion.poblacion
+                                    document.getElementById("inputPROVINCIArespuesta").value = data.Poblacion.provincia
+
+                                    document.getElementById("divCPresultado").className = "form-group has-success   "
+                                    document.getElementById("inputCPrespuesta").style = "background-color: #3CBC8D;"
+                                    document.getElementById("inputPOBLACIONrespuesta").style = "background-color: #3CBC8D;"
+                                    document.getElementById("inputPROVINCIArespuesta").style = "background-color: #3CBC8D;"
+                                } else {
+                                    document.getElementById("inputCPrespuesta").value = data.Poblacion.codigoPostal
+                                    document.getElementById("inputPOBLACIONrespuesta").value = "No Existe"
+                                    document.getElementById("inputPROVINCIArespuesta").value = "No Existe"
+
+                                    document.getElementById("divCPresultado").className = "form-group has-error   "
+                                    document.getElementById("inputCPrespuesta").style = "background-color: #ff6347;"
+                                    document.getElementById("inputPOBLACIONrespuesta").style = "background-color: #ff6347;"
+                                    document.getElementById("inputPROVINCIArespuesta").style = "background-color: #ff6347;"
+                                }
+                            }
+                        },
+                        error: function (data, xhr, textStatus) {
+                            if (data.status == 401) {
+                                $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
+                                    $("#danger-alert").slideUp(500);
+                                });
+                            }
+                        }
+                    });
+                }
+            </script>
+            <!-- ******************************************************************************************** -->
+            <!-- ***************************************PRESUPUESTO****************************************** -->
+            <!-- ******************************************************************************************** -->
+            <script>
+                function generarPresupuesto() {
+                    if (document.getElementById("inputIDCLIENTE").value == "") {
+                        document.getElementById("divIDCLIENTE").className = "form-group has-error "
+                    } else {
+                        document.getElementById("divIDCLIENTE").className = "form-group "
+                    }
+                    if (document.getElementById("inputFECHA").value == "") {
+                        document.getElementById("divFECHA").className = "form-group has-error"
+                    } else {
+                        document.getElementById("divFECHA").className = "form-group "
+                    }
+                    if (document.getElementById("inputREFERENCIA").value == "") {
+                        document.getElementById("divREFERENCIA").className = "form-group has-error "
+                    } else {
+                        document.getElementById("divREFERENCIA").className = "form-group "
+                    }
+                    if (document.getElementById("inputCANTIDAD").value == "") {
+                        document.getElementById("divCANTIDAD").className = "form-group has-error"
+                    } else {
+                        document.getElementById("divCANTIDAD").className = "form-group "
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        url: "http://localhost:3000/generarPresupuesto/" + document.getElementById("inputCP").value,
+                        contentType: "application/json; charset=utf-8",                     
+                        headers: {
+                            RestKey: document.getElementById("restkey").value
+                        },
+                        data: JSON.stringify({
+                            fechaPresupuesto: document.getElementById("inputFECHA").value,
+                            idCliente: document.getElementById("inputIDCLIENTE").value,
+                            referenciaProducto: document.getElementById("inputREFERENCIA").value,
+                            cantidadProducto: document.getElementById("inputCANTIDAD").value
+                        }),
+
+                        success: function (data, textStatus, xhr) {
+                            if (data.status == 201) {
+                                if (data.correcto == true) {
+                                    document.getElementById("inputPRESUPUESTOrespuesta").value = "ID: " + data.Presupuesto.idPresupuesto
+
+                                    document.getElementById("divPRESUPUESTOresultado").className = "form-group has-success   "
+                                    document.getElementById("inputPRESUPUESTOrespuesta").style = "background-color: #3CBC8D;"
+                                }
+                            } 
+                        },
+                        error: function (data, xhr, textStatus) {
+                            console.log(data)
+                            if (data.status == 401) {
+                                $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
+                                    $("#danger-alert").slideUp(500);
+                                });
+                            }else {
+                                $("#danger-alert-presupuesto").fadeTo(2000, 500).slideUp(500, function () {
+                                    $("#danger-alert-presupuesto").slideUp(500);
+                                });
+                                document.getElementById("inputPRESUPUESTOrespuesta").value = "Error"
+
+                                document.getElementById("divPRESUPUESTOresultado").className = "form-group has-error   "
+                                document.getElementById("inputPRESUPUESTOrespuesta").style = "background-color: #ff6347;"
+                            }
+                        }
+                    });
+                }
+            </script>
+
+    </body>
+
+</html>
