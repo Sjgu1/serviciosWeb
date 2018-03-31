@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:WS_almacenLocal="http://www.example.org/WS_almacenLocal/" xmlns:invoke.bpel.mtis="http://invoke.bpel.mtis">
+  <process name="invoke.bpel.mtis:WS_compra">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="invoke.bpel.mtis:WS_compraService" port="WS_compraPort"/>
+    </provide>
+    <invoke partnerLink="comprobarLocalPL">
+      <service name="WS_almacenLocal:WS_almacenLocal" port="WS_almacenLocalSOAP"/>
+    </invoke>
+  </process>
+</deploy>
