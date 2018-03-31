@@ -5,7 +5,7 @@
          suppressJoinFailure="yes"
          xmlns:tns="http://invoke.bpel.mtis"
          xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
-         xmlns:ns="http://www.example.org/WS_almacenLocal/">
+         xmlns:ns="http://www.example.org/WS_almacenLocal/" xmlns:ns1="http://www.w3.org/2001/XMLSchema">
 
     <!-- Import the client WSDL -->
 	<bpel:import location="WS_compraArtifacts.wsdl" namespace="http://invoke.bpel.mtis" 
@@ -38,8 +38,19 @@
           -->
         <bpel:variable name="output"
                   messageType="tns:WS_compraResponseMessage"/>
+        
+        
+        <bpel:variable name="ifLocal" type="ns1:boolean"></bpel:variable>
+        
+        
         <bpel:variable name="comprobarLocalPLResponse" messageType="ns:ComprobarStockResponse"></bpel:variable>
         <bpel:variable name="comprobarLocalPLRequest" messageType="ns:ComprobarStockRequest"></bpel:variable>
+        <bpel:variable name="devolver" type="ns1:string"></bpel:variable>
+        
+        
+        <bpel:variable name="comprobarLocalPLResponse1" messageType="ns:ActualizarStockResponse"></bpel:variable>
+        <bpel:variable name="comprobarLocalPLRequest1" messageType="ns:ActualizarStockRequest"></bpel:variable>
+        <bpel:variable name="actualizadoLocal" type="ns1:boolean"></bpel:variable>
     </bpel:variables>
 
     <!-- ================================================================= -->         
@@ -59,6 +70,12 @@
         
         <!-- Generate reply to synchronous request -->
         <bpel:assign validate="no" name="asignarEntradaLocal">
+            
+            
+            
+            
+            
+            
             <bpel:copy>
                 <bpel:from><bpel:literal><tns:ComprobarStock xmlns:tns="http://www.example.org/WS_almacenLocal/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <numeroUnidades>0</numeroUnidades>
@@ -88,28 +105,239 @@
         <bpel:assign validate="no" name="asignarSalidaLocal">
             
             
-            <bpel:copy>
-                <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <tns:result>true</tns:result>
-</tns:WS_compraResponse>
-</bpel:literal></bpel:from>
-                <bpel:to variable="output" part="payload"></bpel:to>
-            </bpel:copy>
+            
             <bpel:copy>
                 <bpel:from part="parameters" variable="comprobarLocalPLResponse">
                     <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[existe]]></bpel:query>
                 </bpel:from>
-                <bpel:to part="payload" variable="output">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
-                </bpel:to>
+                <bpel:to variable="ifLocal"></bpel:to>
             </bpel:copy>
         </bpel:assign>
-        <bpel:reply name="replyOutput" 
-               partnerLink="client"
-               portType="tns:WS_compra"
-               operation="process" 
-               variable="output"
-               />
+            
+        
+        <bpel:if name="If">
+            <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$ifLocal = true()]]></bpel:condition>
+            <bpel:sequence>
+                <bpel:assign validate="no" name="asignarEntradaActualizarLocal">
+                
+                    <bpel:copy>
+                        <bpel:from><bpel:literal><tns:ActualizarStock xmlns:tns="http://www.example.org/WS_almacenLocal/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <numeroUnidades>0</numeroUnidades>
+  <referenciaProducto>referenciaProducto</referenciaProducto>
+</tns:ActualizarStock>
+</bpel:literal></bpel:from>
+                        <bpel:to variable="comprobarLocalPLRequest1" part="parameters"></bpel:to>
+                    </bpel:copy>
+                    <bpel:copy>
+                    <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                    <bpel:to variable="output" part="payload"></bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from>
+                        <bpel:literal xml:space="preserve">Stock almacen local : True</bpel:literal>
+                    </bpel:from>
+                    <bpel:to variable="devolver"></bpel:to>
+                </bpel:copy>
+                
+                    <bpel:copy>
+                        <bpel:from part="payload" variable="input">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:referenciaProducto]]></bpel:query>
+                        </bpel:from>
+                        <bpel:to part="parameters" variable="comprobarLocalPLRequest1">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[referenciaProducto]]></bpel:query>
+                        </bpel:to>
+                    </bpel:copy>
+                    <bpel:copy>
+                        <bpel:from part="payload" variable="input">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:numeroUnidades]]></bpel:query>
+                        </bpel:from>
+                        <bpel:to part="parameters" variable="comprobarLocalPLRequest1">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[numeroUnidades]]></bpel:query>
+                        </bpel:to>
+                    </bpel:copy>
+                </bpel:assign>
+                <bpel:invoke name="invocarActualizarLocal" partnerLink="comprobarLocalPL" operation="ActualizarStock" portType="ns:WS_almacenLocal" inputVariable="comprobarLocalPLRequest1" outputVariable="comprobarLocalPLResponse1"></bpel:invoke>
+                <bpel:assign validate="no" name="asignarSalidaActualizarLocal">
+                    <bpel:copy>
+                        <bpel:from part="parameters" variable="comprobarLocalPLResponse1">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                <![CDATA[actualizado]]>
+                            </bpel:query>
+                        </bpel:from>
+                        <bpel:to variable="actualizadoLocal"></bpel:to>
+                    </bpel:copy>
+                </bpel:assign>
+                <bpel:if name="If1">
+                    <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$actualizadoLocal = true()]]></bpel:condition>
+                    <bpel:assign validate="no" name="actualizadoLocalTrue">
+                        <bpel:copy>
+                            <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                            <bpel:to variable="output" part="payload"></bpel:to>
+                        </bpel:copy>
+                        <bpel:copy>
+                            <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <![CDATA[concat($devolver," --> Actualizado local: true")]]>
+                            </bpel:from>
+                            <bpel:to variable="devolver"></bpel:to>
+                        </bpel:copy>
+                        <bpel:copy>
+                            <bpel:from variable="devolver"></bpel:from>
+                            <bpel:to part="payload" variable="output">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
+                    </bpel:assign>
+                    <bpel:else>
+                        <bpel:assign validate="no" name="actualizadoLocalFalse">
+                            <bpel:copy>
+                                <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                <bpel:to variable="output" part="payload"></bpel:to>
+                            </bpel:copy>
+                            <bpel:copy>
+                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    
+                                    <![CDATA[concat($devolver," -->  Actualizado local: true")]]>
+                                </bpel:from>
+                                <bpel:to variable="devolver"></bpel:to>
+                            </bpel:copy>
+                            <bpel:copy>
+                                <bpel:from variable="devolver"></bpel:from>
+                                <bpel:to part="payload" variable="output">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                        </bpel:assign>
+                    </bpel:else>
+                </bpel:if>
+            </bpel:sequence>
+            <bpel:else>
+                <bpel:assign validate="no" name="Assign">
+                    
+                    
+                    
+                    <bpel:copy>
+                        <bpel:from>
+                            <bpel:literal xml:space="preserve">Stock almacen local : False</bpel:literal>
+                        </bpel:from>
+                        <bpel:to variable="devolver"></bpel:to>
+                    </bpel:copy>
+                </bpel:assign>
+            </bpel:else>
+        </bpel:if>
+        
+        <bpel:reply name="replyOutput" partnerLink="client" portType="tns:WS_compra" operation="process" variable="output" />
     </bpel:sequence>
 </bpel:process>
 

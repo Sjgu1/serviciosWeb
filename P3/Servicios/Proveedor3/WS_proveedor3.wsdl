@@ -125,7 +125,7 @@
   </wsdl:binding>
   <wsdl:service name="WS_proveedor3">
     <wsdl:port binding="tns:WS_proveedor3SOAP" name="WS_proveedor3SOAP">
-      <soap:address location="http://www.example.org/"/>
+      <soap:address location="http://localhost:9080/Proveedor3/services/WS_proveedor3"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -89,7 +89,7 @@
   </wsdl:binding>
   <wsdl:service name="WS_almacenCentral">
     <wsdl:port binding="tns:WS_almacenCentralSOAP" name="WS_almacenCentralSOAP">
-      <soap:address location="http://www.example.org/"/>
+      <soap:address location="http://localhost:9080/AlmacenCentral/services/WS_almacenCentral"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

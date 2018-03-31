@@ -43,7 +43,7 @@ public class WS_proveedor3Skeleton {
 				if (stockActual >= actualizarStock.getNumeroUnidades()) {
 					String query = "update productos set stock = ? where id = ?";
 				      PreparedStatement preparedStmt = conn.prepareStatement(query);
-				      preparedStmt.setInt   (1, stockActual + actualizarStock.getNumeroUnidades());
+				      preparedStmt.setInt   (1, stockActual - actualizarStock.getNumeroUnidades());
 				      preparedStmt.setString(2, actualizarStock.getReferenciaProducto());
 				      preparedStmt.executeUpdate();
 				   
