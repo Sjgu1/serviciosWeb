@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:17:49 BST) --><serviceGroup>
+    <service name="WS_almacenLocal">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.example.www.ws_almacenlocal.WS_almacenLocalMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">org.example.www.ws_almacenlocal.WS_almacenLocalSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="ComprobarStock" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/WS_almacenLocal/">
+            <actionMapping>http://www.example.org/WS_almacenLocal/ComprobarStock</actionMapping>
+            <outputActionMapping>http://www.example.org/WS_almacenLocal/WS_almacenLocal/ComprobarStockResponse</outputActionMapping>
+        </operation>
+        <operation name="ActualizarStock" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/WS_almacenLocal/">
+            <actionMapping>http://www.example.org/WS_almacenLocal/ActualizarStock</actionMapping>
+            <outputActionMapping>http://www.example.org/WS_almacenLocal/WS_almacenLocal/ActualizarStockResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

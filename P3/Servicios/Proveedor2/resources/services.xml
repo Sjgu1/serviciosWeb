@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:17:49 BST) --><serviceGroup>
+    <service name="WS_proveedor2">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.example.www.ws_proveedor2.WS_proveedor2MessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">org.example.www.ws_proveedor2.WS_proveedor2Skeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="OrdenarCompra" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/WS_proveedor2/">
+            <actionMapping>http://www.example.org/WS_proveedor2/OrdenarCompra</actionMapping>
+            <outputActionMapping>http://www.example.org/WS_proveedor2/WS_proveedor2/OrdenarCompraResponse</outputActionMapping>
+        </operation>
+        <operation name="SolicitarPresupuesto" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/WS_proveedor2/">
+            <actionMapping>http://www.example.org/WS_proveedor2/SolicitarPresupuesto</actionMapping>
+            <outputActionMapping>http://www.example.org/WS_proveedor2/WS_proveedor2/SolicitarPresupuestoResponse</outputActionMapping>
+        </operation>
+        <operation name="ActualizarStock" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/WS_proveedor2/">
+            <actionMapping>http://www.example.org/WS_proveedor2/ActualizarStock</actionMapping>
+            <outputActionMapping>http://www.example.org/WS_proveedor2/WS_proveedor2/ActualizarStockResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

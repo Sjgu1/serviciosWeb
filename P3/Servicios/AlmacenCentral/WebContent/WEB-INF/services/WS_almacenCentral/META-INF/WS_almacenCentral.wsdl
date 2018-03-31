@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="WS_almacenCentral" targetNamespace="http://www.example.org/WS_almacenCentral/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/WS_almacenCentral/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/WS_almacenCentral/">
+      <xsd:element name="ComprobarStock">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="numeroUnidades" type="xsd:int"/>
+          	<xsd:element name="referenciaProducto" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ComprobarStockResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="existe" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ActualizarStock">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="numeroUnidades" type="xsd:int"/>
+      			<xsd:element name="referenciaProducto" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ActualizarStockResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="actualizado" type="xsd:boolean"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ActualizarStockRequest">
+    <wsdl:part name="parameters" element="tns:ActualizarStock">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ActualizarStockResponse">
+    <wsdl:part name="parameters" element="tns:ActualizarStockResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ComprobarStockRequest">
+    <wsdl:part name="parameters" element="tns:ComprobarStock">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ComprobarStockResponse">
+    <wsdl:part name="parameters" element="tns:ComprobarStockResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WS_almacenCentral">
+    <wsdl:operation name="ComprobarStock">
+      <wsdl:input message="tns:ComprobarStockRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ComprobarStockResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarStock">
+      <wsdl:input message="tns:ActualizarStockRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ActualizarStockResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WS_almacenCentralSOAP" type="tns:WS_almacenCentral">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ComprobarStock">
+      <soap:operation soapAction="http://www.example.org/WS_almacenCentral/ComprobarStock"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarStock">
+      <soap:operation soapAction="http://www.example.org/WS_almacenCentral/ActualizarStock"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WS_almacenCentral">
+    <wsdl:port name="WS_almacenCentralSOAP" binding="tns:WS_almacenCentralSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
