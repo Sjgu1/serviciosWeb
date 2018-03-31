@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://invoke.bpel.mtis" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://www.example.org/WS_almacenLocal/" name="WS_compra" targetNamespace="http://invoke.bpel.mtis">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://invoke.bpel.mtis" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://www.example.org/WS_almacenLocal/" xmlns:wsdl1="http://www.example.org/WS_almacenCentral/" name="WS_compra" targetNamespace="http://invoke.bpel.mtis">
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      TYPE DEFINITION - List of types participating in this BPEL process 
@@ -10,7 +10,11 @@
     <plnk:partnerLinkType name="comprobarLocalPLN">
     <plnk:role name="comprobarLocalRole" portType="wsdl:WS_almacenLocal"/>
   </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="almacenCentralPLN">
+    <plnk:role name="almacenCentralRole" portType="wsdl1:WS_almacenCentral"/>
+  </plnk:partnerLinkType>
     <import location="WS_almacenLocal.wsdl" namespace="http://www.example.org/WS_almacenLocal/"/>
+    <import location="WS_almacenCentral.wsdl" namespace="http://www.example.org/WS_almacenCentral/"/>
     <types>
         <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://invoke.bpel.mtis">
 

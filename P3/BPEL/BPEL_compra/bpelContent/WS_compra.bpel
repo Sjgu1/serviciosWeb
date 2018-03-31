@@ -5,7 +5,7 @@
          suppressJoinFailure="yes"
          xmlns:tns="http://invoke.bpel.mtis"
          xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
-         xmlns:ns="http://www.example.org/WS_almacenLocal/" xmlns:ns1="http://www.w3.org/2001/XMLSchema">
+         xmlns:ns="http://www.example.org/WS_almacenLocal/" xmlns:ns1="http://www.w3.org/2001/XMLSchema" xmlns:ns0="http://www.example.org/WS_almacenCentral/">
 
     <!-- Import the client WSDL -->
 	<bpel:import location="WS_compraArtifacts.wsdl" namespace="http://invoke.bpel.mtis" 
@@ -22,6 +22,7 @@
                      myRole="WS_compraProvider"
                      />
         <bpel:partnerLink name="comprobarLocalPL" partnerLinkType="tns:comprobarLocalPLN" partnerRole="comprobarLocalRole"></bpel:partnerLink>
+        <bpel:partnerLink name="almacenCentralPL" partnerLinkType="tns:almacenCentralPLN" partnerRole="almacenCentralRole"></bpel:partnerLink>
     </bpel:partnerLinks>
   
     <!-- ================================================================= -->         
@@ -51,6 +52,12 @@
         <bpel:variable name="comprobarLocalPLResponse1" messageType="ns:ActualizarStockResponse"></bpel:variable>
         <bpel:variable name="comprobarLocalPLRequest1" messageType="ns:ActualizarStockRequest"></bpel:variable>
         <bpel:variable name="actualizadoLocal" type="ns1:boolean"></bpel:variable>
+        <bpel:variable name="almacenCentralPLResponse" messageType="ns0:ComprobarStockResponse"></bpel:variable>
+        <bpel:variable name="almacenCentralPLRequest" messageType="ns0:ComprobarStockRequest"></bpel:variable>
+        <bpel:variable name="ifCentral" type="ns1:boolean"></bpel:variable>
+        <bpel:variable name="ifCentralActualizar" type="ns1:boolean"></bpel:variable>
+        <bpel:variable name="almacenCentralPLResponse1" messageType="ns0:ActualizarStockResponse"></bpel:variable>
+        <bpel:variable name="almacenCentralPLRequest1" messageType="ns0:ActualizarStockRequest"></bpel:variable>
     </bpel:variables>
 
     <!-- ================================================================= -->         
@@ -323,17 +330,303 @@
                 </bpel:if>
             </bpel:sequence>
             <bpel:else>
-                <bpel:assign validate="no" name="Assign">
+                <bpel:sequence>
+                    <bpel:assign validate="no" name="asignarEntradaComprobarCentral">
                     
                     
                     
-                    <bpel:copy>
+                    
+                        <bpel:copy>
+                            <bpel:from><bpel:literal><tns:ComprobarStock xmlns:tns="http://www.example.org/WS_almacenCentral/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <numeroUnidades>0</numeroUnidades>
+  <referenciaProducto>referenciaProducto</referenciaProducto>
+</tns:ComprobarStock>
+</bpel:literal></bpel:from>
+                            <bpel:to variable="almacenCentralPLRequest" part="parameters"></bpel:to>
+                        </bpel:copy>
+                        <bpel:copy>
                         <bpel:from>
                             <bpel:literal xml:space="preserve">Stock almacen local : False</bpel:literal>
                         </bpel:from>
                         <bpel:to variable="devolver"></bpel:to>
                     </bpel:copy>
-                </bpel:assign>
+                        <bpel:copy>
+                            <bpel:from part="payload" variable="input">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:referenciaProducto]]></bpel:query>
+                            </bpel:from>
+                            <bpel:to part="parameters" variable="almacenCentralPLRequest">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[referenciaProducto]]></bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
+                        <bpel:copy>
+                            <bpel:from part="payload" variable="input">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:numeroUnidades]]></bpel:query>
+                            </bpel:from>
+                            <bpel:to part="parameters" variable="almacenCentralPLRequest">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[numeroUnidades]]></bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
+                    </bpel:assign>
+                    <bpel:invoke name="invocarComprobarCentral" partnerLink="almacenCentralPL" operation="ComprobarStock" portType="ns0:WS_almacenCentral" inputVariable="almacenCentralPLRequest" outputVariable="almacenCentralPLResponse"></bpel:invoke>
+                    <bpel:assign validate="no" name="asignarSalidaComprobarCentral">
+                        <bpel:copy>
+                            <bpel:from part="parameters" variable="almacenCentralPLResponse">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[existe]]></bpel:query>
+                            </bpel:from>
+                            <bpel:to variable="ifCentral"></bpel:to>
+                        </bpel:copy>
+                    </bpel:assign>
+                    <bpel:if name="If2">
+                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$ifCentral = true()]]></bpel:condition>
+                        <bpel:sequence>
+                            <bpel:assign validate="no" name="asignarEntradaActualizarCentral">
+                                <bpel:copy>
+                                    <bpel:from><bpel:literal><tns:ActualizarStock xmlns:tns="http://www.example.org/WS_almacenCentral/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <numeroUnidades>0</numeroUnidades>
+  <referenciaProducto>referenciaProducto</referenciaProducto>
+</tns:ActualizarStock>
+</bpel:literal></bpel:from>
+                                    <bpel:to variable="almacenCentralPLRequest1" part="parameters"></bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                <bpel:to variable="output" part="payload"></bpel:to>
+                            </bpel:copy>
+                            <bpel:copy>
+                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <![CDATA[concat($devolver, " --> Stock en central: true")]]>
+                                </bpel:from>
+                                <bpel:to variable="devolver"></bpel:to>
+                            </bpel:copy>
+                            <bpel:copy>
+                                <bpel:from variable="devolver"></bpel:from>
+                                <bpel:to part="payload" variable="output">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from part="payload" variable="input">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:referenciaProducto]]></bpel:query>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="almacenCentralPLRequest1">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[referenciaProducto]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from part="payload" variable="input">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:numeroUnidades]]></bpel:query>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="almacenCentralPLRequest1">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[numeroUnidades]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                            </bpel:assign>
+                            <bpel:invoke name="invocarActualizarCentral" partnerLink="almacenCentralPL" operation="ActualizarStock" portType="ns0:WS_almacenCentral" inputVariable="almacenCentralPLRequest1" outputVariable="almacenCentralPLResponse1"></bpel:invoke>
+                            <bpel:assign validate="no" name="asignarSalidaActualizarCentral">
+                                <bpel:copy>
+                                    <bpel:from part="parameters" variable="almacenCentralPLResponse1">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[actualizado]]></bpel:query>
+                                    </bpel:from>
+                                    <bpel:to variable="ifCentralActualizar"></bpel:to>
+                                </bpel:copy>
+                            </bpel:assign>
+                            <bpel:if name="If3">
+                                <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$ifCentralActualizar = true()]]></bpel:condition>
+                                <bpel:assign validate="no" name="actualizadoCentralTrue">
+                                    <bpel:copy>
+                                        <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                        <bpel:to variable="output" part="payload"></bpel:to>
+                                    </bpel:copy>
+                                    <bpel:copy>
+                                        <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <![CDATA[concat($devolver, "--> Actualizado central: true")]]>
+                                        </bpel:from>
+                                        <bpel:to variable="devolver"></bpel:to>
+                                    </bpel:copy>
+                                    <bpel:copy>
+                                        <bpel:from variable="devolver"></bpel:from>
+                                        <bpel:to part="payload" variable="output">
+                                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                        </bpel:to>
+                                    </bpel:copy>
+                                </bpel:assign>
+                                <bpel:else>
+                                    <bpel:assign validate="no" name="actualizadoCentralFalse">
+                                        <bpel:copy>
+                                            <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                            <bpel:to variable="output" part="payload"></bpel:to>
+                                        </bpel:copy>
+                                        <bpel:copy>
+                                            <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                <![CDATA[concat($devolver, "--> Actualizado central: false")]]>
+                                            </bpel:from>
+                                            <bpel:to variable="devolver"></bpel:to>
+                                        </bpel:copy>
+                                        <bpel:copy>
+                                            <bpel:from variable="devolver"></bpel:from>
+                                            <bpel:to part="payload" variable="output">
+                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                            </bpel:to>
+                                        </bpel:copy>
+                                    </bpel:assign>
+                                </bpel:else>
+                            </bpel:if>
+                        </bpel:sequence>
+                        <bpel:else>
+                            <bpel:assign validate="no" name="Assign1">
+                                <bpel:copy>
+                                    <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                    <bpel:to variable="output" part="payload"></bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <![CDATA[concat($devolver, " --> Stock en central: false")]]>
+                                    </bpel:from>
+                                    <bpel:to variable="devolver"></bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from variable="devolver"></bpel:from>
+                                    <bpel:to part="payload" variable="output">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                            </bpel:assign>
+                        </bpel:else>
+                    </bpel:if>
+                </bpel:sequence>
             </bpel:else>
         </bpel:if>
         
