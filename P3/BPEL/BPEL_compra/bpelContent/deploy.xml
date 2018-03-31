@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:WS_almacenCentral="http://www.example.org/WS_almacenCentral/" xmlns:WS_almacenLocal="http://www.example.org/WS_almacenLocal/" xmlns:invoke.bpel.mtis="http://invoke.bpel.mtis">
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:WS_almacenCentral="http://www.example.org/WS_almacenCentral/" xmlns:WS_almacenLocal="http://www.example.org/WS_almacenLocal/" xmlns:WS_proveedor1="http://www.example.org/WS_proveedor1/" xmlns:WS_proveedor2="http://www.example.org/WS_proveedor2/" xmlns:WS_proveedor3="http://www.example.org/WS_proveedor3/" xmlns:invoke.bpel.mtis="http://invoke.bpel.mtis">
   <process name="invoke.bpel.mtis:WS_compra">
     <active>true</active>
     <retired>false</retired>
@@ -12,6 +12,15 @@
     </invoke>
     <invoke partnerLink="almacenCentralPL">
       <service name="WS_almacenCentral:WS_almacenCentral" port="WS_almacenCentralSOAP"/>
+    </invoke>
+    <invoke partnerLink="proveedor1PL">
+      <service name="WS_proveedor1:WS_proveedor1" port="WS_proveedor1SOAP"/>
+    </invoke>
+    <invoke partnerLink="proveedor2PL">
+      <service name="WS_proveedor2:WS_proveedor2" port="WS_proveedor2SOAP"/>
+    </invoke>
+    <invoke partnerLink="proveedor3PL">
+      <service name="WS_proveedor3:WS_proveedor3" port="WS_proveedor3SOAP"/>
     </invoke>
   </process>
 </deploy>
