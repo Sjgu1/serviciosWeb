@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2018 a las 20:07:04
+-- Tiempo de generación: 01-04-2018 a las 12:58:50
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -40,10 +40,10 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id`, `stock`, `precio`) VALUES
 ('1', 9, 74.12),
-('2', 5, 14.13),
-('3', 19, 74.12),
+('2', 499, 14.13),
+('3', 0, 74.12),
 ('4', 0, 15.13),
-('5', 29, 73.12),
+('5', 0, 73.12),
 ('6', 1, 11.13),
 ('7', 34, 54.12),
 ('8', 0, 1.13);

@@ -114,6 +114,18 @@ public class WS_proveedor3Skeleton {
 			Connection conn = DriverManager.getConnection(myUrl, "user", "user");
 
 			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("select count(1) from productos where id like '" + ordenarCompra.getReferenciaProducto() + "' ;");
+
+			String resultado = "0";
+			while (rs.next()) {
+				resultado = rs.getString(1);
+			}
+
+			if (resultado.equals("0")) {
+				conn.close();
+				respuesta.setRealizadaCorrectamente(false);
+				return respuesta;
+			}
 			String values = "('" + ordenarCompra.getReferenciaProducto() + "', '" + ordenarCompra.getNumeroUnidades() +"')";
 
 			st.executeUpdate("INSERT INTO historial (idProducto, cantidad) VALUES "+ values + ";");

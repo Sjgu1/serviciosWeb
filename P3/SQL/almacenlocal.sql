@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2018 a las 20:07:22
+-- Tiempo de generación: 01-04-2018 a las 12:59:07
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -39,14 +39,14 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `stock`, `precio`) VALUES
-('1', 25, 71.12),
-('2', 15, 12.23),
-('3', 7, 71.12),
-('4', 2, 11.53),
+('1', 220, 71.12),
+('2', 0, 12.23),
+('3', 0, 71.12),
+('4', 0, 11.53),
 ('5', 0, 63.1),
 ('6', 1, 12.11),
 ('7', 3, 51.52),
-('8', 8, 1.53);
+('8', 0, 1.53);
 
 --
 -- Índices para tablas volcadas

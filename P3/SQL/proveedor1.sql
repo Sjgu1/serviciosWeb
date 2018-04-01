@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2018 a las 20:07:34
+-- Tiempo de generación: 01-04-2018 a las 12:59:16
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -40,7 +40,9 @@ CREATE TABLE `historial` (
 
 INSERT INTO `historial` (`id`, `idProducto`, `cantidad`) VALUES
 (1, '2', 4),
-(2, '12', 4);
+(2, '12', 4),
+(3, '0', 1),
+(4, '3', 1);
 
 -- --------------------------------------------------------
 
@@ -61,12 +63,12 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id`, `stock`, `precio`) VALUES
 ('1', 100039, 71.11),
 ('2', 99999, 12.33),
-('3', 99999, 72.12),
+('3', 99998, 1),
 ('4', 99999, 13.53),
 ('5', 99999, 61.1),
 ('6', 99999, 11.11),
 ('7', 99999, 54.52),
-('8', 99999, 1.13);
+('8', 99999, 1.01);
 
 --
 -- Índices para tablas volcadas
@@ -92,7 +94,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2018 a las 20:07:50
+-- Tiempo de generación: 01-04-2018 a las 12:59:30
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -34,6 +34,13 @@ CREATE TABLE `historial` (
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `historial`
+--
+
+INSERT INTO `historial` (`id`, `idProducto`, `cantidad`) VALUES
+(1, '5', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -55,7 +62,7 @@ INSERT INTO `productos` (`id`, `stock`, `precio`) VALUES
 ('2', 99999, 11.33),
 ('3', 99999, 75.12),
 ('4', 99999, 15.53),
-('5', 99999, 65.1),
+('5', 99998, 1),
 ('6', 99999, 9.11),
 ('7', 99999, 49.52),
 ('8', 99999, 1.02);
@@ -84,7 +91,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
