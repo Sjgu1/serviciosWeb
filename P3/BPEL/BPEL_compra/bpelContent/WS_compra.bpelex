@@ -10,7 +10,7 @@
   </extensions>
   <extensions>
     <extendedObject href="WS_compra.bpel#/"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1522522663579"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1522569275862"/>
   </extensions>
   <extensions>
     <extendedObject href="WS_compra.bpel#//@variables/@children.2"/>
@@ -381,15 +381,15 @@
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CaseExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity"/>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity"/>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity"/>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
@@ -445,42 +445,6 @@
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@copy.1"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@copy.1"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@copy.1"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@copy.2"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@copy.0"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@copy.2"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@copy.0"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@copy.2"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@copy.0"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
-  </extensions>
-  <extensions>
     <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.1/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
@@ -506,6 +470,434 @@
   </extensions>
   <extensions>
     <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.1/@activities.1/@activities.2/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.24"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@else/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@else/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@else/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.25"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.3/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.3/@else/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.3/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.3/@else/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.3/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.3/@else/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.0/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.0/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.0/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.26"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.27"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.0/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.0/@copy.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.2/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.28"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.29"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.0/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.0/@copy.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.2/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.30"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.31"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.0/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.0/@copy.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.2/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.0/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@else/@activity/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@else/@activity/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@else/@activity/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.0/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@else/@activity/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@else/@activity/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@else/@activity/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.0/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@else/@activity/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@else/@activity/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@else/@activity/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.32"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.33"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.0/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.0/@copy.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.2/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.34"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.35"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.0/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.0/@copy.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.2/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.36"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@variables/@children.37"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.0/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.0/@copy.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.2/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.3/@activity/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.3/@activity/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.3/@activity/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.3/@else/@activity/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.3/@else/@activity/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@activity/@activities.3/@activity/@activities.3/@else/@activity/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.3/@activity/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.3/@activity/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.3/@activity/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.3/@else/@activity/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.3/@else/@activity/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@elseIf.0/@activity/@activities.3/@activity/@activities.3/@else/@activity/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.3/@activity/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.3/@activity/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.3/@activity/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.3/@else/@activity/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.3/@else/@activity/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="WS_compra.bpel#//@activity/@activities.4/@else/@activity/@activities.3/@else/@activity/@activities.2/@else/@activity/@activities.3/@activity/@activities.3/@else/@activity/@copy.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
 </extensionmodel:ExtensionMap>

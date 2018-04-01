@@ -72,6 +72,20 @@
         <bpel:variable name="proveedor3PLRequest" messageType="ns4:SolicitarPresupuestoRequest"></bpel:variable>
         <bpel:variable name="proveedor2PLResponse" messageType="ns3:SolicitarPresupuestoResponse"></bpel:variable>
         <bpel:variable name="proveedor2PLRequest" messageType="ns3:SolicitarPresupuestoRequest"></bpel:variable>
+        <bpel:variable name="ifCompra" type="ns1:boolean"></bpel:variable>
+        <bpel:variable name="ifActualizarProveedor" type="ns1:boolean"></bpel:variable>
+        <bpel:variable name="proveedor1PLResponse1" messageType="ns2:OrdenarCompraResponse"></bpel:variable>
+        <bpel:variable name="proveedor1PLRequest1" messageType="ns2:OrdenarCompraRequest"></bpel:variable>
+        <bpel:variable name="proveedor2PLResponse1" messageType="ns3:OrdenarCompraResponse"></bpel:variable>
+        <bpel:variable name="proveedor2PLRequest1" messageType="ns3:OrdenarCompraRequest"></bpel:variable>
+        <bpel:variable name="proveedor3PLResponse1" messageType="ns4:OrdenarCompraResponse"></bpel:variable>
+        <bpel:variable name="proveedor3PLRequest1" messageType="ns4:OrdenarCompraRequest"></bpel:variable>
+        <bpel:variable name="proveedor1PLResponse2" messageType="ns2:ActualizarStockResponse"></bpel:variable>
+        <bpel:variable name="proveedor1PLRequest2" messageType="ns2:ActualizarStockRequest"></bpel:variable>
+        <bpel:variable name="proveedor2PLResponse2" messageType="ns3:ActualizarStockResponse"></bpel:variable>
+        <bpel:variable name="proveedor2PLRequest2" messageType="ns3:ActualizarStockRequest"></bpel:variable>
+        <bpel:variable name="proveedor3PLResponse2" messageType="ns4:ActualizarStockResponse"></bpel:variable>
+        <bpel:variable name="proveedor3PLRequest2" messageType="ns4:ActualizarStockRequest"></bpel:variable>
     </bpel:variables>
 
     <!-- ================================================================= -->         
@@ -779,141 +793,680 @@
                                 
                                 <bpel:if name="If4">
                                     <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[($precio1 <= $precio2) and ($precio1 <= $precio3)]]></bpel:condition>
-                                    <bpel:assign validate="no" name="entradaComprarP1">
-                                        <bpel:copy>
-                                            <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                    <bpel:sequence>
+                                        <bpel:assign validate="no" name="entradaComprarP1">
+                                        
+                                        
+                                        
+                                            <bpel:copy>
+                                                <bpel:from><bpel:literal><tns:OrdenarCompra xmlns:tns="http://www.example.org/WS_proveedor1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <numeroUnidades>0</numeroUnidades>
+  <referenciaProducto>referenciaProducto</referenciaProducto>
+</tns:OrdenarCompra>
+</bpel:literal></bpel:from>
+                                                <bpel:to variable="proveedor1PLRequest1" part="parameters"></bpel:to>
+                                            </bpel:copy>
+                                            <bpel:copy>
+                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                    
+                                                    
+                                                    <![CDATA[concat($devolver, " --> Mejor Presupuesto proveedor: 1")]]>
+                                                </bpel:from>
+                                                <bpel:to variable="devolver"></bpel:to>
+                                            </bpel:copy>
+                                            <bpel:copy>
+                                                <bpel:from part="payload" variable="input">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:referenciaProducto]]></bpel:query>
+                                                </bpel:from>
+                                                <bpel:to part="parameters" variable="proveedor1PLRequest1">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[referenciaProducto]]></bpel:query>
+                                                </bpel:to>
+                                            </bpel:copy>
+                                            <bpel:copy>
+                                                <bpel:from part="payload" variable="input">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:numeroUnidades]]></bpel:query>
+                                                </bpel:from>
+                                                <bpel:to part="parameters" variable="proveedor1PLRequest1">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[numeroUnidades]]></bpel:query>
+                                                </bpel:to>
+                                            </bpel:copy>
+                                        </bpel:assign>
+                                        <bpel:invoke name="invocarCompraP1" partnerLink="proveedor1PL" operation="OrdenarCompra" portType="ns2:WS_proveedor1" inputVariable="proveedor1PLRequest1" outputVariable="proveedor1PLResponse1"></bpel:invoke>
+                                        <bpel:assign validate="no" name="salidaCompraP1">
+                                            <bpel:copy>
+                                                <bpel:from part="parameters" variable="proveedor1PLResponse1">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[RealizadaCorrectamente]]></bpel:query>
+                                                </bpel:from>
+                                                <bpel:to variable="ifCompra"></bpel:to>
+                                            </bpel:copy>
+                                        </bpel:assign>
+                                        <bpel:if name="If5">
+                                            <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$ifCompra = true()]]></bpel:condition>
+                                            <bpel:sequence>
+                                                <bpel:assign validate="no" name="entradaActualizarP1">
+                                                    <bpel:copy>
+                                                        <bpel:from><bpel:literal><tns:ActualizarStock xmlns:tns="http://www.example.org/WS_proveedor1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <numeroUnidades>0</numeroUnidades>
+  <referenciaProducto>referenciaProducto</referenciaProducto>
+</tns:ActualizarStock>
+</bpel:literal></bpel:from>
+                                                        <bpel:to variable="proveedor1PLRequest2" part="parameters"></bpel:to>
+                                                    </bpel:copy>
+                                                    <bpel:copy>
+                                                        <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            <![CDATA[concat($devolver, " --> Compra a proveedor 1: True")]]>
+                                                        </bpel:from>
+                                                        <bpel:to variable="devolver"></bpel:to>
+                                                    </bpel:copy>
+                                                    <bpel:copy>
+                                                        <bpel:from part="payload" variable="input">
+                                                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:referenciaProducto]]></bpel:query>
+                                                        </bpel:from>
+                                                        <bpel:to part="parameters" variable="proveedor1PLRequest2">
+                                                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[referenciaProducto]]></bpel:query>
+                                                        </bpel:to>
+                                                    </bpel:copy>
+                                                    <bpel:copy>
+                                                        <bpel:from part="payload" variable="input">
+                                                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:numeroUnidades]]></bpel:query>
+                                                        </bpel:from>
+                                                        <bpel:to part="parameters" variable="proveedor1PLRequest2">
+                                                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[numeroUnidades]]></bpel:query>
+                                                        </bpel:to>
+                                                    </bpel:copy>
+                                                </bpel:assign>
+                                                <bpel:invoke name="invocarActualizarP1" partnerLink="proveedor1PL" operation="ActualizarStock" portType="ns2:WS_proveedor1" inputVariable="proveedor1PLRequest2" outputVariable="proveedor1PLResponse2"></bpel:invoke>
+                                                <bpel:assign validate="no" name="salidaActualizarP1">
+                                                    
+                                                    <bpel:copy>
+                                                        <bpel:from part="parameters" variable="proveedor1PLResponse2">
+                                                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[actualizado]]></bpel:query>
+                                                        </bpel:from>
+                                                        <bpel:to variable="ifActualizarProveedor"></bpel:to>
+                                                    </bpel:copy>
+                                                </bpel:assign>
+                                                <bpel:if name="If8">
+                                                    <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$ifActualizarProveedor = true()]]></bpel:condition>
+                                                    <bpel:assign validate="no" name="actualizarP1True">
+                                                        <bpel:copy>
+                                                            <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <tns:result>tns:result</tns:result>
 </tns:WS_compraResponse>
 </bpel:literal></bpel:from>
-                                            <bpel:to variable="output" part="payload"></bpel:to>
-                                        </bpel:copy>
-                                        <bpel:copy>
-                                            <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                <![CDATA[concat($devolver, " --> Mejor Presupuesto proveedor: 1")]]>
-                                            </bpel:from>
-                                            <bpel:to variable="devolver"></bpel:to>
-                                        </bpel:copy>
-                                        <bpel:copy>
-                                            <bpel:from variable="devolver"></bpel:from>
-                                            <bpel:to part="payload" variable="output">
-                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
-                                            </bpel:to>
-                                        </bpel:copy>
-                                    </bpel:assign>
+                                                            <bpel:to variable="output" part="payload"></bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                <![CDATA[concat($devolver, " --> Proveedor 1 actualizar: True")]]>
+                                                            </bpel:from>
+                                                            <bpel:to variable="devolver"></bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from variable="devolver"></bpel:from>
+                                                            <bpel:to part="payload" variable="output">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                                            </bpel:to>
+                                                        </bpel:copy>
+                                                    </bpel:assign>
+                                                    <bpel:else>
+                                                        <bpel:assign validate="no" name="actualizarP1False">
+                                                            <bpel:copy>
+                                                                <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                                                <bpel:to variable="output" part="payload"></bpel:to>
+                                                            </bpel:copy>
+                                                            <bpel:copy>
+                                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    <![CDATA[concat($devolver, " --> Proveedor 1 actualizar: False")]]>
+                                                                </bpel:from>
+                                                                <bpel:to variable="devolver"></bpel:to>
+                                                            </bpel:copy>
+                                                            <bpel:copy>
+                                                                <bpel:from variable="devolver"></bpel:from>
+                                                                <bpel:to part="payload" variable="output">
+                                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                                                </bpel:to>
+                                                            </bpel:copy>
+                                                        </bpel:assign>
+                                                    </bpel:else>
+                                                </bpel:if>
+                                            </bpel:sequence>
+                                            <bpel:else>
+                                                <bpel:assign validate="no" name="comprarP1False">
+                                                    <bpel:copy>
+                                                        <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                                        <bpel:to variable="output" part="payload"></bpel:to>
+                                                    </bpel:copy>
+                                                    <bpel:copy>
+                                                        <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            <![CDATA[concat($devolver, " --> Compra a proveedor 1: False")]]>
+                                                        </bpel:from>
+                                                        <bpel:to variable="devolver"></bpel:to>
+                                                    </bpel:copy>
+                                                    <bpel:copy>
+                                                        <bpel:from variable="devolver"></bpel:from>
+                                                        <bpel:to part="payload" variable="output">
+                                                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                                        </bpel:to>
+                                                    </bpel:copy>
+                                                </bpel:assign>
+                                            </bpel:else>
+                                        </bpel:if>
+                                    </bpel:sequence>
                                 <bpel:elseif>
                                         <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[($precio2 <= $precio1) and ($precio2 <= $precio3)]]></bpel:condition>
-                                        <bpel:assign validate="no" name="entradaComprarP2">
-                                            <bpel:copy>
-                                                <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                        <bpel:sequence>
+                                            <bpel:assign validate="no" name="entradaComprarP2">
+                                            
+                                            
+                                            
+                                                <bpel:copy>
+                                                    <bpel:from><bpel:literal><tns:OrdenarCompra xmlns:tns="http://www.example.org/WS_proveedor2/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <numeroUnidades>0</numeroUnidades>
+  <referenciaProducto>referenciaProducto</referenciaProducto>
+</tns:OrdenarCompra>
+</bpel:literal></bpel:from>
+                                                    <bpel:to variable="proveedor2PLRequest1" part="parameters"></bpel:to>
+                                                </bpel:copy>
+                                                <bpel:copy>
+                                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                        <![CDATA[concat($devolver, " --> Mejor Presupuesto proveedor: 2")]]>
+                                                    </bpel:from>
+                                                    <bpel:to variable="devolver"></bpel:to>
+                                                </bpel:copy>
+                                                <bpel:copy>
+                                                    <bpel:from part="payload" variable="input">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:referenciaProducto]]></bpel:query>
+                                                    </bpel:from>
+                                                    <bpel:to part="parameters" variable="proveedor2PLRequest1">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[referenciaProducto]]></bpel:query>
+                                                    </bpel:to>
+                                                </bpel:copy>
+                                                <bpel:copy>
+                                                    <bpel:from part="payload" variable="input">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:numeroUnidades]]></bpel:query>
+                                                    </bpel:from>
+                                                    <bpel:to part="parameters" variable="proveedor2PLRequest1">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[numeroUnidades]]></bpel:query>
+                                                    </bpel:to>
+                                                </bpel:copy>
+                                            </bpel:assign>
+                                            <bpel:invoke name="invocarCompraP2" partnerLink="proveedor2PL" operation="OrdenarCompra" portType="ns3:WS_proveedor2" inputVariable="proveedor2PLRequest1" outputVariable="proveedor2PLResponse1"></bpel:invoke>
+                                            <bpel:assign validate="no" name="salidaCompraP2">
+                                                <bpel:copy>
+                                                    <bpel:from part="parameters" variable="proveedor2PLResponse1">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[RealizadaCorrectamente]]></bpel:query>
+                                                    </bpel:from>
+                                                    <bpel:to variable="ifCompra"></bpel:to>
+                                                </bpel:copy>
+                                            </bpel:assign>
+                                            <bpel:if name="If6">
+                                                <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$ifCompra = true()]]></bpel:condition>
+                                                <bpel:sequence>
+                                                    <bpel:assign validate="no" name="entradaActualizarP2">
+                                                        <bpel:copy>
+                                                            <bpel:from><bpel:literal><tns:ActualizarStock xmlns:tns="http://www.example.org/WS_proveedor2/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <numeroUnidades>0</numeroUnidades>
+  <referenciaProducto>referenciaProducto</referenciaProducto>
+</tns:ActualizarStock>
+</bpel:literal></bpel:from>
+                                                            <bpel:to variable="proveedor2PLRequest2" part="parameters"></bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                                
+                                                                
+                                                                <![CDATA[concat($devolver, " --> Compra a proveedor 2: True")]]>
+                                                            </bpel:from>
+                                                            <bpel:to variable="devolver"></bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from part="payload" variable="input">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:referenciaProducto]]></bpel:query>
+                                                            </bpel:from>
+                                                            <bpel:to part="parameters" variable="proveedor2PLRequest2">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[referenciaProducto]]></bpel:query>
+                                                            </bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from part="payload" variable="input">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:numeroUnidades]]></bpel:query>
+                                                            </bpel:from>
+                                                            <bpel:to part="parameters" variable="proveedor2PLRequest2">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[numeroUnidades]]></bpel:query>
+                                                            </bpel:to>
+                                                        </bpel:copy>
+                                                    </bpel:assign>
+                                                    <bpel:invoke name="invocarActualizarP2" partnerLink="proveedor2PL" operation="ActualizarStock" portType="ns3:WS_proveedor2" inputVariable="proveedor2PLRequest2" outputVariable="proveedor2PLResponse2"></bpel:invoke>
+                                                    <bpel:assign validate="no" name="salidaActualizarP2">
+                                                        <bpel:copy>
+                                                            <bpel:from part="parameters" variable="proveedor2PLResponse2">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[actualizado]]></bpel:query>
+                                                            </bpel:from>
+                                                            <bpel:to variable="ifActualizarProveedor"></bpel:to>
+                                                        </bpel:copy>
+                                                    </bpel:assign>
+                                                    <bpel:if name="If9">
+                                                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$ifActualizarProveedor = true()]]></bpel:condition>
+                                                        <bpel:assign validate="no" name="actualizarP2True">
+                                                            <bpel:copy>
+                                                                <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <tns:result>tns:result</tns:result>
 </tns:WS_compraResponse>
 </bpel:literal></bpel:from>
-                                                <bpel:to variable="output" part="payload"></bpel:to>
-                                            </bpel:copy>
-                                            <bpel:copy>
-                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                                    
-                                                    
-                                                    <![CDATA[concat($devolver, " --> Mejor Presupuesto proveedor: 2")]]>
-                                                </bpel:from>
-                                                <bpel:to variable="devolver"></bpel:to>
-                                            </bpel:copy>
-                                            <bpel:copy>
-                                                <bpel:from variable="devolver"></bpel:from>
-                                                <bpel:to part="payload" variable="output">
-                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
-                                                </bpel:to>
-                                            </bpel:copy>
-                                        </bpel:assign>
+                                                                <bpel:to variable="output" part="payload"></bpel:to>
+                                                            </bpel:copy>
+                                                            <bpel:copy>
+                                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                                    
+                                                                    
+                                                                    <![CDATA[concat($devolver, " --> Proveedor 2 actualizar: True")]]>
+                                                                </bpel:from>
+                                                                <bpel:to variable="devolver"></bpel:to>
+                                                            </bpel:copy>
+                                                            <bpel:copy>
+                                                                <bpel:from variable="devolver"></bpel:from>
+                                                                <bpel:to part="payload" variable="output">
+                                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                                                </bpel:to>
+                                                            </bpel:copy>
+                                                        </bpel:assign>
+                                                        <bpel:else>
+                                                            <bpel:assign validate="no" name="actualizarP2False">
+                                                                <bpel:copy>
+                                                                    <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                                                    <bpel:to variable="output" part="payload"></bpel:to>
+                                                                </bpel:copy>
+                                                                <bpel:copy>
+                                                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        <![CDATA[concat($devolver, " --> Proveedor 2 actualizar: False")]]>
+                                                                    </bpel:from>
+                                                                    <bpel:to variable="devolver"></bpel:to>
+                                                                </bpel:copy>
+                                                                <bpel:copy>
+                                                                    <bpel:from variable="devolver"></bpel:from>
+                                                                    <bpel:to part="payload" variable="output">
+                                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                                                    </bpel:to>
+                                                                </bpel:copy>
+                                                            </bpel:assign>
+                                                        </bpel:else>
+                                                    </bpel:if>
+                                                </bpel:sequence>
+                                                <bpel:else>
+                                                    <bpel:assign validate="no" name="comprarP2False">
+                                                        <bpel:copy>
+                                                            <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                                            <bpel:to variable="output" part="payload"></bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                <![CDATA[concat($devolver, " --> Compra a proveedor 2: False")]]>
+                                                            </bpel:from>
+                                                            <bpel:to variable="devolver"></bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from variable="devolver"></bpel:from>
+                                                            <bpel:to part="payload" variable="output">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                                            </bpel:to>
+                                                        </bpel:copy>
+                                                    </bpel:assign>
+                                                </bpel:else>
+                                            </bpel:if>
+                                        </bpel:sequence>
                                     </bpel:elseif><bpel:else>
-                                        <bpel:assign validate="no" name="entradaComprarP3">
-                                            <bpel:copy>
-                                                <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                        <bpel:sequence>
+                                            <bpel:assign validate="no" name="entradaComprarP3">
+                                            
+                                            
+                                            
+                                                <bpel:copy>
+                                                    <bpel:from><bpel:literal><tns:OrdenarCompra xmlns:tns="http://www.example.org/WS_proveedor3/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <numeroUnidades>0</numeroUnidades>
+  <referenciaProducto>referenciaProducto</referenciaProducto>
+</tns:OrdenarCompra>
+</bpel:literal></bpel:from>
+                                                    <bpel:to variable="proveedor3PLRequest1" part="parameters"></bpel:to>
+                                                </bpel:copy>
+                                                <bpel:copy>
+                                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                        
+                                                        
+                                                        <![CDATA[concat($devolver, " --> Mejor Presupuesto proveedor: 3")]]>
+                                                    </bpel:from>
+                                                    <bpel:to variable="devolver"></bpel:to>
+                                                </bpel:copy>
+                                                <bpel:copy>
+                                                    <bpel:from part="payload" variable="input">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:referenciaProducto]]></bpel:query>
+                                                    </bpel:from>
+                                                    <bpel:to part="parameters" variable="proveedor3PLRequest1">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[referenciaProducto]]></bpel:query>
+                                                    </bpel:to>
+                                                </bpel:copy>
+                                                <bpel:copy>
+                                                    <bpel:from part="payload" variable="input">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:numeroUnidades]]></bpel:query>
+                                                    </bpel:from>
+                                                    <bpel:to part="parameters" variable="proveedor3PLRequest1">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[numeroUnidades]]></bpel:query>
+                                                    </bpel:to>
+                                                </bpel:copy>
+                                            </bpel:assign>
+                                            <bpel:invoke name="ordenarCompraP3" partnerLink="proveedor3PL" operation="OrdenarCompra" portType="ns4:WS_proveedor3" inputVariable="proveedor3PLRequest1" outputVariable="proveedor3PLResponse1"></bpel:invoke>
+                                            <bpel:assign validate="no" name="salidaCompraP3">
+                                                <bpel:copy>
+                                                    <bpel:from part="parameters" variable="proveedor3PLResponse1">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[RealizadaCorrectamente]]></bpel:query>
+                                                    </bpel:from>
+                                                    <bpel:to variable="ifCompra"></bpel:to>
+                                                </bpel:copy>
+                                            </bpel:assign>
+                                            <bpel:if name="If7">
+                                                <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$ifCompra = true()]]></bpel:condition>
+                                                <bpel:sequence>
+                                                    <bpel:assign validate="no" name="entradaActualizarP3">
+                                                        <bpel:copy>
+                                                            <bpel:from><bpel:literal><tns:ActualizarStock xmlns:tns="http://www.example.org/WS_proveedor3/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <numeroUnidades>0</numeroUnidades>
+  <referenciaProducto>referenciaProducto</referenciaProducto>
+</tns:ActualizarStock>
+</bpel:literal></bpel:from>
+                                                            <bpel:to variable="proveedor3PLRequest2" part="parameters"></bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                                
+                                                                
+                                                                <![CDATA[concat($devolver, " --> Compra a proveedor 3: True")]]>
+                                                            </bpel:from>
+                                                            <bpel:to variable="devolver"></bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from part="payload" variable="input">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:referenciaProducto]]></bpel:query>
+                                                            </bpel:from>
+                                                            <bpel:to part="parameters" variable="proveedor3PLRequest2">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[referenciaProducto]]></bpel:query>
+                                                            </bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from part="payload" variable="input">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:numeroUnidades]]></bpel:query>
+                                                            </bpel:from>
+                                                            <bpel:to part="parameters" variable="proveedor3PLRequest2">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[numeroUnidades]]></bpel:query>
+                                                            </bpel:to>
+                                                        </bpel:copy>
+                                                    </bpel:assign>
+                                                    <bpel:invoke name="invocarActualizarP3" partnerLink="proveedor3PL" operation="ActualizarStock" portType="ns4:WS_proveedor3" inputVariable="proveedor3PLRequest2" outputVariable="proveedor3PLResponse2"></bpel:invoke>
+                                                    <bpel:assign validate="no" name="salidaActualizarP3">
+                                                        <bpel:copy>
+                                                            <bpel:from part="parameters" variable="proveedor3PLResponse2">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[actualizado]]></bpel:query>
+                                                            </bpel:from>
+                                                            <bpel:to variable="ifActualizarProveedor"></bpel:to>
+                                                        </bpel:copy>
+                                                    </bpel:assign>
+                                                    <bpel:if name="If10">
+                                                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$ifActualizarProveedor = true()]]></bpel:condition>
+                                                        <bpel:assign validate="no" name="actualizarP3True">
+                                                            <bpel:copy>
+                                                                <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <tns:result>tns:result</tns:result>
 </tns:WS_compraResponse>
 </bpel:literal></bpel:from>
-                                                <bpel:to variable="output" part="payload"></bpel:to>
-                                            </bpel:copy>
-                                            <bpel:copy>
-                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    <![CDATA[concat($devolver, " --> Mejor Presupuesto proveedor: 3")]]>
-                                                </bpel:from>
-                                                <bpel:to variable="devolver"></bpel:to>
-                                            </bpel:copy>
-                                            <bpel:copy>
-                                                <bpel:from variable="devolver"></bpel:from>
-                                                <bpel:to part="payload" variable="output">
-                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
-                                                </bpel:to>
-                                            </bpel:copy>
-                                        </bpel:assign>
+                                                                <bpel:to variable="output" part="payload"></bpel:to>
+                                                            </bpel:copy>
+                                                            <bpel:copy>
+                                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                                    
+                                                                    
+                                                                    <![CDATA[concat($devolver, " --> Proveedor 3 actualizar: True")]]>
+                                                                </bpel:from>
+                                                                <bpel:to variable="devolver"></bpel:to>
+                                                            </bpel:copy>
+                                                            <bpel:copy>
+                                                                <bpel:from variable="devolver"></bpel:from>
+                                                                <bpel:to part="payload" variable="output">
+                                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                                                </bpel:to>
+                                                            </bpel:copy>
+                                                        </bpel:assign>
+                                                        <bpel:else>
+                                                            <bpel:assign validate="no" name="actualizarP3False">
+                                                                <bpel:copy>
+                                                                    <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                                                    <bpel:to variable="output" part="payload"></bpel:to>
+                                                                </bpel:copy>
+                                                                <bpel:copy>
+                                                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        <![CDATA[concat($devolver, " --> Proveedor 3 actualizar: False")]]>
+                                                                    </bpel:from>
+                                                                    <bpel:to variable="devolver"></bpel:to>
+                                                                </bpel:copy>
+                                                                <bpel:copy>
+                                                                    <bpel:from variable="devolver"></bpel:from>
+                                                                    <bpel:to part="payload" variable="output">
+                                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                                                    </bpel:to>
+                                                                </bpel:copy>
+                                                            </bpel:assign>
+                                                        </bpel:else>
+                                                    </bpel:if>
+                                                </bpel:sequence>
+                                                <bpel:else>
+                                                    <bpel:assign validate="no" name="comprarP3False">
+                                                        <bpel:copy>
+                                                            <bpel:from><bpel:literal><tns:WS_compraResponse xmlns:tns="http://invoke.bpel.mtis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:result>tns:result</tns:result>
+</tns:WS_compraResponse>
+</bpel:literal></bpel:from>
+                                                            <bpel:to variable="output" part="payload"></bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                <![CDATA[concat($devolver, " --> Compra a proveedor 3: False")]]>
+                                                            </bpel:from>
+                                                            <bpel:to variable="devolver"></bpel:to>
+                                                        </bpel:copy>
+                                                        <bpel:copy>
+                                                            <bpel:from variable="devolver"></bpel:from>
+                                                            <bpel:to part="payload" variable="output">
+                                                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                                            </bpel:to>
+                                                        </bpel:copy>
+                                                    </bpel:assign>
+                                                </bpel:else>
+                                            </bpel:if>
+                                        </bpel:sequence>
                                     </bpel:else></bpel:if>
                             </bpel:sequence>
                         </bpel:else>
