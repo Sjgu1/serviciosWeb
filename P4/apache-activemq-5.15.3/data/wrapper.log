@@ -1,0 +1,286 @@
+STATUS | wrapper  | 2018/04/13 16:48:18 | --> Wrapper Started as Console
+STATUS | wrapper  | 2018/04/13 16:48:18 | Launching a JVM...
+INFO   | jvm 1    | 2018/04/13 16:48:19 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+INFO   | jvm 1    | 2018/04/13 16:48:19 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+INFO   | jvm 1    | 2018/04/13 16:48:19 | 
+INFO   | jvm 1    | 2018/04/13 16:48:19 | 
+INFO   | jvm 1    | 2018/04/13 16:48:19 | WARNING - Unable to load the Wrapper's native library because none of the
+INFO   | jvm 1    | 2018/04/13 16:48:19 |           following files:
+INFO   | jvm 1    | 2018/04/13 16:48:19 |             libwrapper-macosx-x86-64.dylib
+INFO   | jvm 1    | 2018/04/13 16:48:19 |             libwrapper-macosx-universal-64.dylib
+INFO   | jvm 1    | 2018/04/13 16:48:19 |             libwrapper.dylib
+INFO   | jvm 1    | 2018/04/13 16:48:19 |           could be located on the following java.library.path:
+INFO   | jvm 1    | 2018/04/13 16:48:19 |             /Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../bin/macosx
+INFO   | jvm 1    | 2018/04/13 16:48:19 |           Please see the documentation for the wrapper.java.library.path
+INFO   | jvm 1    | 2018/04/13 16:48:19 |           configuration property.
+INFO   | jvm 1    | 2018/04/13 16:48:19 |           System signals will not be handled correctly.
+INFO   | jvm 1    | 2018/04/13 16:48:19 | 
+INFO   | jvm 1    | 2018/04/13 16:48:19 | Java Runtime: Oracle Corporation 1.8.0_111 /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/jre
+INFO   | jvm 1    | 2018/04/13 16:48:19 |   Heap sizes: current=251392k  free=238284k  max=932352k
+INFO   | jvm 1    | 2018/04/13 16:48:19 |     JVM args: -Dactivemq.home=../.. -Dactivemq.base=../.. -Djavax.net.ssl.keyStorePassword=password -Djavax.net.ssl.trustStorePassword=password -Djavax.net.ssl.keyStore=../../conf/broker.ks -Djavax.net.ssl.trustStore=../../conf/broker.ts -Dcom.sun.management.jmxremote -Dorg.apache.activemq.UseDedicatedTaskRunner=true -Djava.util.logging.config.file=logging.properties -Dactivemq.conf=../../conf -Dactivemq.data=../../data -Djava.security.auth.login.config=../../conf/login.config -Xmx1024m -Djava.library.path=../../bin/macosx/ -Dwrapper.key=Lngnasg_fA5LE5qF -Dwrapper.port=32000 -Dwrapper.jvm.port.min=31000 -Dwrapper.jvm.port.max=31999 -Dwrapper.pid=6666 -Dwrapper.version=3.2.3 -Dwrapper.native_library=wrapper -Dwrapper.cpu.timeout=10 -Dwrapper.jvmid=1
+INFO   | jvm 1    | 2018/04/13 16:48:19 | Extensions classpath:
+INFO   | jvm 1    | 2018/04/13 16:48:19 |   [../../lib,../../lib/camel,../../lib/optional,../../lib/web,../../lib/extra]
+INFO   | jvm 1    | 2018/04/13 16:48:19 | ACTIVEMQ_HOME: ../..
+INFO   | jvm 1    | 2018/04/13 16:48:19 | ACTIVEMQ_BASE: ../..
+INFO   | jvm 1    | 2018/04/13 16:48:19 | ACTIVEMQ_CONF: ../../conf
+INFO   | jvm 1    | 2018/04/13 16:48:19 | ACTIVEMQ_DATA: ../../data
+INFO   | jvm 1    | 2018/04/13 16:48:19 | Loading message broker from: xbean:activemq.xml
+INFO   | jvm 1    | 2018/04/13 16:48:20 |  INFO | Refreshing org.apache.activemq.xbean.XBeanBrokerFactory$1@3face73e: startup date [Fri Apr 13 16:48:19 CEST 2018]; root of context hierarchy
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Using Persistence Adapter: KahaDBPersistenceAdapter[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/kahadb]
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | PListStore:[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/localhost/tmp_storage] started
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62480-1523630901003-0:1) is starting
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Listening for connections at: tcp://MacBook-Pro.local:61616?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Connector openwire started
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Listening for connections at: amqp://MacBook-Pro.local:5672?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Connector amqp started
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Listening for connections at: stomp://MacBook-Pro.local:61613?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Connector stomp started
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Listening for connections at: mqtt://MacBook-Pro.local:1883?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Connector mqtt started
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  WARN | ServletContext@o.e.j.s.ServletContextHandler@4e879263{/,null,STARTING} has uncovered http methods for path: /
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Listening for connections at ws://MacBook-Pro.local:61614?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Connector ws started
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62480-1523630901003-0:1) started
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | For help or more information please see: http://activemq.apache.org
+INFO   | jvm 1    | 2018/04/13 16:48:21 |  INFO | No Spring WebApplicationInitializer types detected on classpath
+INFO   | jvm 1    | 2018/04/13 16:48:22 |  INFO | ActiveMQ WebConsole available at http://0.0.0.0:8161/
+INFO   | jvm 1    | 2018/04/13 16:48:22 |  INFO | ActiveMQ Jolokia REST API available at http://0.0.0.0:8161/api/jolokia/
+INFO   | jvm 1    | 2018/04/13 16:48:22 |  INFO | Initializing Spring FrameworkServlet 'dispatcher'
+INFO   | jvm 1    | 2018/04/13 16:48:22 |  INFO | No Spring WebApplicationInitializer types detected on classpath
+INFO   | jvm 1    | 2018/04/13 16:48:22 |  INFO | jolokia-agent: Using policy access restrictor classpath:/jolokia-access.xml
+STATUS | wrapper  | 2018/04/13 16:54:58 | INT trapped.  Shutting down.
+INFO   | jvm 1    | 2018/04/13 16:54:58 | Wrapper Manager: Unable to unregister shutdown hook: java.lang.IllegalStateException: Shutdown in progress
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62480-1523630901003-0:1) is shutting down
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Connector openwire stopped
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Connector amqp stopped
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Connector stomp stopped
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Connector mqtt stopped
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Connector ws stopped
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | PListStore:[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/localhost/tmp_storage] stopped
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Stopping async queue tasks
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Stopping async topic tasks
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Stopped KahaDB
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62480-1523630901003-0:1) uptime 6 minutes
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62480-1523630901003-0:1) is shutdown
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@3face73e: startup date [Fri Apr 13 16:48:19 CEST 2018]; root of context hierarchy
+INFO   | jvm 1    | 2018/04/13 16:54:58 |  INFO | Destroying Spring FrameworkServlet 'dispatcher'
+STATUS | wrapper  | 2018/04/13 16:54:59 | <-- Wrapper Stopped
+STATUS | wrapper  | 2018/04/13 16:55:02 | --> Wrapper Started as Console
+STATUS | wrapper  | 2018/04/13 16:55:02 | Launching a JVM...
+INFO   | jvm 1    | 2018/04/13 16:55:03 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+INFO   | jvm 1    | 2018/04/13 16:55:03 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+INFO   | jvm 1    | 2018/04/13 16:55:03 | 
+INFO   | jvm 1    | 2018/04/13 16:55:03 | 
+INFO   | jvm 1    | 2018/04/13 16:55:03 | WARNING - Unable to load the Wrapper's native library because none of the
+INFO   | jvm 1    | 2018/04/13 16:55:03 |           following files:
+INFO   | jvm 1    | 2018/04/13 16:55:03 |             libwrapper-macosx-x86-64.dylib
+INFO   | jvm 1    | 2018/04/13 16:55:03 |             libwrapper-macosx-universal-64.dylib
+INFO   | jvm 1    | 2018/04/13 16:55:03 |             libwrapper.dylib
+INFO   | jvm 1    | 2018/04/13 16:55:03 |           could be located on the following java.library.path:
+INFO   | jvm 1    | 2018/04/13 16:55:03 |             /Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../bin/macosx
+INFO   | jvm 1    | 2018/04/13 16:55:03 |           Please see the documentation for the wrapper.java.library.path
+INFO   | jvm 1    | 2018/04/13 16:55:03 |           configuration property.
+INFO   | jvm 1    | 2018/04/13 16:55:03 |           System signals will not be handled correctly.
+INFO   | jvm 1    | 2018/04/13 16:55:03 | 
+INFO   | jvm 1    | 2018/04/13 16:55:03 | Java Runtime: Oracle Corporation 1.8.0_111 /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/jre
+INFO   | jvm 1    | 2018/04/13 16:55:03 |   Heap sizes: current=251392k  free=238284k  max=932352k
+INFO   | jvm 1    | 2018/04/13 16:55:03 |     JVM args: -Dactivemq.home=../.. -Dactivemq.base=../.. -Djavax.net.ssl.keyStorePassword=password -Djavax.net.ssl.trustStorePassword=password -Djavax.net.ssl.keyStore=../../conf/broker.ks -Djavax.net.ssl.trustStore=../../conf/broker.ts -Dcom.sun.management.jmxremote -Dorg.apache.activemq.UseDedicatedTaskRunner=true -Djava.util.logging.config.file=logging.properties -Dactivemq.conf=../../conf -Dactivemq.data=../../data -Djava.security.auth.login.config=../../conf/login.config -Xmx1024m -Djava.library.path=../../bin/macosx/ -Dwrapper.key=UuanQVcU5sfWImcB -Dwrapper.port=32000 -Dwrapper.jvm.port.min=31000 -Dwrapper.jvm.port.max=31999 -Dwrapper.pid=6742 -Dwrapper.version=3.2.3 -Dwrapper.native_library=wrapper -Dwrapper.cpu.timeout=10 -Dwrapper.jvmid=1
+INFO   | jvm 1    | 2018/04/13 16:55:03 | Extensions classpath:
+INFO   | jvm 1    | 2018/04/13 16:55:03 |   [../../lib,../../lib/camel,../../lib/optional,../../lib/web,../../lib/extra]
+INFO   | jvm 1    | 2018/04/13 16:55:03 | ACTIVEMQ_HOME: ../..
+INFO   | jvm 1    | 2018/04/13 16:55:03 | ACTIVEMQ_BASE: ../..
+INFO   | jvm 1    | 2018/04/13 16:55:03 | ACTIVEMQ_CONF: ../../conf
+INFO   | jvm 1    | 2018/04/13 16:55:03 | ACTIVEMQ_DATA: ../../data
+INFO   | jvm 1    | 2018/04/13 16:55:03 | Loading message broker from: xbean:activemq.xml
+INFO   | jvm 1    | 2018/04/13 16:55:03 |  INFO | Refreshing org.apache.activemq.xbean.XBeanBrokerFactory$1@7d77e5cc: startup date [Fri Apr 13 16:55:03 CEST 2018]; root of context hierarchy
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Using Persistence Adapter: KahaDBPersistenceAdapter[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/kahadb]
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | KahaDB is version 6
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | PListStore:[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/localhost/tmp_storage] started
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62542-1523631304156-0:1) is starting
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Listening for connections at: tcp://MacBook-Pro.local:61616?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Connector openwire started
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Listening for connections at: amqp://MacBook-Pro.local:5672?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Connector amqp started
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Listening for connections at: stomp://MacBook-Pro.local:61613?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Connector stomp started
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Listening for connections at: mqtt://MacBook-Pro.local:1883?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Connector mqtt started
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  WARN | ServletContext@o.e.j.s.ServletContextHandler@4c755a4{/,null,STARTING} has uncovered http methods for path: /
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Listening for connections at ws://MacBook-Pro.local:61614?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Connector ws started
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62542-1523631304156-0:1) started
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | For help or more information please see: http://activemq.apache.org
+INFO   | jvm 1    | 2018/04/13 16:55:04 |  INFO | No Spring WebApplicationInitializer types detected on classpath
+INFO   | jvm 1    | 2018/04/13 16:55:05 |  INFO | ActiveMQ WebConsole available at http://0.0.0.0:8161/
+INFO   | jvm 1    | 2018/04/13 16:55:05 |  INFO | ActiveMQ Jolokia REST API available at http://0.0.0.0:8161/api/jolokia/
+INFO   | jvm 1    | 2018/04/13 16:55:05 |  INFO | Initializing Spring FrameworkServlet 'dispatcher'
+INFO   | jvm 1    | 2018/04/13 16:55:05 |  INFO | No Spring WebApplicationInitializer types detected on classpath
+INFO   | jvm 1    | 2018/04/13 16:55:05 |  INFO | jolokia-agent: Using policy access restrictor classpath:/jolokia-access.xml
+STATUS | wrapper  | 2018/04/13 16:55:25 | INT trapped.  Shutting down.
+INFO   | jvm 1    | 2018/04/13 16:55:25 | Wrapper Manager: Unable to unregister shutdown hook: java.lang.IllegalStateException: Shutdown in progress
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62542-1523631304156-0:1) is shutting down
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Connector openwire stopped
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | socketQueue interrupted - stopping
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Connector amqp stopped
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Could not accept connection during shutdown  : {}
+INFO   | jvm 1    | 2018/04/13 16:55:25 | java.lang.InterruptedException
+INFO   | jvm 1    | 2018/04/13 16:55:25 | 	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.reportInterruptAfterWait(AbstractQueuedSynchronizer.java:2014)[:1.8.0_111]
+INFO   | jvm 1    | 2018/04/13 16:55:25 | 	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2088)[:1.8.0_111]
+INFO   | jvm 1    | 2018/04/13 16:55:25 | 	at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)[:1.8.0_111]
+INFO   | jvm 1    | 2018/04/13 16:55:25 | 	at org.apache.activemq.transport.tcp.TcpTransportServer$1.run(TcpTransportServer.java:479)[activemq-client-5.15.3.jar:5.15.3]
+INFO   | jvm 1    | 2018/04/13 16:55:25 | 	at java.lang.Thread.run(Thread.java:745)[:1.8.0_111]
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Connector stomp stopped
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Connector mqtt stopped
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Connector ws stopped
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | PListStore:[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/localhost/tmp_storage] stopped
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Stopping async queue tasks
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Stopping async topic tasks
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Stopped KahaDB
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62542-1523631304156-0:1) uptime 21.110 seconds
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62542-1523631304156-0:1) is shutdown
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@7d77e5cc: startup date [Fri Apr 13 16:55:03 CEST 2018]; root of context hierarchy
+INFO   | jvm 1    | 2018/04/13 16:55:25 |  INFO | Destroying Spring FrameworkServlet 'dispatcher'
+STATUS | wrapper  | 2018/04/13 16:55:26 | <-- Wrapper Stopped
+STATUS | wrapper  | 2018/04/13 16:55:30 | --> Wrapper Started as Daemon
+STATUS | wrapper  | 2018/04/13 16:55:31 | Launching a JVM...
+INFO   | jvm 1    | 2018/04/13 16:55:31 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+INFO   | jvm 1    | 2018/04/13 16:55:31 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+INFO   | jvm 1    | 2018/04/13 16:55:31 | 
+INFO   | jvm 1    | 2018/04/13 16:55:31 | 
+INFO   | jvm 1    | 2018/04/13 16:55:31 | WARNING - Unable to load the Wrapper's native library because none of the
+INFO   | jvm 1    | 2018/04/13 16:55:31 |           following files:
+INFO   | jvm 1    | 2018/04/13 16:55:31 |             libwrapper-macosx-x86-64.dylib
+INFO   | jvm 1    | 2018/04/13 16:55:31 |             libwrapper-macosx-universal-64.dylib
+INFO   | jvm 1    | 2018/04/13 16:55:31 |             libwrapper.dylib
+INFO   | jvm 1    | 2018/04/13 16:55:31 |           could be located on the following java.library.path:
+INFO   | jvm 1    | 2018/04/13 16:55:31 |             /Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../bin/macosx
+INFO   | jvm 1    | 2018/04/13 16:55:31 |           Please see the documentation for the wrapper.java.library.path
+INFO   | jvm 1    | 2018/04/13 16:55:31 |           configuration property.
+INFO   | jvm 1    | 2018/04/13 16:55:31 |           System signals will not be handled correctly.
+INFO   | jvm 1    | 2018/04/13 16:55:31 | 
+INFO   | jvm 1    | 2018/04/13 16:55:31 | Java Runtime: Oracle Corporation 1.8.0_111 /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/jre
+INFO   | jvm 1    | 2018/04/13 16:55:31 |   Heap sizes: current=251392k  free=238284k  max=932352k
+INFO   | jvm 1    | 2018/04/13 16:55:31 |     JVM args: -Dactivemq.home=../.. -Dactivemq.base=../.. -Djavax.net.ssl.keyStorePassword=password -Djavax.net.ssl.trustStorePassword=password -Djavax.net.ssl.keyStore=../../conf/broker.ks -Djavax.net.ssl.trustStore=../../conf/broker.ts -Dcom.sun.management.jmxremote -Dorg.apache.activemq.UseDedicatedTaskRunner=true -Djava.util.logging.config.file=logging.properties -Dactivemq.conf=../../conf -Dactivemq.data=../../data -Djava.security.auth.login.config=../../conf/login.config -Xmx1024m -Djava.library.path=../../bin/macosx/ -Dwrapper.key=mIijXQhTDKVUMHBH -Dwrapper.port=32000 -Dwrapper.jvm.port.min=31000 -Dwrapper.jvm.port.max=31999 -Dwrapper.pid=6820 -Dwrapper.version=3.2.3 -Dwrapper.native_library=wrapper -Dwrapper.service=TRUE -Dwrapper.cpu.timeout=10 -Dwrapper.jvmid=1
+INFO   | jvm 1    | 2018/04/13 16:55:31 | Extensions classpath:
+INFO   | jvm 1    | 2018/04/13 16:55:31 |   [../../lib,../../lib/camel,../../lib/optional,../../lib/web,../../lib/extra]
+INFO   | jvm 1    | 2018/04/13 16:55:31 | ACTIVEMQ_HOME: ../..
+INFO   | jvm 1    | 2018/04/13 16:55:31 | ACTIVEMQ_BASE: ../..
+INFO   | jvm 1    | 2018/04/13 16:55:31 | ACTIVEMQ_CONF: ../../conf
+INFO   | jvm 1    | 2018/04/13 16:55:31 | ACTIVEMQ_DATA: ../../data
+INFO   | jvm 1    | 2018/04/13 16:55:31 | Loading message broker from: xbean:activemq.xml
+INFO   | jvm 1    | 2018/04/13 16:55:31 |  INFO | Refreshing org.apache.activemq.xbean.XBeanBrokerFactory$1@15e57b74: startup date [Fri Apr 13 16:55:31 CEST 2018]; root of context hierarchy
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Using Persistence Adapter: KahaDBPersistenceAdapter[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/kahadb]
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | KahaDB is version 6
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | PListStore:[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/localhost/tmp_storage] started
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62544-1523631332360-0:1) is starting
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Listening for connections at: tcp://MacBook-Pro.local:61616?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Connector openwire started
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Listening for connections at: amqp://MacBook-Pro.local:5672?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Connector amqp started
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Listening for connections at: stomp://MacBook-Pro.local:61613?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Connector stomp started
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Listening for connections at: mqtt://MacBook-Pro.local:1883?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Connector mqtt started
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  WARN | ServletContext@o.e.j.s.ServletContextHandler@31ff6e8b{/,null,STARTING} has uncovered http methods for path: /
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Listening for connections at ws://MacBook-Pro.local:61614?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Connector ws started
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62544-1523631332360-0:1) started
+INFO   | jvm 1    | 2018/04/13 16:55:32 |  INFO | For help or more information please see: http://activemq.apache.org
+INFO   | jvm 1    | 2018/04/13 16:55:33 |  INFO | No Spring WebApplicationInitializer types detected on classpath
+INFO   | jvm 1    | 2018/04/13 16:55:33 |  INFO | ActiveMQ WebConsole available at http://0.0.0.0:8161/
+INFO   | jvm 1    | 2018/04/13 16:55:33 |  INFO | ActiveMQ Jolokia REST API available at http://0.0.0.0:8161/api/jolokia/
+INFO   | jvm 1    | 2018/04/13 16:55:33 |  INFO | Initializing Spring FrameworkServlet 'dispatcher'
+INFO   | jvm 1    | 2018/04/13 16:55:33 |  INFO | No Spring WebApplicationInitializer types detected on classpath
+INFO   | jvm 1    | 2018/04/13 16:55:33 |  INFO | jolokia-agent: Using policy access restrictor classpath:/jolokia-access.xml
+STATUS | wrapper  | 2018/04/13 16:55:38 | TERM trapped.  Shutting down.
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62544-1523631332360-0:1) is shutting down
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Connector openwire stopped
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Connector amqp stopped
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Connector stomp stopped
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Connector mqtt stopped
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Connector ws stopped
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | PListStore:[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/localhost/tmp_storage] stopped
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Stopping async queue tasks
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Stopping async topic tasks
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Stopped KahaDB
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62544-1523631332360-0:1) uptime 7.260 seconds
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62544-1523631332360-0:1) is shutdown
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@15e57b74: startup date [Fri Apr 13 16:55:31 CEST 2018]; root of context hierarchy
+INFO   | jvm 1    | 2018/04/13 16:55:39 |  INFO | Destroying Spring FrameworkServlet 'dispatcher'
+STATUS | wrapper  | 2018/04/13 16:55:39 | <-- Wrapper Stopped
+STATUS | wrapper  | 2018/04/13 16:57:41 | --> Wrapper Started as Console
+STATUS | wrapper  | 2018/04/13 16:57:41 | Launching a JVM...
+INFO   | jvm 1    | 2018/04/13 16:57:42 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+INFO   | jvm 1    | 2018/04/13 16:57:42 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+INFO   | jvm 1    | 2018/04/13 16:57:42 | 
+INFO   | jvm 1    | 2018/04/13 16:57:42 | 
+INFO   | jvm 1    | 2018/04/13 16:57:42 | WARNING - Unable to load the Wrapper's native library because none of the
+INFO   | jvm 1    | 2018/04/13 16:57:42 |           following files:
+INFO   | jvm 1    | 2018/04/13 16:57:42 |             libwrapper-macosx-x86-64.dylib
+INFO   | jvm 1    | 2018/04/13 16:57:42 |             libwrapper-macosx-universal-64.dylib
+INFO   | jvm 1    | 2018/04/13 16:57:42 |             libwrapper.dylib
+INFO   | jvm 1    | 2018/04/13 16:57:42 |           could be located on the following java.library.path:
+INFO   | jvm 1    | 2018/04/13 16:57:42 |             /Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../bin/macosx
+INFO   | jvm 1    | 2018/04/13 16:57:42 |           Please see the documentation for the wrapper.java.library.path
+INFO   | jvm 1    | 2018/04/13 16:57:42 |           configuration property.
+INFO   | jvm 1    | 2018/04/13 16:57:42 |           System signals will not be handled correctly.
+INFO   | jvm 1    | 2018/04/13 16:57:42 | 
+INFO   | jvm 1    | 2018/04/13 16:57:42 | Java Runtime: Oracle Corporation 1.8.0_111 /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/jre
+INFO   | jvm 1    | 2018/04/13 16:57:42 |   Heap sizes: current=251392k  free=238284k  max=932352k
+INFO   | jvm 1    | 2018/04/13 16:57:42 |     JVM args: -Dactivemq.home=../.. -Dactivemq.base=../.. -Djavax.net.ssl.keyStorePassword=password -Djavax.net.ssl.trustStorePassword=password -Djavax.net.ssl.keyStore=../../conf/broker.ks -Djavax.net.ssl.trustStore=../../conf/broker.ts -Dcom.sun.management.jmxremote -Dorg.apache.activemq.UseDedicatedTaskRunner=true -Djava.util.logging.config.file=logging.properties -Dactivemq.conf=../../conf -Dactivemq.data=../../data -Djava.security.auth.login.config=../../conf/login.config -Xmx1024m -Djava.library.path=../../bin/macosx/ -Dwrapper.key=CI80d6RQEeSURRXM -Dwrapper.port=32000 -Dwrapper.jvm.port.min=31000 -Dwrapper.jvm.port.max=31999 -Dwrapper.pid=6895 -Dwrapper.version=3.2.3 -Dwrapper.native_library=wrapper -Dwrapper.cpu.timeout=10 -Dwrapper.jvmid=1
+INFO   | jvm 1    | 2018/04/13 16:57:42 | Extensions classpath:
+INFO   | jvm 1    | 2018/04/13 16:57:42 |   [../../lib,../../lib/camel,../../lib/optional,../../lib/web,../../lib/extra]
+INFO   | jvm 1    | 2018/04/13 16:57:42 | ACTIVEMQ_HOME: ../..
+INFO   | jvm 1    | 2018/04/13 16:57:42 | ACTIVEMQ_BASE: ../..
+INFO   | jvm 1    | 2018/04/13 16:57:42 | ACTIVEMQ_CONF: ../../conf
+INFO   | jvm 1    | 2018/04/13 16:57:42 | ACTIVEMQ_DATA: ../../data
+INFO   | jvm 1    | 2018/04/13 16:57:42 | Loading message broker from: xbean:activemq.xml
+INFO   | jvm 1    | 2018/04/13 16:57:42 |  INFO | Refreshing org.apache.activemq.xbean.XBeanBrokerFactory$1@40aa260d: startup date [Fri Apr 13 16:57:42 CEST 2018]; root of context hierarchy
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Using Persistence Adapter: KahaDBPersistenceAdapter[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/kahadb]
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | KahaDB is version 6
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | PListStore:[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/localhost/tmp_storage] started
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62554-1523631463433-0:1) is starting
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Listening for connections at: tcp://MacBook-Pro.local:61616?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Connector openwire started
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Listening for connections at: amqp://MacBook-Pro.local:5672?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Connector amqp started
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Listening for connections at: stomp://MacBook-Pro.local:61613?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Connector stomp started
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Listening for connections at: mqtt://MacBook-Pro.local:1883?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Connector mqtt started
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  WARN | ServletContext@o.e.j.s.ServletContextHandler@556152c6{/,null,STARTING} has uncovered http methods for path: /
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Listening for connections at ws://MacBook-Pro.local:61614?maximumConnections=1000&wireFormat.maxFrameSize=104857600
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Connector ws started
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62554-1523631463433-0:1) started
+INFO   | jvm 1    | 2018/04/13 16:57:43 |  INFO | For help or more information please see: http://activemq.apache.org
+INFO   | jvm 1    | 2018/04/13 16:57:44 |  INFO | No Spring WebApplicationInitializer types detected on classpath
+INFO   | jvm 1    | 2018/04/13 16:57:44 |  INFO | ActiveMQ WebConsole available at http://0.0.0.0:8161/
+INFO   | jvm 1    | 2018/04/13 16:57:44 |  INFO | ActiveMQ Jolokia REST API available at http://0.0.0.0:8161/api/jolokia/
+INFO   | jvm 1    | 2018/04/13 16:57:44 |  INFO | Initializing Spring FrameworkServlet 'dispatcher'
+INFO   | jvm 1    | 2018/04/13 16:57:44 |  INFO | No Spring WebApplicationInitializer types detected on classpath
+INFO   | jvm 1    | 2018/04/13 16:57:44 |  INFO | jolokia-agent: Using policy access restrictor classpath:/jolokia-access.xml
+STATUS | wrapper  | 2018/04/13 17:06:54 | INT trapped.  Shutting down.
+INFO   | jvm 1    | 2018/04/13 17:06:54 | Wrapper Manager: Unable to unregister shutdown hook: java.lang.IllegalStateException: Shutdown in progress
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62554-1523631463433-0:1) is shutting down
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | socketQueue interrupted - stopping
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Connector openwire stopped
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Could not accept connection during shutdown  : {}
+INFO   | jvm 1    | 2018/04/13 17:06:54 | java.lang.InterruptedException
+INFO   | jvm 1    | 2018/04/13 17:06:54 | 	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.reportInterruptAfterWait(AbstractQueuedSynchronizer.java:2014)[:1.8.0_111]
+INFO   | jvm 1    | 2018/04/13 17:06:54 | 	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2088)[:1.8.0_111]
+INFO   | jvm 1    | 2018/04/13 17:06:54 | 	at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)[:1.8.0_111]
+INFO   | jvm 1    | 2018/04/13 17:06:54 | 	at org.apache.activemq.transport.tcp.TcpTransportServer$1.run(TcpTransportServer.java:479)[activemq-client-5.15.3.jar:5.15.3]
+INFO   | jvm 1    | 2018/04/13 17:06:54 | 	at java.lang.Thread.run(Thread.java:745)[:1.8.0_111]
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Connector amqp stopped
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Connector stomp stopped
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Connector mqtt stopped
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Connector ws stopped
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | PListStore:[/Users/joseantoniocarbonell/Desktop/apache-activemq-5.15.3/bin/macosx/../../data/localhost/tmp_storage] stopped
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Stopping async queue tasks
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Stopping async topic tasks
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Stopped KahaDB
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62554-1523631463433-0:1) uptime 9 minutes
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-62554-1523631463433-0:1) is shutdown
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@40aa260d: startup date [Fri Apr 13 16:57:42 CEST 2018]; root of context hierarchy
+INFO   | jvm 1    | 2018/04/13 17:06:54 |  INFO | Destroying Spring FrameworkServlet 'dispatcher'
+STATUS | wrapper  | 2018/04/13 17:06:55 | <-- Wrapper Stopped
