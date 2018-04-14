@@ -1,13 +1,13 @@
 var user = null;
 var password = null;
 var client = Stomp.client("ws://localhost:61614"); // configurar!!!
-const minLuzPermisible = 400
-const maxLuzPermisible = 800
-const minTempPermisible = 15
-const maxTempPermisible = 35
+const minLuzPermisible = 500
+const maxLuzPermisible = 700
+const minTempPermisible = 20
+const maxTempPermisible = 30
 const envioMensajesTiempo = 5
-const cambiosTiempo = 3
-const accionAleatoriaTiempo = 30
+const cambiosTiempo = 4
+const accionAleatoriaTiempo = 20
 const margenTemperatura = 13
 const margenLuz = 200
 
@@ -46,8 +46,8 @@ $(document).ready(function enviarInformacion() {
     var valorActualLuz1 = document.getElementById("inputLuzOficina1").value
     var valorActualTemp1 = document.getElementById("inputTempOficina1").value
 
-    var message1 = '{ "luz":"' + valorActualLuz1 + '", "temperatura":"' + valorActualTemp1 + '"}'
-    var message2 = '{ "luz":"' + valorActualLuz1 + '", "temperatura":"' + valorActualTemp1 + '"}'
+    var message1 = '{ "luz":"' + valorActualLuz1 + '"}'
+    var message2 = '{ "temperatura":"' + valorActualTemp1 + '"}'
     sendMessage(activador1, message1)
     sendMessage(activador2, message2)
 
@@ -59,25 +59,28 @@ $(document).ready(function enviarInformacion() {
 
 //<!-- ACTIVADOR LUZ OFICINA 1 -->
 
-var activador = "activadorLuz1";
-$(document).ready(function subscribeMessageQueue() {
-    client.subscribe('/topic/activador.' + activador, processMessageLuz1);
+var activadorSubsLuz1 = "activadorLuz1";
+$(document).ready(function subscribeMessageQueueLuz() {
+    client.subscribe('/topic/activador.' + activadorSubsLuz1, processMessageLuz1);
 })
 
 function processMessageLuz1(message) {
     var bodyLuz1 = message.body
     var messageBodyLuz1 = JSON.parse(bodyLuz1);
-    console.log(bodyLuz1)
 
     if (messageBodyLuz1.luz <= minLuzPermisible) {
         document.getElementById("inputLuzOficina1Accion").value = "subir"
         $('#dialog_title_span_luz_1').text('Regulando luces:');
         $('#flechaArribaLuz1').css("visibility", "visible");
+        $('#flechaAbajoLuz1').css("visibility", "hidden")
+
 
     } else if (messageBodyLuz1.luz >= maxLuzPermisible) {
         document.getElementById("inputLuzOficina1Accion").value = "bajar"
         $('#dialog_title_span_luz_1').text('Regulando luces: ');
         $('#flechaAbajoLuz1').css("visibility", "visible");
+        $('#flechaArribaLuz1').css("visibility", "hidden")
+
 
     } else {
         $('#dialog_title_span_luz_1').text("");
@@ -88,9 +91,9 @@ function processMessageLuz1(message) {
 
 //<!-- ACTIVADOR TEMPERATURA OFICINA 1 -->
 
-var activador = "activadorTemp1";
-$(document).ready(function subscribeMessageQueue() {
-    client.subscribe('/topic/activador.' + activador, processMessageTemp1);
+var activadorSubsTemp1 = "activadorTemp1";
+$(document).ready(function subscribeMessageQueueTemp() {
+    client.subscribe('/topic/activador.' + activadorSubsTemp1, processMessageTemp1);
 })
 
 function processMessageTemp1(message) {
