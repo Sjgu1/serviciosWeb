@@ -1,15 +1,13 @@
 var user2 = null;
 var password2 = null;
 var client2 = Stomp.client("ws://localhost:61614"); // configurar!!!
-const minLuzPermisible2 = 599
-const maxLuzPermisible2 = 601
-const minTempPermisible2 = 20
-const maxTempPermisible2 = 30
+const minLuzPermisible2 = 450
+const maxLuzPermisible2 = 750
+const minTempPermisible2 = 15
+const maxTempPermisible2 = 35
 const envioMensajesTiempo2 = 5
 const cambiosTiempo2 = 4
 const accionAleatoriaTiempo2 = 20
-const margenTemperatura2 = 13
-const margenLuz2 = 200
 
 client2.connect(user2, password2, onconnect2, onerror2);
 
