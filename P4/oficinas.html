@@ -10,21 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/stomp.js"></script>
-    <script>
-        var user = null;
-        var password = null;
-        var client = Stomp.client("ws://localhost:61614"); // configurar!!!
-        client.connect(user, password, onconnect, onerror);
-
-        function onconnect() {
-            console.log("Se ha conectado")
-        }
-
-        function onerror() {
-            // manejamos el error
-            console.log("Ha ocurrido un error")
-
-        }
+    <script src="./js/oficina1.js">
     </script>
 </head>
 
@@ -39,32 +25,36 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Oficina 1</div>
                         <div class="panel-body">
+                            <!-- Luz-->
                             <p class="pull-left">200lm</p>
-                            <span id="dialog_title_span" style="text-align:center">
-                                
+                            <span id="dialog_title_span_luz_1" style="text-align:center">
                             </span>
-                            <i id="flechaArriba" class="fa fa-arrow-up" style="visibility: hidden"></i>
-                                <i id="flechaAbajo" class="fa fa-arrow-down" style="visibility: hidden"></i>
+                            <i id="flechaArribaLuz1" class="fa fa-arrow-up" style="visibility: hidden"></i>
+                            <i id="flechaAbajoLuz1" class="fa fa-arrow-down" style="visibility: hidden"></i>
                             <p class="pull-right">1000lm</p>
                             <div class="progress">
                                 <div class="progress-bar progress-bar-info" id="luzOficina1" role="progressbar" aria-valuenow="600" aria-valuemin="200" aria-valuemax="1000"
                                     style="width:0%">
                                 </div>
-
                                 <br/>
                                 <input id="inputLuzOficina1" value="600">
                                 <input id="inputLuzOficina1Accion">
                             </div>
-                            <div>
-                                <p class="pull-left">0</p>
-                                <p style="margin-left:90%">50</p>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="200" aria-valuemax="1000"
-                                        style="width:40%">
-                                    </div>
-                                </div>
-                            </div>
-
+                           <!-- Temperatura-->
+                           <p class="pull-left">0ºC</p>
+                           <span id="dialog_title_span_temp_1" style="text-align:center">
+                           </span>
+                           <i id="flechaArribaTemp1" class="fa fa-arrow-up" style="visibility: hidden"></i>
+                           <i id="flechaAbajoTemp1" class="fa fa-arrow-down" style="visibility: hidden"></i>
+                           <p class="pull-right">50ºC</p>
+                           <div class="progress">
+                               <div class="progress-bar progress-bar-sucess" id="tempOficina1" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="50"
+                                   style="width:0%">
+                               </div>
+                               <br/>
+                               <input id="inputTempOficina1" value="25">
+                               <input id="inputTempOficina1Accion">
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -109,127 +99,5 @@
     </div>
 
 </body>
-<script>
-    $(document).ready(function valoresAleatoriosSubirBajar() {
-        x = 30;  // 5 Seconds
-        var actual = document.getElementById("inputLuzOficina1Accion").value
-        var accion = Math.floor(Math.random() * 5) + 0
-        console.log(accion)
-        if (accion > 2) {
-            document.getElementById("inputLuzOficina1Accion").value = "subir"
-        } else {
-            document.getElementById("inputLuzOficina1Accion").value = "bajar"
-        }
-        setTimeout(valoresAleatoriosSubirBajar, x * 1000);
-    })
-</script>
-<!-- OFICINA 1 -->
-<script>
-    $(document).ready(function enviarInformacion() {
-        x = 10;  // 5 Seconds
-        var valorActual = document.getElementById("inputLuzOficina1").value
-        var message = "null"
-        console.log(message)
-        console.log(valorActual)
-        if (valorActual >= 850)
-            message = "bajarLuz"
-        if (valorActual <= 350)
-            message = "subirLuz"
-        console.log(message)
-
-        sendMessage(message)
-
-        function sendMessage(message) {
-            client.send('/topic/activador.activador1', {}, message);
-        }
-        setTimeout(enviarInformacion, x * 1000);
-    })
-</script>
-</script>
-<!-- ACTIVADOR LUZ OFICINA 1 -->
-<script>   
-    var activador = "activadorLuz1";
-    $(document).ready(function subscribeMessageQueue() {
-        console.log("Estoy suscrito")
-        client.subscribe('/topic/activador.activador1', processMessage);
-    })
-
-    function processMessage(message) {
-        var messageBody = message.body;
-        console.log("Recibo mensaje")
-        console.log(message)
-
-        if (messageBody == "subirLuz") {
-            document.getElementById("inputLuzOficina1Accion").value = "subir"
-            $('#dialog_title_span').text('Regulando luces:');
-            $('#flechaArriba').css("visibility", "visible");
-
-        } else if (messageBody == "bajarLuz") {
-            document.getElementById("inputLuzOficina1Accion").value = "bajar"
-            $('#dialog_title_span').text('Regulando luces: ');
-            $('#flechaAbajo').css("visibility", "visible");
-
-        } else {
-            $('#dialog_title_span').text("");
-            $('#flechaArriba').css("visibility", "hidden")
-            $('#flechaAbajo').css("visibility", "hidden")
-        }
-    }
-</script>
-<!-- SENSOR LUZ OFICINA 1 -->
-<script>
-    $(document).ready(function sensorLuzOficina1() {
-        x = 3;  // 5 Seconds
-        var actual = document.getElementById("inputLuzOficina1").value
-        var accion = document.getElementById("inputLuzOficina1Accion").value
-        if (accion == "subir") {
-            for (i = 0; i < Math.floor(Math.random() * 80) + 20; i++) {
-                actual++
-                if (actual >= 1000) {
-                    actual = 1000
-                }
-
-            }
-        } else {
-            for (i = 0; i < Math.floor(Math.random() * 80) + 20; i++) {
-                actual--
-                if (actual <= 200) {
-                    actual = 200
-                }
-            }
-        }
-
-
-        porcentaje = (actual - 200) * 0.125
-
-
-        $("#luzOficina1")
-            .removeClass("progress-bar-danger")
-            .addClass("progress-bar-info")
-            .css("width", porcentaje + "%")
-            .attr("aria-valuenow", actual)
-            .text(actual);
-        if (actual <= 400) {
-            $("#luzOficina1")
-                .removeClass("progress-bar-info")
-                .addClass("progress-bar-danger")
-                .css("width", porcentaje + "%")
-                .attr("aria-valuenow", actual)
-                .text(actual);
-        } else if (actual >= 800) {
-            $("#luzOficina1")
-                .removeClass("progress-bar-info")
-                .addClass("progress-bar-danger")
-                .css("width", porcentaje + "%")
-                .attr("aria-valuenow", actual)
-                .text(actual);
-        }
-
-
-        document.getElementById("inputLuzOficina1").value = actual
-        setTimeout(sensorLuzOficina1, x * 1000);
-
-    })
-</script>
 
 </html>
