@@ -2877,3 +2877,17 @@ java.lang.InterruptedException
 2018-04-18 19:17:07,551 | INFO  | Initializing Spring FrameworkServlet 'dispatcher' | /admin | main
 2018-04-18 19:17:07,728 | INFO  | No Spring WebApplicationInitializer types detected on classpath | /api | main
 2018-04-18 19:17:07,783 | INFO  | jolokia-agent: Using policy access restrictor classpath:/jolokia-access.xml | /api | main
+2018-04-18 19:34:43,506 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-53762-1524071826505-0:1) is shutting down | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-18 19:34:43,508 | INFO  | Connector openwire stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 19:34:43,509 | INFO  | Connector amqp stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 19:34:43,510 | INFO  | Connector stomp stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 19:34:43,511 | INFO  | Connector mqtt stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 19:34:43,522 | INFO  | Connector ws stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 19:34:43,528 | INFO  | PListStore:[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/localhost/tmp_storage] stopped | org.apache.activemq.store.kahadb.plist.PListStoreImpl | Thread-24
+2018-04-18 19:34:43,528 | INFO  | Stopping async queue tasks | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-18 19:34:43,529 | INFO  | Stopping async topic tasks | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-18 19:34:43,529 | INFO  | Stopped KahaDB | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-18 19:34:43,539 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-53762-1524071826505-0:1) uptime 17 minutes | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-18 19:34:43,540 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-53762-1524071826505-0:1) is shutdown | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-18 19:34:43,541 | INFO  | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@39aeed2f: startup date [Wed Apr 18 19:17:05 CEST 2018]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | Thread-24
+2018-04-18 19:34:43,545 | INFO  | Destroying Spring FrameworkServlet 'dispatcher' | /admin | Thread-24
