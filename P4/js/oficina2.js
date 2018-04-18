@@ -5,7 +5,7 @@ const minLuzPermisible2 = 450
 const maxLuzPermisible2 = 750
 const minTempPermisible2 = 15
 const maxTempPermisible2 = 35
-const envioMensajesTiempo2 = 2
+const envioMensajesTiempo2 = 3
 const cambiosTiempo2 = 1
 const accionAleatoriaTiempo2 = 20
 
@@ -209,10 +209,18 @@ $(document).ready(function simuladorTemp2() {
 
 
 $(window).on("load", function enviarDatosLuz2() {
-    consola("activadorLuz2", document.getElementById("inputLuzOficina2").value)
-    setTimeout(enviarDatosLuz2, envioMensajesTiempo2 * 1000);
+    var valor = document.getElementById("inputLuzOficina2").value
+    var message = '{"origen": "luz2","valor": "'+valor+'"}'
+    setTimeout(function () {
+        client2.send('/topic/sensor.sensorLuz2', {}, message);
+    }, envioMensajesTiempo2/2);
+    setTimeout(enviarDatosLuz2, envioMensajesTiempo2/2  * 1000);
 })
 $(window).on("load", function enviarDatosTemp2() {
-    consola("activadorTemp2", document.getElementById("inputTempOficina2").value)
-    setTimeout(enviarDatosTemp2, envioMensajesTiempo2 * 1000);
+    var valor = document.getElementById("inputTempOficina2").value
+    var message = '{"origen": "temp2","valor": "'+valor+'"}'
+    setTimeout(function () {
+        client2.send('/topic/sensor.sensorTemp2', {}, message);
+    }, envioMensajesTiempo2/2);
+    setTimeout(enviarDatosTemp2,envioMensajesTiempo2/2  * 1000);
 })
