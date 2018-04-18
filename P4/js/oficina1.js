@@ -28,7 +28,7 @@ $(document).ready(function valoresAleatoriosSubirBajar() {
     } else {
         document.getElementById("inputLuzOficina1Accion").value = "bajar"
     }
-    if (accion > 2) {
+    if (accion2 > 2) {
         document.getElementById("inputTempOficina1Accion").value = "subir"
     } else {
         document.getElementById("inputTempOficina1Accion").value = "bajar"
@@ -46,7 +46,6 @@ $(document).ready(function subscribeMessageQueueLuz() {
 function processMessageLuz1(message) {
     var bodyLuz1 = message.body
     var messageBodyLuz1 = JSON.parse(bodyLuz1);
-    console.log(messageBodyLuz1.action)
 
     if(messageBodyLuz1.action == "bajar"){
         document.getElementById("inputLuzOficina1Accion").value = "bajar"
@@ -202,9 +201,9 @@ $(document).ready(function simuladorTemp1() {
 
 $(document).ready(function enviarDatosLuz1() {
     consola("activadorLuz1", document.getElementById("inputLuzOficina1").value )
-    setTimeout(enviarDatosLuz1,1 * 1000);
+    setTimeout(enviarDatosLuz1,envioMensajesTiempo  * 1000);
 })
 $(document).ready(function enviarDatosTemp1() {
     consola("activadorTemp1", document.getElementById("inputTempOficina1").value )
-    setTimeout(enviarDatosTemp1,1 * 1000);
+    setTimeout(enviarDatosTemp1,envioMensajesTiempo * 1000);
 })

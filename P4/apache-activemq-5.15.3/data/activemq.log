@@ -2076,3 +2076,27 @@ java.lang.InterruptedException
 2018-04-18 14:42:38,529 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-64631-1524054140237-0:1) is shutdown | org.apache.activemq.broker.BrokerService | Thread-24
 2018-04-18 14:42:38,530 | INFO  | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@39aeed2f: startup date [Wed Apr 18 14:22:19 CEST 2018]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | Thread-24
 2018-04-18 14:42:38,535 | INFO  | Destroying Spring FrameworkServlet 'dispatcher' | /admin | Thread-24
+2018-04-18 17:03:07,392 | INFO  | Refreshing org.apache.activemq.xbean.XBeanBrokerFactory$1@39aeed2f: startup date [Wed Apr 18 17:03:07 CEST 2018]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | main
+2018-04-18 17:03:08,170 | INFO  | Using Persistence Adapter: KahaDBPersistenceAdapter[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/kahadb] | org.apache.activemq.broker.BrokerService | main
+2018-04-18 17:03:08,233 | INFO  | KahaDB is version 6 | org.apache.activemq.store.kahadb.MessageDatabase | main
+2018-04-18 17:03:08,328 | INFO  | PListStore:[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/localhost/tmp_storage] started | org.apache.activemq.store.kahadb.plist.PListStoreImpl | main
+2018-04-18 17:03:08,469 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-52583-1524063788340-0:1) is starting | org.apache.activemq.broker.BrokerService | main
+2018-04-18 17:03:08,586 | INFO  | Listening for connections at: tcp://MacBook-Pro.local:61616 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 17:03:08,587 | INFO  | Connector openwire started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 17:03:08,591 | INFO  | Listening for connections at: amqp://MacBook-Pro.local:5672?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 17:03:08,594 | INFO  | Connector amqp started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 17:03:08,598 | INFO  | Listening for connections at: stomp://MacBook-Pro.local:61613?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 17:03:08,600 | INFO  | Connector stomp started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 17:03:08,604 | INFO  | Listening for connections at: mqtt://MacBook-Pro.local:1883?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 17:03:08,606 | INFO  | Connector mqtt started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 17:03:08,705 | WARN  | ServletContext@o.e.j.s.ServletContextHandler@5505ae1a{/,null,STARTING} has uncovered http methods for path: / | org.eclipse.jetty.security.SecurityHandler | main
+2018-04-18 17:03:08,752 | INFO  | Listening for connections at ws://MacBook-Pro.local:61614 | org.apache.activemq.transport.ws.WSTransportServer | main
+2018-04-18 17:03:08,753 | INFO  | Connector ws started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 17:03:08,754 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-52583-1524063788340-0:1) started | org.apache.activemq.broker.BrokerService | main
+2018-04-18 17:03:08,756 | INFO  | For help or more information please see: http://activemq.apache.org | org.apache.activemq.broker.BrokerService | main
+2018-04-18 17:03:09,204 | INFO  | No Spring WebApplicationInitializer types detected on classpath | /admin | main
+2018-04-18 17:03:09,302 | INFO  | ActiveMQ WebConsole available at http://0.0.0.0:8161/ | org.apache.activemq.web.WebConsoleStarter | main
+2018-04-18 17:03:09,303 | INFO  | ActiveMQ Jolokia REST API available at http://0.0.0.0:8161/api/jolokia/ | org.apache.activemq.web.WebConsoleStarter | main
+2018-04-18 17:03:09,340 | INFO  | Initializing Spring FrameworkServlet 'dispatcher' | /admin | main
+2018-04-18 17:03:09,468 | INFO  | No Spring WebApplicationInitializer types detected on classpath | /api | main
+2018-04-18 17:03:09,547 | INFO  | jolokia-agent: Using policy access restrictor classpath:/jolokia-access.xml | /api | main
