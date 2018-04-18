@@ -96,7 +96,6 @@ function processMessageTemp2(message) {
     var body = message.body
     var messageBody = JSON.parse(body);
 
-    console.log(body)
     if (messageBody.temperatura <= minTempPermisible2 ) {
         document.getElementById("inputTempOficina2Accion").value = "subir"
         $('#dialog_title_span_temp_2').text('Regulando temperatura:');

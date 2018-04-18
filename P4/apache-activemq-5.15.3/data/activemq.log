@@ -1940,3 +1940,139 @@ org.springframework.web.util.NestedServletException: Request processing failed; 
 2018-04-14 11:33:07,674 | INFO  | Initializing Spring FrameworkServlet 'dispatcher' | /admin | main
 2018-04-14 11:33:07,791 | INFO  | No Spring WebApplicationInitializer types detected on classpath | /api | main
 2018-04-14 11:33:07,865 | INFO  | jolokia-agent: Using policy access restrictor classpath:/jolokia-access.xml | /api | main
+2018-04-14 11:47:20,068 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-51874-1523698386776-0:1) is shutting down | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-14 11:47:20,070 | INFO  | Connector openwire stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-14 11:47:20,072 | INFO  | Connector amqp stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-14 11:47:20,074 | INFO  | Connector stomp stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-14 11:47:20,075 | INFO  | Connector mqtt stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-14 11:47:20,081 | INFO  | Connector ws stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-14 11:47:20,087 | INFO  | PListStore:[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/localhost/tmp_storage] stopped | org.apache.activemq.store.kahadb.plist.PListStoreImpl | Thread-24
+2018-04-14 11:47:20,088 | INFO  | Stopping async queue tasks | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-14 11:47:20,089 | INFO  | Stopping async topic tasks | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-14 11:47:20,090 | INFO  | Stopped KahaDB | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-14 11:47:20,098 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-51874-1523698386776-0:1) uptime 14 minutes | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-14 11:47:20,099 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-51874-1523698386776-0:1) is shutdown | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-14 11:47:20,101 | INFO  | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@39aeed2f: startup date [Sat Apr 14 11:33:05 CEST 2018]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | Thread-24
+2018-04-14 11:47:20,108 | INFO  | Destroying Spring FrameworkServlet 'dispatcher' | /admin | Thread-24
+2018-04-14 16:19:44,879 | INFO  | Refreshing org.apache.activemq.xbean.XBeanBrokerFactory$1@39aeed2f: startup date [Sat Apr 14 16:19:44 CEST 2018]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | main
+2018-04-14 16:19:45,818 | INFO  | Using Persistence Adapter: KahaDBPersistenceAdapter[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/kahadb] | org.apache.activemq.broker.BrokerService | main
+2018-04-14 16:19:45,892 | INFO  | KahaDB is version 6 | org.apache.activemq.store.kahadb.MessageDatabase | main
+2018-04-14 16:19:45,997 | INFO  | PListStore:[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/localhost/tmp_storage] started | org.apache.activemq.store.kahadb.plist.PListStoreImpl | main
+2018-04-14 16:19:46,143 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-49274-1523715586009-0:1) is starting | org.apache.activemq.broker.BrokerService | main
+2018-04-14 16:19:46,266 | INFO  | Listening for connections at: tcp://MacBook-Pro.local:61616 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-14 16:19:46,268 | INFO  | Connector openwire started | org.apache.activemq.broker.TransportConnector | main
+2018-04-14 16:19:46,273 | INFO  | Listening for connections at: amqp://MacBook-Pro.local:5672?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-14 16:19:46,275 | INFO  | Connector amqp started | org.apache.activemq.broker.TransportConnector | main
+2018-04-14 16:19:46,279 | INFO  | Listening for connections at: stomp://MacBook-Pro.local:61613?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-14 16:19:46,281 | INFO  | Connector stomp started | org.apache.activemq.broker.TransportConnector | main
+2018-04-14 16:19:46,286 | INFO  | Listening for connections at: mqtt://MacBook-Pro.local:1883?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-14 16:19:46,288 | INFO  | Connector mqtt started | org.apache.activemq.broker.TransportConnector | main
+2018-04-14 16:19:46,434 | WARN  | ServletContext@o.e.j.s.ServletContextHandler@5505ae1a{/,null,STARTING} has uncovered http methods for path: / | org.eclipse.jetty.security.SecurityHandler | main
+2018-04-14 16:19:46,495 | INFO  | Listening for connections at ws://MacBook-Pro.local:61614 | org.apache.activemq.transport.ws.WSTransportServer | main
+2018-04-14 16:19:46,496 | INFO  | Connector ws started | org.apache.activemq.broker.TransportConnector | main
+2018-04-14 16:19:46,497 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-49274-1523715586009-0:1) started | org.apache.activemq.broker.BrokerService | main
+2018-04-14 16:19:46,499 | INFO  | For help or more information please see: http://activemq.apache.org | org.apache.activemq.broker.BrokerService | main
+2018-04-14 16:19:47,005 | INFO  | No Spring WebApplicationInitializer types detected on classpath | /admin | main
+2018-04-14 16:19:47,131 | INFO  | ActiveMQ WebConsole available at http://0.0.0.0:8161/ | org.apache.activemq.web.WebConsoleStarter | main
+2018-04-14 16:19:47,131 | INFO  | ActiveMQ Jolokia REST API available at http://0.0.0.0:8161/api/jolokia/ | org.apache.activemq.web.WebConsoleStarter | main
+2018-04-14 16:19:47,180 | INFO  | Initializing Spring FrameworkServlet 'dispatcher' | /admin | main
+2018-04-14 16:19:47,325 | INFO  | No Spring WebApplicationInitializer types detected on classpath | /api | main
+2018-04-14 16:19:47,411 | INFO  | jolokia-agent: Using policy access restrictor classpath:/jolokia-access.xml | /api | main
+2018-04-14 16:24:27,357 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-49274-1523715586009-0:1) is shutting down | org.apache.activemq.broker.BrokerService | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,360 | INFO  | Connector openwire stopped | org.apache.activemq.broker.TransportConnector | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,361 | INFO  | Connector amqp stopped | org.apache.activemq.broker.TransportConnector | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,362 | INFO  | Connector stomp stopped | org.apache.activemq.broker.TransportConnector | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,363 | INFO  | Connector mqtt stopped | org.apache.activemq.broker.TransportConnector | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,369 | INFO  | Connector ws stopped | org.apache.activemq.broker.TransportConnector | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,375 | INFO  | PListStore:[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/localhost/tmp_storage] stopped | org.apache.activemq.store.kahadb.plist.PListStoreImpl | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,376 | INFO  | Stopping async queue tasks | org.apache.activemq.store.kahadb.KahaDBStore | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,377 | INFO  | Stopping async topic tasks | org.apache.activemq.store.kahadb.KahaDBStore | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,378 | INFO  | Stopped KahaDB | org.apache.activemq.store.kahadb.KahaDBStore | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,386 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-49274-1523715586009-0:1) uptime 4 minutes | org.apache.activemq.broker.BrokerService | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,387 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-49274-1523715586009-0:1) is shutdown | org.apache.activemq.broker.BrokerService | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,388 | INFO  | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@39aeed2f: startup date [Sat Apr 14 16:19:44 CEST 2018]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | ActiveMQ ShutdownHook
+2018-04-14 16:24:27,395 | INFO  | Destroying Spring FrameworkServlet 'dispatcher' | /admin | ActiveMQ ShutdownHook
+2018-04-18 13:15:44,974 | INFO  | Refreshing org.apache.activemq.xbean.XBeanBrokerFactory$1@39aeed2f: startup date [Wed Apr 18 13:15:44 CEST 2018]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | main
+2018-04-18 13:15:45,910 | INFO  | Using Persistence Adapter: KahaDBPersistenceAdapter[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/kahadb] | org.apache.activemq.broker.BrokerService | main
+2018-04-18 13:15:45,974 | INFO  | KahaDB is version 6 | org.apache.activemq.store.kahadb.MessageDatabase | main
+2018-04-18 13:15:46,057 | INFO  | PListStore:[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/localhost/tmp_storage] started | org.apache.activemq.store.kahadb.plist.PListStoreImpl | main
+2018-04-18 13:15:46,210 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-50066-1524050146069-0:1) is starting | org.apache.activemq.broker.BrokerService | main
+2018-04-18 13:15:46,333 | INFO  | Listening for connections at: tcp://MacBook-Pro.local:61616 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 13:15:46,335 | INFO  | Connector openwire started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 13:15:46,341 | INFO  | Listening for connections at: amqp://MacBook-Pro.local:5672?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 13:15:46,343 | INFO  | Connector amqp started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 13:15:46,347 | INFO  | Listening for connections at: stomp://MacBook-Pro.local:61613?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 13:15:46,349 | INFO  | Connector stomp started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 13:15:46,354 | INFO  | Listening for connections at: mqtt://MacBook-Pro.local:1883?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 13:15:46,356 | INFO  | Connector mqtt started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 13:15:46,471 | WARN  | ServletContext@o.e.j.s.ServletContextHandler@5505ae1a{/,null,STARTING} has uncovered http methods for path: / | org.eclipse.jetty.security.SecurityHandler | main
+2018-04-18 13:15:46,533 | INFO  | Listening for connections at ws://MacBook-Pro.local:61614 | org.apache.activemq.transport.ws.WSTransportServer | main
+2018-04-18 13:15:46,534 | INFO  | Connector ws started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 13:15:46,535 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-50066-1524050146069-0:1) started | org.apache.activemq.broker.BrokerService | main
+2018-04-18 13:15:46,536 | INFO  | For help or more information please see: http://activemq.apache.org | org.apache.activemq.broker.BrokerService | main
+2018-04-18 13:15:46,985 | INFO  | No Spring WebApplicationInitializer types detected on classpath | /admin | main
+2018-04-18 13:15:47,088 | INFO  | ActiveMQ WebConsole available at http://0.0.0.0:8161/ | org.apache.activemq.web.WebConsoleStarter | main
+2018-04-18 13:15:47,089 | INFO  | ActiveMQ Jolokia REST API available at http://0.0.0.0:8161/api/jolokia/ | org.apache.activemq.web.WebConsoleStarter | main
+2018-04-18 13:15:47,139 | INFO  | Initializing Spring FrameworkServlet 'dispatcher' | /admin | main
+2018-04-18 13:15:47,270 | INFO  | No Spring WebApplicationInitializer types detected on classpath | /api | main
+2018-04-18 13:15:47,352 | INFO  | jolokia-agent: Using policy access restrictor classpath:/jolokia-access.xml | /api | main
+2018-04-18 14:22:16,527 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-50066-1524050146069-0:1) is shutting down | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-18 14:22:16,529 | INFO  | socketQueue interrupted - stopping | org.apache.activemq.transport.tcp.TcpTransportServer | ActiveMQ Transport Server Thread Handler: tcp://0.0.0.0:61616
+2018-04-18 14:22:16,529 | INFO  | Connector openwire stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 14:22:16,531 | INFO  | Could not accept connection during shutdown  : {} | org.apache.activemq.broker.TransportConnector | ActiveMQ Transport Server Thread Handler: tcp://0.0.0.0:61616
+java.lang.InterruptedException
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.reportInterruptAfterWait(AbstractQueuedSynchronizer.java:2014)[:1.8.0_111]
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2088)[:1.8.0_111]
+	at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)[:1.8.0_111]
+	at org.apache.activemq.transport.tcp.TcpTransportServer$1.run(TcpTransportServer.java:479)[activemq-client-5.15.3.jar:5.15.3]
+	at java.lang.Thread.run(Thread.java:745)[:1.8.0_111]
+2018-04-18 14:22:16,531 | INFO  | Connector amqp stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 14:22:16,533 | INFO  | Connector stomp stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 14:22:16,535 | INFO  | Connector mqtt stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 14:22:16,543 | INFO  | Connector ws stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 14:22:16,548 | INFO  | PListStore:[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/localhost/tmp_storage] stopped | org.apache.activemq.store.kahadb.plist.PListStoreImpl | Thread-24
+2018-04-18 14:22:16,549 | INFO  | Stopping async queue tasks | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-18 14:22:16,549 | INFO  | Stopping async topic tasks | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-18 14:22:16,550 | INFO  | Stopped KahaDB | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-18 14:22:16,558 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-50066-1524050146069-0:1) uptime 1 hour 6 minutes | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-18 14:22:16,559 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-50066-1524050146069-0:1) is shutdown | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-18 14:22:16,560 | INFO  | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@39aeed2f: startup date [Wed Apr 18 13:15:44 CEST 2018]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | Thread-24
+2018-04-18 14:22:16,564 | INFO  | Destroying Spring FrameworkServlet 'dispatcher' | /admin | Thread-24
+2018-04-18 14:22:19,435 | INFO  | Refreshing org.apache.activemq.xbean.XBeanBrokerFactory$1@39aeed2f: startup date [Wed Apr 18 14:22:19 CEST 2018]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | main
+2018-04-18 14:22:20,095 | INFO  | Using Persistence Adapter: KahaDBPersistenceAdapter[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/kahadb] | org.apache.activemq.broker.BrokerService | main
+2018-04-18 14:22:20,155 | INFO  | KahaDB is version 6 | org.apache.activemq.store.kahadb.MessageDatabase | main
+2018-04-18 14:22:20,228 | INFO  | PListStore:[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/localhost/tmp_storage] started | org.apache.activemq.store.kahadb.plist.PListStoreImpl | main
+2018-04-18 14:22:20,364 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-64631-1524054140237-0:1) is starting | org.apache.activemq.broker.BrokerService | main
+2018-04-18 14:22:20,465 | INFO  | Listening for connections at: tcp://MacBook-Pro.local:61616 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 14:22:20,466 | INFO  | Connector openwire started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 14:22:20,470 | INFO  | Listening for connections at: amqp://MacBook-Pro.local:5672?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 14:22:20,471 | INFO  | Connector amqp started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 14:22:20,474 | INFO  | Listening for connections at: stomp://MacBook-Pro.local:61613?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 14:22:20,476 | INFO  | Connector stomp started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 14:22:20,479 | INFO  | Listening for connections at: mqtt://MacBook-Pro.local:1883?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | main
+2018-04-18 14:22:20,480 | INFO  | Connector mqtt started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 14:22:20,561 | WARN  | ServletContext@o.e.j.s.ServletContextHandler@5505ae1a{/,null,STARTING} has uncovered http methods for path: / | org.eclipse.jetty.security.SecurityHandler | main
+2018-04-18 14:22:20,610 | INFO  | Listening for connections at ws://MacBook-Pro.local:61614 | org.apache.activemq.transport.ws.WSTransportServer | main
+2018-04-18 14:22:20,610 | INFO  | Connector ws started | org.apache.activemq.broker.TransportConnector | main
+2018-04-18 14:22:20,611 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-64631-1524054140237-0:1) started | org.apache.activemq.broker.BrokerService | main
+2018-04-18 14:22:20,613 | INFO  | For help or more information please see: http://activemq.apache.org | org.apache.activemq.broker.BrokerService | main
+2018-04-18 14:22:20,992 | INFO  | No Spring WebApplicationInitializer types detected on classpath | /admin | main
+2018-04-18 14:22:21,082 | INFO  | ActiveMQ WebConsole available at http://0.0.0.0:8161/ | org.apache.activemq.web.WebConsoleStarter | main
+2018-04-18 14:22:21,082 | INFO  | ActiveMQ Jolokia REST API available at http://0.0.0.0:8161/api/jolokia/ | org.apache.activemq.web.WebConsoleStarter | main
+2018-04-18 14:22:21,125 | INFO  | Initializing Spring FrameworkServlet 'dispatcher' | /admin | main
+2018-04-18 14:22:21,235 | INFO  | No Spring WebApplicationInitializer types detected on classpath | /api | main
+2018-04-18 14:22:21,311 | INFO  | jolokia-agent: Using policy access restrictor classpath:/jolokia-access.xml | /api | main
+2018-04-18 14:42:38,496 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-64631-1524054140237-0:1) is shutting down | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-18 14:42:38,498 | INFO  | Connector openwire stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 14:42:38,500 | INFO  | Connector amqp stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 14:42:38,501 | INFO  | Connector stomp stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 14:42:38,502 | INFO  | Connector mqtt stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 14:42:38,510 | INFO  | Connector ws stopped | org.apache.activemq.broker.TransportConnector | Thread-24
+2018-04-18 14:42:38,515 | INFO  | PListStore:[/Users/joseantoniocarbonell/Desktop/MTIS/Practicas/P4/apache-activemq-5.15.3/data/localhost/tmp_storage] stopped | org.apache.activemq.store.kahadb.plist.PListStoreImpl | Thread-24
+2018-04-18 14:42:38,516 | INFO  | Stopping async queue tasks | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-18 14:42:38,516 | INFO  | Stopping async topic tasks | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-18 14:42:38,517 | INFO  | Stopped KahaDB | org.apache.activemq.store.kahadb.KahaDBStore | Thread-24
+2018-04-18 14:42:38,528 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-64631-1524054140237-0:1) uptime 20 minutes | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-18 14:42:38,529 | INFO  | Apache ActiveMQ 5.15.3 (localhost, ID:MacBook-Pro.local-64631-1524054140237-0:1) is shutdown | org.apache.activemq.broker.BrokerService | Thread-24
+2018-04-18 14:42:38,530 | INFO  | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@39aeed2f: startup date [Wed Apr 18 14:22:19 CEST 2018]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | Thread-24
+2018-04-18 14:42:38,535 | INFO  | Destroying Spring FrameworkServlet 'dispatcher' | /admin | Thread-24

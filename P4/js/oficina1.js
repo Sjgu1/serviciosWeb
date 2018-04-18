@@ -21,7 +21,6 @@ function onerror() {
 
 }
 $(document).ready(function valoresAleatoriosSubirBajar() {
-    var actual = document.getElementById("inputLuzOficina1Accion").value
     var accion = Math.floor(Math.random() * 5) + 0
     var accion2 = Math.floor(Math.random() * 5) + 0
     if (accion > 2) {
@@ -38,50 +37,29 @@ $(document).ready(function valoresAleatoriosSubirBajar() {
 })
 
 //<!-- OFICINA 1 -->
-
-$(document).ready(function enviarInformacion() {
-    var activador1 = "activadorLuz1"
-    var activador2 = "activadorTemp1"
-    var valorActualLuz1 = document.getElementById("inputLuzOficina1").value
-    var valorActualTemp1 = document.getElementById("inputTempOficina1").value
-
-    var message1 = '{ "luz":"' + valorActualLuz1 + '"}'
-    var message2 = '{ "temperatura":"' + valorActualTemp1 + '"}'
-    sendMessage(activador1, message1)
-    sendMessage(activador2, message2)
-
-    function sendMessage(activador, message) {
-        client.send('/topic/activador.' + activador, {}, message);
-    }
-    setTimeout(enviarInformacion, envioMensajesTiempo * 1000);
-})
-
 //<!-- ACTIVADOR LUZ OFICINA 1 -->
 
-var activadorSubsLuz1 = "activadorLuz1";
 $(document).ready(function subscribeMessageQueueLuz() {
-    client.subscribe('/topic/activador.' + activadorSubsLuz1, processMessageLuz1);
+    client.subscribe('/topic/activador.activadorLuz1', processMessageLuz1);
 })
 
 function processMessageLuz1(message) {
     var bodyLuz1 = message.body
     var messageBodyLuz1 = JSON.parse(bodyLuz1);
+    console.log(messageBodyLuz1.action)
 
-    if (messageBodyLuz1.luz <= minLuzPermisible) {
-        document.getElementById("inputLuzOficina1Accion").value = "subir"
-        $('#dialog_title_span_luz_1').text('Regulando luces:');
-        $('#flechaArribaLuz1').css("visibility", "visible");
-        $('#flechaAbajoLuz1').css("visibility", "hidden")
-
-
-    } else if (messageBodyLuz1.luz >= maxLuzPermisible) {
+    if(messageBodyLuz1.action == "bajar"){
         document.getElementById("inputLuzOficina1Accion").value = "bajar"
         $('#dialog_title_span_luz_1').text('Regulando luces: ');
         $('#flechaAbajoLuz1').css("visibility", "visible");
         $('#flechaArribaLuz1').css("visibility", "hidden")
 
-
-    } else {
+    }else if(messageBodyLuz1.action == "subir"){
+        document.getElementById("inputLuzOficina1Accion").value = "subir"
+        $('#dialog_title_span_luz_1').text('Regulando luces:');
+        $('#flechaArribaLuz1').css("visibility", "visible");
+        $('#flechaAbajoLuz1').css("visibility", "hidden")
+    }else{
         $('#dialog_title_span_luz_1').text("");
         $('#flechaArribaLuz1').css("visibility", "hidden")
         $('#flechaAbajoLuz1').css("visibility", "hidden")
@@ -90,21 +68,20 @@ function processMessageLuz1(message) {
 
 //<!-- ACTIVADOR TEMPERATURA OFICINA 1 -->
 
-var activadorSubsTemp1 = "activadorTemp1";
 $(document).ready(function subscribeMessageQueueTemp() {
-    client.subscribe('/topic/activador.' + activadorSubsTemp1, processMessageTemp1);
+    client.subscribe('/topic/activador.activadorTemp1' , processMessageTemp1);
 })
 
 function processMessageTemp1(message) {
     var body = message.body
     var messageBody = JSON.parse(body);
 
-    if (messageBody.temperatura <= minTempPermisible ) {
+    if (messageBody.action == "subir" ) {
         document.getElementById("inputTempOficina1Accion").value = "subir"
         $('#dialog_title_span_temp_1').text('Regulando temperatura:');
         $('#flechaArribaTemp1').css("visibility", "visible");
 
-    } else if (messageBody.temperatura >= maxTempPermisible) {
+    } else if (messageBody.action == "bajar" ) {
         document.getElementById("inputTempOficina1Accion").value = "bajar"
         $('#dialog_title_span_temp_1').text('Regulando temperatura: ');
         $('#flechaAbajoTemp1').css("visibility", "visible");
@@ -116,7 +93,7 @@ function processMessageTemp1(message) {
     }
 }
 //<!-- SENSOR LUZ OFICINA 1 -->
-$(document).ready(function sensorLuzOficina1() {
+$(document).ready(function simuladorLuz1() {
     var actualLuz1 = document.getElementById("inputLuzOficina1").value
     var accionLuz1 = document.getElementById("inputLuzOficina1Accion").value
     if (accionLuz1 == "subir") {
@@ -164,13 +141,15 @@ $(document).ready(function sensorLuzOficina1() {
 
 
     document.getElementById("inputLuzOficina1").value = actualLuz1
-    setTimeout(sensorLuzOficina1, cambiosTiempo * 1000);
+    setTimeout(simuladorLuz1, cambiosTiempo * 1000);
 
 })
-//<!-- SENSOR TEMPERATURA OFICINA 1 -->
-$(document).ready(function sensorTempOficina1() {
+//<!-- Simaldor TEMPERATURA OFICINA 1 -->
+
+$(document).ready(function simuladorTemp1() {
     var actualTemp1 = document.getElementById("inputTempOficina1").value
     var accionTemp1 = document.getElementById("inputTempOficina1Accion").value
+
     if (accionTemp1 == "subir") {
         for (i = 0; i < Math.floor(Math.random() * 5) + 2; i++) {
             actualTemp1++
@@ -216,6 +195,16 @@ $(document).ready(function sensorTempOficina1() {
 
 
     document.getElementById("inputTempOficina1").value = actualTemp1
-    setTimeout(sensorTempOficina1,cambiosTiempo * 1000);
+    setTimeout(simuladorTemp1,cambiosTiempo * 1000);
 
+})
+
+
+$(document).ready(function enviarDatosLuz1() {
+    consola("activadorLuz1", document.getElementById("inputLuzOficina1").value )
+    setTimeout(enviarDatosLuz1,1 * 1000);
+})
+$(document).ready(function enviarDatosTemp1() {
+    consola("activadorTemp1", document.getElementById("inputTempOficina1").value )
+    setTimeout(enviarDatosTemp1,1 * 1000);
 })
