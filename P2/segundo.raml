@@ -1,0 +1,80 @@
+#%RAML 1.0
+baseUri: http://localhost:3000
+title: Comprobar el código postal
+
+types: 
+  Poblacion:
+   type: object
+   properties: 
+     codigoPostal: string
+     poblacion: string
+     provincia: string
+     existe: boolean
+
+#Operaciones disponibles
+/consultaCodigoPostal:
+  /{cp}:
+    uriParameters: 
+      cp:
+        type: string
+        required: true
+        example: "03690"     
+    get:
+      description: Comprueba a dónde corresponde un código postal
+      headers: 
+        RestKey:
+          type: string
+          required: true
+          example: clave1 
+      responses:
+        200:
+          description: Se ha obtenido una respuesta al código postal
+          body:
+            application/json:
+              example: |
+                {
+                  "correcto" : true,
+                  "status" : 200,
+                  "message" : "Correcto",
+                  "Poblacion" : 
+                    {
+                    "codigoPostal": "03690",
+                    "poblacion": "San Vicente del Raspeig",
+                    "provincia": "Alicante",
+                    "existe": true
+                    }
+                }
+        401:
+          description: No se ha podido comprobar el CP, RestKey incorrecta
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 401,
+                  "message" : "RestKey incorrecta",
+                  "Poblacion" : 
+                    {
+                    "codigoPostal": null,
+                    "poblacion": null,
+                    "provincia": null,
+                    "existe": null
+                    }
+                }       
+        500:
+          description: Error al acceder a la API
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 500,
+                  "message" : "Problemas con el servidor",
+                  "Poblacion" : 
+                    {
+                    "codigoPostal": null,
+                    "poblacion": null,
+                    "provincia": null,
+                    "existe": null
+                    }
+                }

@@ -31,7 +31,6 @@ http.createServer(app).listen(app.get('port'), function () {
         {
             host: 'localhost',
             user: 'root',
-            password: 'root',
             database: 'mtis'
         }
     );

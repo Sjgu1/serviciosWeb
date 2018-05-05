@@ -1,0 +1,88 @@
+#%RAML 1.0
+baseUri: http://localhost:3000
+title: Genera un presupuesto
+
+types: 
+  Presupuesto:
+   type: object
+   properties: 
+     fechaPresupuesto: 
+       type: date-only
+       example: 2018-02-16
+     idCliente: 
+       type: integer
+       example: 2
+     referenciaProducto: 
+       type: string
+       example: 123ab
+     cantidadProducto: 
+       type: integer
+       example: 3
+      
+
+#Operaciones disponibles
+/generarPresupuesto:     
+  post:
+    description: Se Crea un presupuesto en la base de datos
+    queryParameters: 
+      datos:
+        type: Presupuesto
+        required: true
+        example: |
+          {
+            "fechaPresupuesto": "2018-02-26",
+            "idCliente": 1,
+            "referenciaProducto": "123ab",
+            "cantidadProducto": 2
+          }
+    headers:
+      RestKey:
+        type: string
+        required: true
+        example: clave1 
+    responses:
+      201:
+        description: Se ha creado un presupuesto
+        body:
+          application/json:
+            example: |
+              {
+                "correcto" : true,
+                "status" : 201,
+                "message" : "Correcto",
+                "Presupuesto" : 
+                  {
+                    "idPresupuesto": 1,
+                    "presupuestoGeneradoCorrectamente" : true
+                  }
+              }
+      401:
+        description: No se ha podido crear el presupuesto, RestKey incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "correcto" : false,
+                "status" : 401,
+                "message" : "RestKey incorrecta",
+                "Presupuesto" : 
+                  {
+                    "idPresupuesto": null,
+                    "presupuestoGeneradoCorrectamente" : false
+                  }
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "correcto" : false,
+                "status" : 500,
+                "message" : "Problemas con el servidor",
+                "Presupuesto" : 
+                  {
+                    "idPresupuesto": false,
+                    "presupuestoGeneradoCorrectamente" : null
+                  }
+              }
