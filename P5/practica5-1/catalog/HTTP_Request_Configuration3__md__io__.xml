@@ -1,6 +1,6 @@
 <metadata__cache__entry>
   <version>5.2.0.0</version>
-  <connectorName>HTTP_Request_Configuration</connectorName>
+  <connectorName>HTTP_Request_Configuration3</connectorName>
   <metadataIo class="tree-map">
     <entry>
       <string>GET:/consultaCodigoPostal/{cp}</string>
