@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
+<mule xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
       xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
       xmlns:http="http://www.mulesoft.org/schema/mule/http"
       xmlns:spring="http://www.springframework.org/schema/beans"
@@ -14,13 +14,16 @@ http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/cu
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
 http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd">
 
     <http:listener-config name="httpListenerConfig" host="0.0.0.0" port="9090" doc:name="HTTP Listener Configuration"/>
     <apikit:config name="apiConfig" raml="api.raml" consoleEnabled="false" doc:name="Router"/>
 
     <context:property-placeholder location="api.properties" />
     <ws:consumer-config name="Web_Service_Consumer" service="WS_compraService" port="WS_compraPort" serviceAddress="http://localhost:8080/ode/processes/WS_compra" wsdlLocation="WS_compraArtifacts.wsdl" doc:name="Web Service Consumer"/>
+    <ws:consumer-config name="Web_Service_Consumer1" service="pub_gestdocente" port="pub_gestdocenteSoap" serviceAddress="https://cvnet.cpd.ua.es/servicioweb/publicos/pub_gestdocente.asmx" wsdlLocation="https://cvnet.cpd.ua.es/servicioweb/publicos/pub_gestdocente.asmx?WSDL" doc:name="Web Service Consumer"/>
+    <jms:activemq-connector name="Active_MQ" brokerURL="tcp://localhost:61616" validateConnections="true" doc:name="Active MQ"/>
 
     <flow name="api-main">
         <http:listener config-ref="httpListenerConfig" path="/*" doc:name="HTTP"/>
@@ -31,11 +34,34 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             <when expression="#[message.inboundProperties.'http.request.uri'.contains('/flujo2')]">
                 <flow-ref name="flujo2-main" doc:name="flujo2"/>
             </when>
+            <when expression="#[message.inboundProperties.'http.request.uri'=='/flujo3']">
+                <flow-ref name="flujo3" doc:name="flujo3"/>
+            </when>
             <otherwise>
                 <set-payload value="No existe el flujo" doc:name="Set Payload"/>
             </otherwise>
         </choice>
         <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <flow name="flujo3">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/xml
+%namespace ns0 http://UASI/WS_GESTDOCENTE.wsdl
+---
+{
+	ns0#wsfechaexamenesasi: {
+		ns0#plengua: "C",
+		ns0#pcurso: "2017-18",
+		ns0#pcodasi: payload.codigoAsignatura,
+		ns0#porden: "A"
+	}
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <ws:consumer config-ref="Web_Service_Consumer1" operation="wsfechaexamenesasi" doc:name="Web Service Consumer"/>
+        <json:xml-to-json-transformer doc:name="XML to JSON"/>
+        <jms:outbound-endpoint topic="practica5" connector-ref="Active_MQ" doc:name="JMS"/>
+        <set-payload value="Mensaje publicado" doc:name="Set Payload"/>
     </flow>
     <flow name="flujo1">
         <dw:transform-message metadata:id="5c2977b0-aa3d-4fc7-a493-0158403140cc" doc:name="Transform Message">
