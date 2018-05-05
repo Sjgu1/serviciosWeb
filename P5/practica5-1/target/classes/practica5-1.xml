@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
+<mule xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
       xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
       xmlns:http="http://www.mulesoft.org/schema/mule/http"
       xmlns:spring="http://www.springframework.org/schema/beans"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:context="http://www.springframework.org/schema/context"
-      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
@@ -15,7 +17,9 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
-http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd">
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd">
 
     <http:listener-config name="httpListenerConfig" host="0.0.0.0" port="9090" doc:name="HTTP Listener Configuration"/>
     <apikit:config name="apiConfig" raml="api.raml" consoleEnabled="false" doc:name="Router"/>
@@ -24,6 +28,9 @@ http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/
     <ws:consumer-config name="Web_Service_Consumer" service="WS_compraService" port="WS_compraPort" serviceAddress="http://localhost:8080/ode/processes/WS_compra" wsdlLocation="WS_compraArtifacts.wsdl" doc:name="Web Service Consumer"/>
     <ws:consumer-config name="Web_Service_Consumer1" service="pub_gestdocente" port="pub_gestdocenteSoap" serviceAddress="https://cvnet.cpd.ua.es/servicioweb/publicos/pub_gestdocente.asmx" wsdlLocation="https://cvnet.cpd.ua.es/servicioweb/publicos/pub_gestdocente.asmx?WSDL" doc:name="Web Service Consumer"/>
     <jms:activemq-connector name="Active_MQ" brokerURL="tcp://localhost:61616" validateConnections="true" doc:name="Active MQ"/>
+    <smtp:gmail-connector name="Gmail" fromAddress="sergiojuliogu@gmail.com" validateConnections="true" doc:name="Gmail"/>
+    <file:connector name="fileConnector" pollingFrequency="100" doc:name="File"/>
+    <file:file-to-string-transformer name="File_to_String" doc:name="File to String"/>
 
     <flow name="api-main">
         <http:listener config-ref="httpListenerConfig" path="/*" doc:name="HTTP"/>
@@ -42,6 +49,17 @@ http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/
             </otherwise>
         </choice>
         <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <flow name="listenerActive">
+        <jms:inbound-endpoint topic="practica5" connector-ref="Active_MQ" doc:name="JMS"/>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <set-variable variableName="contenido" value="#[payload]" doc:name="Variable"/>
+         <set-payload value="#[Thread.currentThread().getContextClassLoader().getResourceAsStream('emails.txt')]" doc:name="Set Payload"/>
+        <byte-array-to-string-transformer doc:name="Byte Array to String"/>
+        <set-variable variableName="email" value="#[payload]" doc:name="Variable"/>
+        <set-payload value="#[flowVars.contenido]" doc:name="Set Payload"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="integracionmtis" password="usabilidad2018" connector-ref="Gmail" to="#[flowVars.email]" from="sergiojuliogu@gmail.com" subject="Practica 5 MTIS" responseTimeout="10000" doc:name="SMTP"/>
+        <set-payload value="Email enviado" doc:name="Set Payload"/>
     </flow>
     <flow name="flujo3">
         <dw:transform-message doc:name="Transform Message">
