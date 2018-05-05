@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns="http://www.mulesoft.org/schema/mule/core"
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
       xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
       xmlns:http="http://www.mulesoft.org/schema/mule/http"
       xmlns:spring="http://www.springframework.org/schema/beans"
@@ -13,16 +13,28 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
 http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
-http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
 
-    <http:listener-config name="httpListenerConfig" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <http:listener-config name="httpListenerConfig" host="0.0.0.0" port="9090" doc:name="HTTP Listener Configuration"/>
     <apikit:config name="apiConfig" raml="api.raml" consoleEnabled="false" doc:name="Router"/>
 
     <context:property-placeholder location="api.properties" />
     <ws:consumer-config name="Web_Service_Consumer" service="WS_compraService" port="WS_compraPort" serviceAddress="http://localhost:8080/ode/processes/WS_compra" wsdlLocation="WS_compraArtifacts.wsdl" doc:name="Web Service Consumer"/>
 
     <flow name="api-main">
-        <http:listener config-ref="httpListenerConfig" path="/api/*" doc:name="HTTP"/>
+        <http:listener config-ref="httpListenerConfig" path="/*" doc:name="HTTP"/>
+        <choice doc:name="Choice">
+            <when expression="#[message.inboundProperties.'http.request.uri'=='/flujo1']">
+                <flow-ref name="flujo1" doc:name="flujo1"/>
+            </when>
+            <otherwise>
+                <set-payload value="No existe el flujo" doc:name="Set Payload"/>
+            </otherwise>
+        </choice>
+        <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <flow name="flujo1">
         <dw:transform-message metadata:id="5c2977b0-aa3d-4fc7-a493-0158403140cc" doc:name="Transform Message">
             <dw:input-payload/>
             <dw:set-payload><![CDATA[%dw 1.0
@@ -37,17 +49,15 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 }]]></dw:set-payload>
         </dw:transform-message>
         <ws:consumer config-ref="Web_Service_Consumer" operation="process" doc:name="Web Service Consumer"/>
-        <dw:transform-message metadata:id="d8ee7f95-ed9f-4ff6-b8e0-a8acc4e777ef" doc:name="Transform Message">
+        <json:xml-to-json-transformer encoding="ISO-8859-1" doc:name="XML to JSON"/>
+        <dw:transform-message metadata:id="0019421c-1189-4730-8c5d-67b1c8615780" doc:name="Transform Message">
             <dw:set-payload><![CDATA[%dw 1.0
-%output application/xml
-%namespace ns0 http://invoke.bpel.mtis
+%output application/json
 ---
 {
-	respuesta: payload.ns0#WS_compraResponse.ns0#result
+	result: payload.WS_compraResponse."tns:result"
 }]]></dw:set-payload>
         </dw:transform-message>
-        <json:xml-to-json-transformer encoding="ISO-8859-1" doc:name="XML to JSON"/>
-        <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
     </flow>
 
     <flow name="api-console">
