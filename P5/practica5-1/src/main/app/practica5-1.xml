@@ -29,7 +29,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <flow-ref name="flujo1" doc:name="flujo1"/>
             </when>
             <when expression="#[message.inboundProperties.'http.request.uri'.contains('/flujo2')]">
-                <flow-ref name="practica2-main" doc:name="flujo2-1"/>
+                <flow-ref name="flujo2-main" doc:name="flujo2"/>
             </when>
             <otherwise>
                 <set-payload value="No existe el flujo" doc:name="Set Payload"/>
