@@ -1,13 +1,14 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var cors = require('cors')
+var app = express();
 
+app.use(cors())
 
 var http = require('http');
 var path = require('path');
 var validator = require('validator');
 
-var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -16,13 +17,29 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 // parse application/json
 app.use(bodyParser.json())
-app.use(cors())
 
 
+// Add headers
+app.use(function (req, res, next) {
 
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
 //llamamos al paquete mysql que hemos instalado
 var mysql = require('mysql')
-
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
@@ -254,33 +271,33 @@ http.createServer(app).listen(app.get('port'), function () {
                                     }
                             });
                         } else {
-                            if( req.body.fechaPresupuesto == "" ||req.body.idcliente == "" ||req.body.referenciaProducto == "" ||req.body.cantidadProducto == "" ){
+                            if (req.body.fechaPresupuesto == "" || req.body.idcliente == "" || req.body.referenciaProducto == "" || req.body.cantidadProducto == "") {
                                 return res.status(500).send({
-                                    "correcto" : false,
-                                    "status" : 500,
-                                    "message" : "Problema a la hora de crear el recurso",
-                                    "Presupuesto" : 
-                                      {
-                                        "idPresupuesto": false,
-                                        "presupuestoGeneradoCorrectamente" : false
-                                      }
-                                  });
+                                    "correcto": false,
+                                    "status": 500,
+                                    "message": "Problema a la hora de crear el recurso",
+                                    "Presupuesto":
+                                        {
+                                            "idPresupuesto": false,
+                                            "presupuestoGeneradoCorrectamente": false
+                                        }
+                                });
                             }
                             var values = "('" + req.body.fechaPresupuesto + "', '" + req.body.idCliente + "', '" + req.body.referenciaProducto + "', '" + req.body.cantidadProducto + "')";
                             connection.query("INSERT INTO presupuestos (fechaPresupuesto, idCliente, referenciaProducto, cantidadProducto) VALUES " + values + ";", function (error2, rows) {
                                 console.log(rows)
                                 if (error2) {
                                     return res.status(500).send({
-                                        "correcto" : false,
-                                        "status" : 500,
-                                        "message" : "Problema a la hora de crear el recurso",
-                                        "Presupuesto" : 
-                                          {
-                                            "idPresupuesto": false,
-                                            "presupuestoGeneradoCorrectamente" : false
-                                          }
-                                      });
-                                }else {
+                                        "correcto": false,
+                                        "status": 500,
+                                        "message": "Problema a la hora de crear el recurso",
+                                        "Presupuesto":
+                                            {
+                                                "idPresupuesto": false,
+                                                "presupuestoGeneradoCorrectamente": false
+                                            }
+                                    });
+                                } else {
                                     return res.status(201).send({
                                         "correcto": true,
                                         "status": 201,
