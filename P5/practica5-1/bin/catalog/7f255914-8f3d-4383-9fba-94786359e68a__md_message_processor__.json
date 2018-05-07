@@ -1,0 +1,10 @@
+{
+    "inputMessageMetadata": {},
+    "outputMessageMetadata": {
+        "flowVariables": {
+            "email": {}
+        }
+    },
+    "id": "7f255914-8f3d-4383-9fba-94786359e68a",
+    "version": "5.2.0.0"
+}

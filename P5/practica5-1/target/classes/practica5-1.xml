@@ -66,49 +66,29 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
         <set-payload value="Email enviado" doc:name="Set Payload"/>
     </flow>
     <flow name="flujo3">
-        <dw:transform-message doc:name="Transform Message">
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/xml
-%namespace ns0 http://UASI/WS_GESTDOCENTE.wsdl
----
-{
-	ns0#wsfechaexamenesasi: {
-		ns0#plengua: "C",
-		ns0#pcurso: "2017-18",
-		ns0#pcodasi: payload.codigoAsignatura,
-		ns0#porden: "A"
-	}
-}]]></dw:set-payload>
-        </dw:transform-message>
+        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to Object"/>
+        <set-payload value="&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;ns0:wsfechaexamenesasi xmlns:ns0=&quot;http://UASI/WS_GESTDOCENTE.wsdl&quot;&gt;
+  &lt;ns0:plengua&gt;C&lt;/ns0:plengua&gt;
+  &lt;ns0:pcurso&gt;2017-18&lt;/ns0:pcurso&gt;
+  &lt;ns0:pcodasi&gt;#[message.payload.mensaje.codigoAsignatura]&lt;/ns0:pcodasi&gt;
+  &lt;ns0:porden&gt;A&lt;/ns0:porden&gt;
+&lt;/ns0:wsfechaexamenesasi&gt;" doc:name="Set Payload"/>
         <ws:consumer config-ref="Web_Service_Consumer1" operation="wsfechaexamenesasi" doc:name="Web Service Consumer"/>
         <json:xml-to-json-transformer doc:name="XML to JSON"/>
         <jms:outbound-endpoint topic="practica5" connector-ref="jmsConnector" doc:name="JMS"/>
         <set-payload value="Mensaje publicado" doc:name="Set Payload"/>
     </flow>
     <flow name="flujo1">
-        <dw:transform-message metadata:id="5c2977b0-aa3d-4fc7-a493-0158403140cc" doc:name="Transform Message">
-            <dw:input-payload/>
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/xml
-%namespace ns0 http://invoke.bpel.mtis
----
-{
-	ns0#WS_compraRequest: {
-		ns0#referenciaProducto: payload.referenciaProducto,
-		ns0#numeroUnidades: payload.numeroUnidades
-	}
-}]]></dw:set-payload>
-        </dw:transform-message>
+        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to Object"/>
+        <set-payload value="&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;ns0:WS_compraRequest xmlns:ns0=&quot;http://invoke.bpel.mtis&quot;&gt;
+  &lt;ns0:referenciaProducto&gt;#[message.payload.mensaje.referenciaProducto]&lt;/ns0:referenciaProducto&gt;
+  &lt;ns0:numeroUnidades&gt;#[message.payload.mensaje.numeroUnidades]&lt;/ns0:numeroUnidades&gt;
+&lt;/ns0:WS_compraRequest&gt;
+" mimeType="text/xml" doc:name="Set Payload"/>
         <ws:consumer config-ref="Web_Service_Consumer" operation="process" doc:name="Web Service Consumer"/>
         <json:xml-to-json-transformer encoding="ISO-8859-1" doc:name="XML to JSON"/>
-        <dw:transform-message metadata:id="0019421c-1189-4730-8c5d-67b1c8615780" doc:name="Transform Message">
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/json
----
-{
-	result: payload.WS_compraResponse."tns:result"
-}]]></dw:set-payload>
-        </dw:transform-message>
     </flow>
 
     <flow name="api-console">

@@ -1,0 +1,244 @@
+#%RAML 1.0
+baseUri: http://localhost:3000
+title: Validar NIF e IBAN
+
+types: 
+  Poblacion:
+   type: object
+   properties: 
+     codigoPostal: string
+     poblacion: string
+     provincia: string
+     existe: boolean
+
+  Presupuesto:
+   type: object
+   properties: 
+     fechaPresupuesto: 
+       type: date-only
+       example: 2018-02-16
+     idCliente: 
+       type: integer
+       example: 2
+     referenciaProducto: 
+       type: string
+       example: 123ab
+     cantidadProducto: 
+       type: integer
+       example: 3
+       
+#Operaciones disponibles
+/validarNIF:
+  /{nif}:
+    uriParameters: 
+      nif:
+        type: string
+        required: true
+        example: 04225922V     
+    get:
+      description: ValidaciÃ³n de DNI
+      headers: 
+        RestKey:
+          type: string
+          required: true
+          example: clave1 
+      responses:
+        200:
+          description: Se ha validado correctamente el dni, puede ser correcto o incorrecto
+          body:
+            application/json:
+              example: |
+                {
+                  "correcto" : true,
+                  "status" : 200,
+                  "message" : "El NIF es vÃ¡lido"
+                }
+        401:
+          description: No se ha podido validar el dni, RestKey incorrecta
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 401,
+                  "message" : "RestKey incorrecta"
+                }       
+        500:
+          description: Error al acceder a la API
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 500,
+                  "message" : "Problemas con el servidor o la base de datos"
+                }
+/validarIBAN:
+  /{iban}:
+    uriParameters: 
+      iban:
+        type: string
+        required: true
+        example: ES9121000418450200051332    
+    get:
+      description: ValidaciÃ³n de IBAN
+      headers: 
+        RestKey:
+          type: string
+          required: true
+          example: clave1 
+      responses:
+        200:
+          description: Se ha validado correctamente el IBAN, puede ser correcto o incorrecto
+          body:
+            application/json:
+              example: |
+                {
+                  "correcto" : true,
+                  "status" : 200,
+                  "message" : "El IBAN es vÃ¡lido"
+                }
+        401:
+          description: No se ha podido validar el IBAN, RestKey incorrecta
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 401,
+                  "message" : "RestKey incorrecta"
+                }       
+        500:
+          description: Error al acceder a la API
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 500,
+                  "message" : "Problemas con el servidor o la base de datos"
+                }
+#Operaciones disponibles
+/consultaCodigoPostal:
+  /{cp}:
+    uriParameters: 
+      cp:
+        type: string
+        required: true
+        example: "03690"     
+    get:
+      description: Comprueba a dÃ³nde corresponde un cÃ³digo postal
+      headers: 
+        RestKey:
+          type: string
+          required: true
+          example: clave1 
+      responses:
+        200:
+          description: Se ha obtenido una respuesta al cÃ³digo postal
+          body:
+            application/json:
+              example: |
+                {
+                  "correcto" : true,
+                  "status" : 200,
+                  "message" : "Correcto",
+                  "Poblacion" : 
+                    {
+                    "codigoPostal": "03690",
+                    "poblacion": "San Vicente del Raspeig",
+                    "provincia": "Alicante",
+                    "existe": true
+                    }
+                }
+        401:
+          description: No se ha podido comprobar el CP, RestKey incorrecta
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 401,
+                  "message" : "RestKey incorrecta",
+                  "Poblacion" : 
+                    {
+                    "codigoPostal": null,
+                    "poblacion": null,
+                    "provincia": null,
+                    "existe": null
+                    }
+                }       
+        500:
+          description: Error al acceder a la API
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 500,
+                  "message" : "Problemas con el servidor",
+                  "Poblacion" : 
+                    {
+                    "codigoPostal": null,
+                    "poblacion": null,
+                    "provincia": null,
+                    "existe": null
+                    }
+                }
+/generarPresupuesto:     
+  post:
+    description: Se Crea un presupuesto en la base de datos
+    body:
+      application/json:
+        type: Presupuesto
+    headers:
+      RestKey:
+        type: string
+        required: true
+        example: clave1 
+    responses:
+      201:
+        description: Se ha creado un presupuesto
+        body:
+          application/json:
+            example: |
+              {
+                "correcto" : true,
+                "status" : 201,
+                "message" : "Correcto",
+                "Presupuesto" : 
+                  {
+                    "idPresupuesto": 1,
+                    "presupuestoGeneradoCorrectamente" : true
+                  }
+              }
+      401:
+        description: No se ha podido crear el presupuesto, RestKey incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "correcto" : false,
+                "status" : 401,
+                "message" : "RestKey incorrecta",
+                "Presupuesto" : 
+                  {
+                    "idPresupuesto": null,
+                    "presupuestoGeneradoCorrectamente" : false
+                  }
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "correcto" : false,
+                "status" : 500,
+                "message" : "Problemas con el servidor",
+                "Presupuesto" : 
+                  {
+                    "idPresupuesto": false,
+                    "presupuestoGeneradoCorrectamente" : null
+                  }
+              }

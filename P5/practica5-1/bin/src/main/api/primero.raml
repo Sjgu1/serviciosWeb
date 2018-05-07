@@ -1,0 +1,95 @@
+#%RAML 1.0
+baseUri: http://localhost:3000
+title: Validar NIF e IBAN
+
+#Operaciones disponibles
+/validarNIF:
+  /{nif}:
+    uriParameters: 
+      nif:
+        type: string
+        required: true
+        example: 04225922V     
+    get:
+      description: Validación de DNI
+      headers: 
+        RestKey:
+          type: string
+          required: true
+          example: clave1 
+      responses:
+        200:
+          description: Se ha validado correctamente el dni, puede ser correcto o incorrecto
+          body:
+            application/json:
+              example: |
+                {
+                  "correcto" : true,
+                  "status" : 200,
+                  "message" : "El NIF es válido"
+                }
+        401:
+          description: No se ha podido validar el dni, RestKey incorrecta
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 401,
+                  "message" : "RestKey incorrecta"
+                }       
+        500:
+          description: Error al acceder a la API
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 500,
+                  "message" : "Problemas con el servidor o la base de datos"
+                }
+/validarIBAN:
+  /{iban}:
+    uriParameters: 
+      iban:
+        type: string
+        required: true
+        example: ES9121000418450200051332    
+    get:
+      description: Validación de IBAN
+      headers: 
+        RestKey:
+          type: string
+          required: true
+          example: clave1 
+      responses:
+        200:
+          description: Se ha validado correctamente el IBAN, puede ser correcto o incorrecto
+          body:
+            application/json:
+              example: |
+                {
+                  "correcto" : true,
+                  "status" : 200,
+                  "message" : "El IBAN es válido"
+                }
+        401:
+          description: No se ha podido validar el IBAN, RestKey incorrecta
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 401,
+                  "message" : "RestKey incorrecta"
+                }       
+        500:
+          description: Error al acceder a la API
+          body: 
+            application/json:
+              example: |
+                {
+                  "correcto" : false,
+                  "status" : 500,
+                  "message" : "Problemas con el servidor o la base de datos"
+                }

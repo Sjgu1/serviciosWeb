@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd">
+
+<jms:activemq-connector name="jmsConnector"
+                          brokerURL="tcp://localhost:61616" doc:name="Active MQ"/>
+  <jms:activemq-xa-connector name="jmsXAConnector"
+                             brokerURL="tcp://localhost:61616" doc:name="Active MQ"/>
+    <http:listener-config name="httpListenerConfig" host="0.0.0.0" port="9090" doc:name="HTTP Listener Configuration"/>
+    <apikit:config name="apiConfig" raml="api.raml" consoleEnabled="false" doc:name="Router"/>
+
+    <context:property-placeholder location="api.properties" />
+    <ws:consumer-config name="Web_Service_Consumer" service="WS_compraService" port="WS_compraPort" serviceAddress="http://localhost:8080/ode/processes/WS_compra" wsdlLocation="WS_compraArtifacts.wsdl" doc:name="Web Service Consumer"/>
+    <ws:consumer-config name="Web_Service_Consumer1" service="pub_gestdocente" port="pub_gestdocenteSoap" serviceAddress="https://cvnet.cpd.ua.es/servicioweb/publicos/pub_gestdocente.asmx" wsdlLocation="https://cvnet.cpd.ua.es/servicioweb/publicos/pub_gestdocente.asmx?WSDL" doc:name="Web Service Consumer"/>
+    <jms:activemq-connector name="Active_MQ" brokerURL="tcp://localhost:61616" validateConnections="true" doc:name="Active MQ"/>
+    <smtp:gmail-connector name="Gmail" fromAddress="sergiojuliogu@gmail.com" validateConnections="true" doc:name="Gmail"/>
+    <file:connector name="fileConnector" pollingFrequency="100" doc:name="File"/>
+    <file:file-to-string-transformer name="File_to_String" doc:name="File to String"/>
+
+    <flow name="api-main">
+        <http:listener config-ref="httpListenerConfig" path="/*" doc:name="HTTP"/>
+        <choice doc:name="Choice">
+            <when expression="#[message.inboundProperties.'http.request.uri'=='/flujo1']">
+                <flow-ref name="flujo1" doc:name="flujo1"/>
+            </when>
+            <when expression="#[message.inboundProperties.'http.request.uri'.contains('/flujo2')]">
+                <flow-ref name="flujo2-main" doc:name="flujo2"/>
+            </when>
+            <when expression="#[message.inboundProperties.'http.request.uri'=='/flujo3']">
+                <flow-ref name="flujo3" doc:name="flujo3"/>
+            </when>
+            <otherwise>
+                <set-payload value="No existe el flujo" doc:name="Set Payload"/>
+            </otherwise>
+        </choice>
+        <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <flow name="listenerActive">
+        <jms:inbound-endpoint topic="practica5" connector-ref="jmsConnector" doc:name="JMS"/>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <set-variable variableName="contenido" value="#[payload]" doc:name="Variable"/>
+         <set-payload value="#[Thread.currentThread().getContextClassLoader().getResourceAsStream('emails.txt')]" doc:name="Set Payload"/>
+        <byte-array-to-string-transformer doc:name="Byte Array to String"/>
+        <set-variable variableName="email" value="#[payload]" doc:name="Variable"/>
+        <set-payload value="#[flowVars.contenido]" doc:name="Set Payload"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="integracionmtis" password="usabilidad2018" connector-ref="Gmail" to="#[flowVars.email]" from="sergiojuliogu@gmail.com" subject="Practica 5 MTIS" responseTimeout="10000" doc:name="SMTP"/>
+        <set-payload value="Email enviado" doc:name="Set Payload"/>
+    </flow>
+    <flow name="flujo3">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/xml
+%namespace ns0 http://UASI/WS_GESTDOCENTE.wsdl
+---
+{
+	ns0#wsfechaexamenesasi: {
+		ns0#plengua: "C",
+		ns0#pcurso: "2017-18",
+		ns0#pcodasi: payload.codigoAsignatura,
+		ns0#porden: "A"
+	}
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <ws:consumer config-ref="Web_Service_Consumer1" operation="wsfechaexamenesasi" doc:name="Web Service Consumer"/>
+        <json:xml-to-json-transformer doc:name="XML to JSON"/>
+        <jms:outbound-endpoint topic="practica5" connector-ref="jmsConnector" doc:name="JMS"/>
+        <set-payload value="Mensaje publicado" doc:name="Set Payload"/>
+    </flow>
+    <flow name="flujo1">
+        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to Object"/>
+        <set-payload value="&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;ns0:WS_compraRequest xmlns:ns0=&quot;http://invoke.bpel.mtis&quot;&gt;
+  &lt;ns0:referenciaProducto&gt;#[message.payload.mensaje.referenciaProducto]&lt;/ns0:referenciaProducto&gt;
+  &lt;ns0:numeroUnidades&gt;#[message.payload.mensaje.numeroUnidades]&lt;/ns0:numeroUnidades&gt;
+&lt;/ns0:WS_compraRequest&gt;
+" mimeType="text/xml" doc:name="Set Payload"/>
+        <ws:consumer config-ref="Web_Service_Consumer" operation="process" doc:name="Web Service Consumer"/>
+        <json:xml-to-json-transformer encoding="ISO-8859-1" doc:name="XML to JSON"/>
+        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to Object"/>
+        <logger message="#[message.payload.WS_compraResponse]" level="INFO" doc:name="Logger"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow>
+
+    <flow name="api-console">
+        <http:listener config-ref="httpListenerConfig" path="/console/*" doc:name="HTTP"/>
+        <apikit:console config-ref="apiConfig" doc:name="APIkit Console"/>
+    </flow>
+
+    <apikit:mapping-exception-strategy name="apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="404">
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="405">
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="415">
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="406">
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+    </apikit:mapping-exception-strategy>
+</mule>

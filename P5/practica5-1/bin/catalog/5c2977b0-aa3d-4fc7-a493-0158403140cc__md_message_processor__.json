@@ -1,0 +1,13 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {}
+    },
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "Web_Service_Consumer",
+            "typeId": "WS_compraRequest"
+        }
+    },
+    "id": "5c2977b0-aa3d-4fc7-a493-0158403140cc",
+    "version": "5.2.0.0"
+}
