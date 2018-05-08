@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
 	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
       xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
       xmlns:http="http://www.mulesoft.org/schema/mule/http"
@@ -19,7 +19,8 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
-http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd">
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
 
 <jms:activemq-connector name="jmsConnector"
                           brokerURL="tcp://localhost:61616" doc:name="Active MQ"/>
@@ -35,6 +36,7 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
     <smtp:gmail-connector name="Gmail" fromAddress="sergiojuliogu@gmail.com" validateConnections="true" doc:name="Gmail"/>
     <file:connector name="fileConnector" pollingFrequency="100" doc:name="File"/>
     <file:file-to-string-transformer name="File_to_String" doc:name="File to String"/>
+    <db:mysql-config name="MySQL_Configuration" host="localhost" port="3306" user="root" database="mule" doc:name="MySQL Configuration"/>
 
     <flow name="api-main">
         <http:listener config-ref="httpListenerConfig" path="/*" doc:name="HTTP"/>
@@ -89,6 +91,11 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
 " mimeType="text/xml" doc:name="Set Payload"/>
         <ws:consumer config-ref="Web_Service_Consumer" operation="process" doc:name="Web Service Consumer"/>
         <json:xml-to-json-transformer encoding="ISO-8859-1" doc:name="XML to JSON"/>
+        <set-variable variableName="elPayload" value="#[payload]" doc:name="Variable"/>
+        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[insert into resultado (result) values (#[flowVars.elPayload])]]></db:parameterized-query>
+        </db:insert>
+        <set-payload value="#[flowVars.elPayload]" doc:name="Set Payload"/>
     </flow>
 
     <flow name="api-console">
