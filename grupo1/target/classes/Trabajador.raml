@@ -1,0 +1,92 @@
+#%RAML 1.0
+baseUri: http://localhost:3000
+title: Información y actualización de un trbajador con sus nóminas.
+
+types: 
+  InformacionTrabajador:
+   type: object
+   properties: 
+    nif: 
+      type: string
+      example: "01224578M"
+    nombre:
+      type: string
+      example: "Juan"
+    apellidos:
+      type: string
+      example: "García García"
+    salarioBase:
+      type: number
+      example: 1251.78
+    seguridadSocial:
+      type: number
+      example: 7
+    IRPF:
+      type: number
+      example: 13
+    IBAN:
+      type: string
+      example: ES9121000418450200051332
+    nominas: 
+      type: number[]
+      example: 
+        [
+          0001213, 0003321, 0004453
+        ]
+
+#Operaciones disponibles
+/Trabajador:
+  /{nif}:
+    uriParameters:
+      nif: 
+        type: string
+        required: true
+        example: "04424421M"
+    get:
+      description: Obtiene los datos de un trabajador necesarios para calcular su nómina.  
+      headers:
+        Authorization:
+          type: string
+          required: true
+          example: administrador1
+      responses:
+        200:
+          description: Se ha obtenido un trabajador
+          body: 
+            application/json:
+              type: InformacionTrabajador
+              example: 
+                {
+                  "nif": "01224578M", 
+                  "nombre": "Juan",
+                  "apellidos": "García García",
+                  "salarioBase": 1251.78,
+                  "seguridadSocial": 7,
+                  "IRPF": 13,
+                  "IBAN": "ES9121000418450200051332",
+                  "nominas": [0001213, 0003321, 0004453]
+                }
+        404:
+          description: No se ha podido encontrar el recurso, petición incorrecta
+          body: 
+            application/json:
+              example: |
+                {
+                  "message" : "Petición incorrecta"
+                }   
+        401:
+          description: No se ha podido obtener el trabajador, Key incorrecta
+          body: 
+            application/json:
+              example: |
+                {
+                  "message" : "Key incorrecta"
+                }       
+        500:
+          description: Error al acceder a la API
+          body: 
+            application/json:
+              example: |
+                {
+                  "message" : "Problemas con el servidor"
+                }

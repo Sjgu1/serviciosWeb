@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+    <http:listener-config name="globalNomina-httpListenerConfig" host="0.0.0.0" port="9090" doc:name="HTTP Listener Configuration"/>
+    <apikit:config name="globalNomina-config" raml="globalNomina.raml" consoleEnabled="false" doc:name="Router"/>
+    <http:request-config name="HTTP_Request_Configuration_global" host="localhost" port="3000" doc:name="HTTP Request Configuration">
+        <http:raml-api-configuration location="globalNomina.raml"/>
+    </http:request-config>
+    <flow name="globalNomina-main">
+        <http:listener config-ref="globalNomina-httpListenerConfig" path="/*" doc:name="HTTP"/>
+        <apikit:router config-ref="globalNomina-config" doc:name="APIkit Router"/>
+        <exception-strategy ref="globalNomina-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <flow name="globalNomina-console">
+        <http:listener config-ref="globalNomina-httpListenerConfig" path="/console/*" doc:name="HTTP"/>
+        <apikit:console config-ref="globalNomina-config" doc:name="APIkit Console"/>
+    </flow>
+    <flow name="get:/Trabajador/{nif}:globalNomina-config">
+        <http:request config-ref="HTTP_Request_Configuration_global" path="/Trabajador/{nif}" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:uri-param paramName="nif" value="#[flowVars.nueva.nif]"/>
+                <http:header headerName="Authorization" value="#[flowVars.auth]"/>
+            </http:request-builder>
+        </http:request>
+        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to Object"/>
+        <set-variable variableName="trabajador" value="#[payload]" doc:name="Variable"/>
+        <flow-ref name="post:/nomina/devengos:globalNomina-config" doc:name="post:/nomina/devengos:globalNomina-config"/>
+
+    </flow>
+    <flow name="post:/documento/enviar:globalNomina-config">
+        <set-payload value="{  &quot;destino&quot;: &quot;#[flowVars.trabajador.email]&quot;, 
+ &quot;asunto&quot;: &quot;Nomina de trabajador&quot;,  
+ &quot;archivo&quot;: #[flowVars.nomina.identificador]}" doc:name="Set Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration_global" path="/documento/enviar" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Authorization" value="#[flowVars.auth]"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+            </http:request-builder>
+        </http:request>
+        <set-payload value="Email enviado" doc:name="Set Payload"/>
+        <flow-ref name="post:/ordenPago/crear:globalNomina-config" doc:name="Flow Reference"/>
+
+    </flow>
+    <flow name="post:/documento/exportar:globalNomina-config">
+        <set-payload value="{
+  &quot;tipo&quot;: &quot;nomina&quot;,
+  &quot;datos&quot;:{
+  	&quot;identificador&quot;: &quot;#[flowVars.nomina.identificador]&quot;,
+  	&quot;nombre&quot;: &quot;#[flowVars.trabajador.nombre]&quot;,
+  	&quot;apellidos&quot;: &quot;#[flowVars.trabajador.apellidos]&quot;,
+  	&quot;sueldoBase&quot;: #[flowVars.trabajador.salarioBase],
+  	&quot;horasExtra&quot;: #[flowVars.nueva.horasExtra],
+  	&quot;devengos&quot;: #[flowVars.devengos],
+  	&quot;deducciones&quot;: #[flowVars.deducciones],
+  	&quot;total&quot;: #[flowVars.nomina.nomina.total]
+  }
+}" doc:name="Set Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration_global" path="/documento/exportar" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Key" value="admin"/>
+                <http:header headerName="Authorization" value="#[flowVars.auth]"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+            </http:request-builder>
+        </http:request>
+        <flow-ref name="post:/documento/enviar:globalNomina-config" doc:name="post:/documento/enviar:globalNomina-config"/>
+    </flow>
+    <flow name="post:/generarNomina:application/json:globalNomina-config">
+        <set-variable variableName="auth" value="#[message.inboundProperties.'Authorization']" doc:name="Variable"/>
+        <http:request config-ref="HTTP_Request_Configuration_global" path="/generarNomina" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Authorization" value="#[message.inboundProperties.Authorization]"/>
+            </http:request-builder>
+        </http:request>
+        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to Object"/>
+        <set-variable variableName="nueva" value="#[payload]" doc:name="Variable"/>
+        <flow-ref name="get:/Trabajador/{nif}:globalNomina-config" doc:name="get:/Trabajador/{nif}:globalNomina-config"/>
+
+    </flow>
+    <flow name="post:/nomina/crear:application/json:globalNomina-config">
+        <set-payload value="{
+    &quot;IBAN&quot;: &quot;#[flowVars.trabajador.IBAN.toString()]&quot;, 
+    &quot;nombre&quot;:  &quot;#[flowVars.trabajador.nombre.toString()]&quot;, 
+    &quot;nif&quot;:  &quot;#[flowVars.trabajador.dni.toString()]&quot;, 
+    &quot;apellidos&quot;:  &quot;#[flowVars.trabajador.apellidos.toString()]&quot;, 
+    &quot;devengos&quot;:  #[flowVars.devengos], 
+    &quot;deducciones&quot;: #[flowVars.deducciones], 
+    &quot;complementos&quot;:  #[flowVars.complementos2]
+}" doc:name="Set Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration_global" path="/nomina/crear" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Authorization" value="#[flowVars.auth]"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+            </http:request-builder>
+        </http:request>
+        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to Object"/>
+        <set-variable variableName="nomina" value="#[payload]" doc:name="Variable"/>
+        <flow-ref name="post:/documento/exportar:globalNomina-config" doc:name="post:/documento/exportar:globalNomina-config"/>
+
+    </flow>
+    <flow name="post:/nomina/deducciones:globalNomina-config">
+        <set-payload value="{
+	&quot;devengos&quot;: #[flowVars.devengos],
+    &quot;IRPF&quot;: #[flowVars.trabajador.IRPF],
+    &quot;seguridadSocial&quot;: #[flowVars.trabajador.seguridadSocial],
+    &quot;horasExtra&quot;: #[flowVars.nueva.horasExtra]
+}" doc:name="Set Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration_global" path="/nomina/deducciones" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Authorization" value=" #[flowVars.auth]"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+            </http:request-builder>
+        </http:request>
+        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to Object"/>
+        <set-variable variableName="deducciones" value="#[payload.cantidad]" doc:name="Variable"/>
+        <flow-ref name="post:/nomina/crear:application/json:globalNomina-config" doc:name="post:/nomina/crear:application/json:globalNomina-config"/>
+
+    </flow>
+
+    <flow name="post:/ordenPago/crear:globalNomina-config">
+
+        <set-payload value="{         &quot;destinoIBAN&quot;: &quot;#[flowVars.trabajador.IBAN]&quot;,         &quot;destinoNombre&quot;: &quot;#[flowVars.trabajador.nombre]&quot;,         &quot;destinoApellidos&quot;: &quot;#[flowVars.trabajador.apellidos]&quot;,         &quot;concepto&quot;: &quot;Nomina trabajador&quot;,         &quot;cantidad&quot;: #[flowVars.nomina.nomina.total]     }" doc:name="Set Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration_global" path="/ordenPago/crear" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Authorization" value="#[flowVars.auth]"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+            </http:request-builder>
+        </http:request>
+    </flow>
+    <flow name="post:/nomina/devengos:globalNomina-config">
+        <set-variable variableName="complementos" value="#[flowVars.nueva.complementos]" mimeType="text/plain" doc:name="Variable"/>
+        <set-payload value="#[flowVars.complementos.toString().replaceAll(&quot;([\\\\\\[\\]\\^\\+])&quot;,&quot;&quot;)]" doc:name="Set Payload"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+flowVars.nueva.complementos]]></dw:set-payload>
+        </dw:transform-message>
+        <set-variable variableName="complementos2" value="#[payload]" mimeType="application/json" doc:name="Variable"/>
+        <set-payload value="{     
+	&quot;sueldoBase&quot;: #[flowVars.trabajador.salarioBase],    
+	&quot;horasExtra&quot;: #[flowVars.nueva.horasExtra],    
+	&quot;jornada&quot;: #[flowVars.trabajador.jornada],     
+	&quot;complementos&quot; : #[flowVars.complementos2]
+}" doc:name="Set Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration_global" path="/nomina/devengos" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Authorization" value="#[flowVars.auth]"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+            </http:request-builder>
+        </http:request>
+        <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to Object"/>
+        <set-variable variableName="devengos" value="#[payload.cantidad]" doc:name="Variable"/>
+        <flow-ref name="post:/nomina/deducciones:globalNomina-config" doc:name="post:/nomina/deducciones:globalNomina-config"/>
+    </flow>
+    <flow name="post:/ordenPago/enviar:globalNomina-config">
+        <set-payload value="{&#xA;  &quot;message&quot; : &quot;Petición correcta&quot;&#xA;}" doc:name="Set Payload"/>
+    </flow>
+    <apikit:mapping-exception-strategy name="globalNomina-apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="404">
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="405">
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="415">
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="406">
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+    </apikit:mapping-exception-strategy>
+</mule>

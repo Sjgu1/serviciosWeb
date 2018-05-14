@@ -1,0 +1,195 @@
+#%RAML 1.0
+baseUri: http://localhost:3000
+title: Iniciador de la secuencia de generar nóminas.
+
+types:
+  Complemento:
+    type: object
+    properties: 
+      nombre: 
+        type: string
+        example: "Productividad"
+      beneficio:
+        type: number
+        example: 425.15
+  nomina:
+    type: object
+    properties: 
+      IBAN: 
+        type: string
+        example: "ES9121000418450200051333"
+      nombre:
+        type: string
+        example: "Juan"
+      apellidos:
+        type: string
+        example: "Garcia Garcia"
+      devengos:
+        type: number
+        example: 123.12
+      deducciones:
+        type: number
+        example: 14.25
+      complementos:
+        type: Complemento[]
+        example:
+          [
+            {
+              nombre: "Productividad", 
+              beneficio: 425.15
+            }
+          ]
+      total:
+        type: number
+        example: 1546.24
+
+#Operaciones disponibles
+/nomina/crear:     
+  post:
+    description: Generar una nueva nómina de pago
+    body: 
+      application/json:
+        type: nomina
+    headers:
+      Authorization:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      201:
+        description: Se ha creado el recurso
+        body:
+          application/json:
+            example: 
+              {
+                "message" : "Petición correcta",
+                "identificador": 0004552,
+                "nomina": 
+                  {
+                    "IBAN": "ES9121000418450200051333", 
+                    "nombre": "Juan",
+                    "apellidos": "Garcia Garcia",
+                    "devengos": 1545.14 ,
+                    "deducciones": 245.14,
+                    "complementos": 
+                      [
+                        {
+                        "nombre": "Productividad", 
+                        "beneficio": 425.15
+                        }
+                      ],
+                    "total": 1300
+                  }
+              }
+      400:
+        description: No se ha podido crear, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+/nomina/devengos:     
+  post:
+    description: Calcula los devengos con la información aportada
+    body:
+     application/json:         
+    headers:
+      Authorization:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      200:
+        description: Se han calculado los devengos
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Petición correcta",
+                "cantidad": 1545.14
+              }
+      400:
+        description: No se ha podido calcular, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+/nomina/deducciones:     
+  post:
+    description: Calcula las devengos con la información aportada
+    body: 
+      application/json:       
+    headers:
+      Authorization:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      200:
+        description: Se han calculado las deducciones
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Petición correcta",
+                "cantidad": 245.14
+              }
+      400:
+        description: No se ha podido calcular, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }

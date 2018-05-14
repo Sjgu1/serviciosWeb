@@ -1,0 +1,135 @@
+#%RAML 1.0
+baseUri: http://localhost
+title: Órdenes de pago para crear y envíar a entidades bancarias.
+
+types: 
+  OrdenPago:
+    type: object
+    properties: 
+      destinoIBAN: 
+        type: string
+        example: "ES9121000418450200051333"
+      destinoNombre:
+        type: string
+        example: "Juan"
+      destinoApellidos:
+        type: string
+        example: "Garcia Garcia"
+      concepto:
+        type: string
+        example: "Nómina"
+      cantidad:
+        type: number
+        example: 1546.24
+
+#Operaciones disponibles
+/ordenPago/crear:     
+  post:
+    description: Generar una nueva orden de pago
+    queryParameters: 
+      datos:
+        type: OrdenPago
+        required: true
+        example: 
+          {
+            "destinoIBAN": "ES9121000418450200051333", 
+            "destinoNombre": "Juan",
+            "destinoApellidos": "Garcia Garcia",
+            "concepto": "Nómina",
+            "cantidad": 1546.24
+          }
+    headers:
+      Key:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      201:
+        description: Se ha creado el recurso
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Petición correcta"
+              }
+      400:
+        description: No se ha podido iniciar el proceso, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+/ordenPago/enviar:     
+  post:
+    description: Enviar a una entidad una orden de pago
+    queryParameters: 
+      datos:
+        type: object
+        required: true
+        example: 
+          {
+            "origenIBAN": "ES9121000418450200051332",
+            ordenPago: 
+              {
+              "destinoIBAN": "ES9121000418450200051333", 
+              "destinoNombre": "Juan",
+              "destinoApellidos": "Garcia Garcia",
+              "concepto": "Nómina",
+              "cantidad": 1546.24
+              }
+          }         
+    headers:
+      Key:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      200:
+        description: Se ha enviado el recurso
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Petición correcta"
+              }
+      400:
+        description: No se ha podido enviar, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }

@@ -1,0 +1,80 @@
+#%RAML 1.0
+baseUri: http://localhost:3000
+title: Iniciador de la secuencia de generar nóminas.
+
+types: 
+  Complemento:
+    type: object
+    properties: 
+      nombre: 
+        type: string
+        example: "Productividad"
+      beneficio:
+        type: number
+        example: 425.15
+      
+  Trabajador:
+   type: object
+   properties: 
+    nif: 
+      type: string
+      example: "01224578M"
+    complementos:
+      type: Complemento[]
+      example:
+        [
+          {
+            nombre: "Productividad", 
+            beneficio: 425.15
+          }
+        ]
+    horasExtra:
+      type: number
+      example: 12
+      
+
+#Operaciones disponibles
+/generarNomina:     
+  post:
+    description: Se introducen los datos del trabajador que comenzarán la secuencia de calcular la nómina, notificarla y pagarla.
+    body: 
+      application/json:
+        type: Trabajador
+    headers:
+      Authorization:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      200:
+        description: Se ha iniciado el proceso
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Petición correcta"
+              }
+      400:
+        description: No se ha podido iniciar el proceso, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }

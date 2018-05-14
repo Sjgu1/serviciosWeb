@@ -1,0 +1,100 @@
+#%RAML 1.0
+title: Documento
+baseUri: http://localhost:3000
+
+types:
+  Documento:
+    type: object
+    properties: 
+      tipo:
+        type: string
+      texto:
+        type: string
+      
+/documento/enviar:
+  post:
+    description: Envía un documento
+    body:
+      application/json:
+    headers: 
+      Authorization:
+        type: string
+        required: true
+        example: clave
+    responses:
+      200:
+        description: Se ha enviado el documento
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Se ha enviado el documento"
+              }
+      400:
+        description: No se ha podido enviar el documento, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : " No se ha podido enviar el documento, petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+
+/documento/exportar:
+  post:
+    description: Exporta datos a pdf
+    body: 
+      application/json:
+    headers:
+      Key:
+        type: string
+        required: true
+        example: clave
+    responses:
+      200:
+        description: Se ha exportado el documento
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Se ha exportado el documento"
+              }
+      400:
+        description: No se ha podido exportar el documento, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : " No se ha podido exportar el documento, petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }

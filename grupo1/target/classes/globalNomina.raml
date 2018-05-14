@@ -1,0 +1,541 @@
+#%RAML 1.0
+baseUri: http://localhost:3000
+title: Iniciador de la secuencia de generar nóminas.
+
+types: 
+  Complemento:
+    type: object
+    properties: 
+      nombre: 
+        type: string
+        example: "Productividad"
+      beneficio:
+        type: number
+        example: 425.15
+      
+  Trabajador:
+   type: object
+   properties: 
+    nif: 
+      type: string
+      example: "01224578M"
+    complementos:
+      type: Complemento[]
+      example:
+        [
+          {
+            nombre: "Productividad", 
+            beneficio: 425.15
+          }
+        ]
+    horasExtra:
+      type: number
+      example: 12
+      
+  nomina:
+    type: object
+    properties: 
+      IBAN: 
+        type: string
+        example: "ES9121000418450200051333"
+      nombre:
+          type: string
+          example: "Juan"
+      apellidos:
+          type: string
+          example: "Garcia Garcia"
+      devengos:
+          type: number
+          example: 123.12
+      deducciones:
+          type: number
+          example: 14.25
+      complementos:
+          type: array
+      total:
+          type: number
+          example: 1546.24
+
+  OrdenPago:
+    type: object
+    properties: 
+      destinoIBAN: 
+        type: string
+        example: "ES9121000418450200051333"
+      destinoNombre:
+        type: string
+        example: "Juan"
+      destinoApellidos:
+        type: string
+        example: "Garcia Garcia"
+      concepto:
+        type: string
+        example: "Nómina"
+      cantidad:
+        type: number
+        example: 1546.24
+
+  InformacionTrabajador:
+   type: object
+   properties: 
+    nif: 
+      type: string
+      example: "01224578M"
+    nombre:
+      type: string
+      example: "Juan"
+    apellidos:
+      type: string
+      example: "García García"
+    salarioBase:
+      type: number
+      example: 1251.78
+    seguridadSocial:
+      type: number
+      example: 7
+    IRPF:
+      type: number
+      example: 13
+    IBAN:
+      type: string
+      example: ES9121000418450200051332
+    nominas: 
+      type: number[]
+      example: 
+        [
+          0001213, 0003321, 0004453
+        ]
+  Documento:
+    type: object
+    properties: 
+      tipo:
+        type: string
+      texto:
+        type: string
+
+#Operaciones disponibles
+/generarNomina:     
+  post:
+    description: Se introducen los datos del trabajador que comenzarán la secuencia de calcular la nómina, notificarla y pagarla.
+    body: 
+      application/json:
+        type: Trabajador
+    headers:
+      Authorization:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      200:
+        description: Se ha iniciado el proceso
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Petición correcta"
+              }
+      400:
+        description: No se ha podido iniciar el proceso, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+#Operaciones disponibles
+/Trabajador:
+  /{nif}:
+    uriParameters:
+      nif: 
+        type: string
+        required: true
+        example: "04424421M"
+    get:
+      description: Obtiene los datos de un trabajador necesarios para calcular su nómina.  
+      headers:
+        Authorization:
+          type: string
+          required: true
+          example: administrador1
+      responses:
+        200:
+          description: Se ha obtenido un trabajador
+          body: 
+            application/json:
+              type: InformacionTrabajador
+              example: 
+                {
+                  "nif": "01224578M", 
+                  "nombre": "Juan",
+                  "apellidos": "García García",
+                  "salarioBase": 1251.78,
+                  "seguridadSocial": 7,
+                  "IRPF": 13,
+                  "IBAN": "ES9121000418450200051332",
+                  "nominas": [0001213, 0003321, 0004453]
+                }
+        404:
+          description: No se ha podido encontrar el recurso, petición incorrecta
+          body: 
+            application/json:
+              example: |
+                {
+                  "message" : "Petición incorrecta"
+                }   
+        401:
+          description: No se ha podido obtener el trabajador, Key incorrecta
+          body: 
+            application/json:
+              example: |
+                {
+                  "message" : "Key incorrecta"
+                }       
+        500:
+          description: Error al acceder a la API
+          body: 
+            application/json:
+              example: |
+                {
+                  "message" : "Problemas con el servidor"
+                }
+#Operaciones disponibles
+/ordenPago/crear:     
+  post:
+    description: Generar una nueva orden de pago
+    body: 
+      application/json:
+    headers:
+      Authorization:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      201:
+        description: Se ha creado el recurso
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Petición correcta"
+              }
+      400:
+        description: No se ha podido iniciar el proceso, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+/ordenPago/enviar:     
+  post:
+    description: Enviar a una entidad una orden de pago
+    body: 
+      application/json:
+    headers:
+      Authorization:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      200:
+        description: Se ha enviado el recurso
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Petición correcta"
+              }
+      400:
+        description: No se ha podido enviar, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+#Operaciones disponibles
+/nomina/crear:     
+  post:
+    description: Generar una nueva nómina de pago
+    body: 
+      application/json:
+        type: nomina
+    headers:
+      Authorization:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      201:
+        description: Se ha creado el recurso
+        body:
+          application/json:
+            example: 
+              {
+                "message" : "Petición correcta",
+                "identificador": 0004552,
+                "nomina": 
+                  {
+                    "IBAN": "ES9121000418450200051333", 
+                    "nombre": "Juan",
+                    "apellidos": "Garcia Garcia",
+                    "devengos": 1545.14 ,
+                    "deducciones": 245.14,
+                    "complementos": 
+                      [
+                        {
+                        "nombre": "Productividad", 
+                        "beneficio": 425.15
+                        }
+                      ],
+                    "total": 1300
+                  }
+              }
+      400:
+        description: No se ha podido crear, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+/nomina/devengos:     
+  post:
+    description: Calcula los devengos con la información aportada
+    body:
+     application/json:         
+    headers:
+      Authorization:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      200:
+        description: Se han calculado los devengos
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Petición correcta",
+                "cantidad": 1545.14
+              }
+      400:
+        description: No se ha podido calcular, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+/nomina/deducciones:     
+  post:
+    description: Calcula las devengos con la información aportada
+    body: 
+      application/json:       
+    headers:
+      Authorization:
+        type: string
+        required: true
+        example: administrador1
+    responses:
+      200:
+        description: Se han calculado las deducciones
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Petición correcta",
+                "cantidad": 245.14
+              }
+      400:
+        description: No se ha podido calcular, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+
+/documento/enviar:
+  post:
+    description: Envía un documento
+    body:
+      application/json:
+    headers: 
+      Authorization:
+        type: string
+        required: true
+        example: clave
+    responses:
+      200:
+        description: Se ha enviado el documento
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Se ha enviado el documento"
+              }
+      400:
+        description: No se ha podido enviar el documento, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : " No se ha podido enviar el documento, petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
+
+/documento/exportar:
+  post:
+    description: Exporta datos a pdf
+    body: 
+      application/json:
+    headers:
+      Key:
+        type: string
+        required: true
+        example: clave
+    responses:
+      200:
+        description: Se ha exportado el documento
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Se ha exportado el documento"
+              }
+      400:
+        description: No se ha podido exportar el documento, petición incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : " No se ha podido exportar el documento, petición incorrecta"
+              }   
+      401:
+        description: No se ha podido iniciar el proceso, Key incorrecta
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Key incorrecta"
+              }       
+      500:
+        description: Error al acceder a la API
+        body: 
+          application/json:
+            example: |
+              {
+                "message" : "Problemas con el servidor"
+              }
